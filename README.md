@@ -4,6 +4,8 @@ Une application de révision pour un élève de CM2, année scolaire **2026-2027
 Elle s'ouvre en double-cliquant sur `index.html`. Il n'y a rien à installer,
 rien à configurer, et **rien ne quitte l'ordinateur**.
 
+![Aperçu du cahier de révisions CM2](img/preview-app-cm2.png)
+
 > ### La règle qui commande tout
 >
 > **Une question fausse est pire que pas de question.**
