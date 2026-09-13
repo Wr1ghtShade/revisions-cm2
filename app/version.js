@@ -165,7 +165,13 @@
             'premiers domaines : les banques de sciences, d\'histoire-géographie et de ' +
             'numérique y manquaient. Corrigé, et un contrôle interdit désormais qu\'un ' +
             'fichier d\'exercices soit chargé par l\'application sans l\'être aussi par ' +
-            'la page de vérification.' }
+            'la page de vérification.' },
+
+    { numero: '1.11.02', date: '2026-09-13',
+      quoi: '« Ma progression » et « Une fiche à imprimer » étaient relégués en bas du ' +
+            'bureau, sous le choix des matières. Ils rejoignent « Où tu en es », juste ' +
+            'sous les post-its : on voit d\'un coup ce qui a été fait et par où entrer ' +
+            'pour en savoir plus. La rubrique « Et aussi », devenue vide, disparaît.' }
   ];
 
   var actuelle = HISTORIQUE[HISTORIQUE.length - 1];

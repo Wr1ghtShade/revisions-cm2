@@ -22,9 +22,13 @@ La numérotation est `1.MAJEUR.MINEUR`.
 
 🌟 marque une version majeure, 🔧 une version mineure.
 
-**Version actuelle : `1.11.01` — 13 septembre 2026.**
+**Version actuelle : `1.11.02` — 13 septembre 2026.**
 
 ---
+
+## 🔧 1.11.02 — 13 septembre 2026
+
+« Ma progression » et « Une fiche à imprimer » étaient relégués en bas du bureau, sous le choix des matières. Ils rejoignent « Où tu en es », juste sous les post-its : on voit d'un coup ce qui a été fait et par où entrer pour en savoir plus. La rubrique « Et aussi », devenue vide, disparaît.
 
 ## 🔧 1.11.01 — 13 septembre 2026
 
@@ -136,4 +140,4 @@ Socle de production — tirage déterministe, contrôle des contraintes du progr
 
 ---
 
-*27 versions depuis le 11 septembre 2026.*
+*28 versions depuis le 11 septembre 2026.*
