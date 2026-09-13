@@ -214,6 +214,11 @@ button { font: inherit; cursor: pointer; }
 
 .groupe { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; }
 .matiere { font-size: 1.05rem; padding: .85rem 1.3rem; font-family: var(--craie-police); }
+
+/* Les sujets d'histoire à cocher sont des boutons de choix, comme les
+   matières : même police manuscrite. Seule la police est reprise — ils
+   gardent leur taille, plus discrète, car ce sont des réglages. */
+#liste-sujets-choix .bouton { font-family: var(--craie-police); }
 .matiere .emoji { font-size: 1.3rem; margin-right: .4rem; }
 
 /* ---------------------------------------------------------------- Cahiers */
@@ -375,10 +380,12 @@ button { font: inherit; cursor: pointer; }
   border-radius: .12rem .4rem .4rem .12rem;
 }
 
-/* la corbeille : volontairement terne, on ne s'y trompe pas */
+/* la corbeille : rouge pastel, la couleur du danger — on ne s'y trompe pas.
+   Le contour reste en pointillés et l'ombre absente : le bouton signale ce
+   qu'il détruit sans pour autant inviter au clic. */
 .objet-corbeille {
-  background: #ece6da;
-  color: #8b4b42;
+  background: #f6c9c4;
+  color: #000;
   border: 1px dashed #c59c95;
   box-shadow: none;
 }

@@ -171,7 +171,18 @@
       quoi: '« Ma progression » et « Une fiche à imprimer » étaient relégués en bas du ' +
             'bureau, sous le choix des matières. Ils rejoignent « Où tu en es », juste ' +
             'sous les post-its : on voit d\'un coup ce qui a été fait et par où entrer ' +
-            'pour en savoir plus. La rubrique « Et aussi », devenue vide, disparaît.' }
+            'pour en savoir plus. La rubrique « Et aussi », devenue vide, disparaît.' },
+
+    { numero: '1.11.03', date: '2026-09-13',
+      quoi: '« Effacer ce cahier » passe du beige terne au rouge pastel, texte en noir. ' +
+            'La couleur dit enfin ce que fait le bouton. Le contour en pointillés et ' +
+            'l\'absence d\'ombre restent : il signale sans inviter au clic.' },
+
+    { numero: '1.11.04', date: '2026-09-13',
+      quoi: 'Les sujets d\'histoire à cocher s\'affichaient dans la police du texte ' +
+            'courant, alors que les boutons de matières juste au-dessus utilisent ' +
+            'l\'écriture manuscrite. Même police pour les deux ; les sujets gardent ' +
+            'leur taille plus discrète, ce sont des réglages.' }
   ];
 
   var actuelle = HISTORIQUE[HISTORIQUE.length - 1];

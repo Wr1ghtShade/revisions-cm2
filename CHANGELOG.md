@@ -22,9 +22,17 @@ La numérotation est `1.MAJEUR.MINEUR`.
 
 🌟 marque une version majeure, 🔧 une version mineure.
 
-**Version actuelle : `1.11.02` — 13 septembre 2026.**
+**Version actuelle : `1.11.04` — 13 septembre 2026.**
 
 ---
+
+## 🔧 1.11.04 — 13 septembre 2026
+
+Les sujets d'histoire à cocher s'affichaient dans la police du texte courant, alors que les boutons de matières juste au-dessus utilisent l'écriture manuscrite. Même police pour les deux ; les sujets gardent leur taille plus discrète, ce sont des réglages.
+
+## 🔧 1.11.03 — 13 septembre 2026
+
+« Effacer ce cahier » passe du beige terne au rouge pastel, texte en noir. La couleur dit enfin ce que fait le bouton. Le contour en pointillés et l'absence d'ombre restent : il signale sans inviter au clic.
 
 ## 🔧 1.11.02 — 13 septembre 2026
 
@@ -140,4 +148,4 @@ Socle de production — tirage déterministe, contrôle des contraintes du progr
 
 ---
 
-*28 versions depuis le 11 septembre 2026.*
+*30 versions depuis le 11 septembre 2026.*
