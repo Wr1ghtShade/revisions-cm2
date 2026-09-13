@@ -11,3 +11,6 @@ desktop.ini
 
 # Rien d'autre : le projet est volontairement sans build ni dépendance
 # (zéro npm, zéro bundler — cf. CLAUDE.md, invariants d'architecture).
+
+# Mémoire de travail Claude Code : reste en local, jamais publiée.
+CLAUDE.md
