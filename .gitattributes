@@ -1,0 +1,12 @@
+# Aucune conversion de fins de ligne : les fichiers sont archivés et restitués
+# octet pour octet, quelle que soit la machine (le projet est développé sous
+# Windows et déployé sous Linux, et mélange déjà CRLF et LF).
+#
+# C'est délibéré : ce projet a une règle d'intégrité stricte sur le contenu des
+# fichiers (cf. CLAUDE.md, « ne jamais écrire du code à antislashs par un
+# heredoc »). On ne laisse pas git réécrire quoi que ce soit en silence.
+* -text
+
+# Les PDF officiels sont des sources archivées avec empreinte SHA-256 :
+# strictement binaires, jamais de diff ni de conversion.
+*.pdf binary

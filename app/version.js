@@ -1,0 +1,178 @@
+/* Version de l'application.
+
+   Une seule source : le numéro affiché en bas de page, celui écrit dans les
+   cahiers exportés et celui de cet historique sont le même.
+
+   Numérotation 1.MAJEUR.MINEUR
+
+   - le 1 ne bouge pas ;
+   - le MAJEUR change quand l'application gagne quelque chose de structurant :
+     un nouveau domaine d'enseignement, une nouvelle capacité de fond ;
+   - le MINEUR, sur deux chiffres, change pour tout le reste : ajustements
+     d'interface, corrections de bugs, complément de contenu dans un domaine
+     existant.
+
+   L'historique sert à savoir, devant un cahier exporté il y a des mois, ce que
+   l'application savait faire à ce moment-là. */
+(function (CM2) {
+  'use strict';
+
+  var HISTORIQUE = [
+    { numero: '1.0.00', date: '2026-09-11', majeur: true,
+      quoi: 'Socle de production — tirage déterministe, contrôle des contraintes du ' +
+            'programme, registre — et premiers générateurs de mathématiques et de ' +
+            'français (85). Interface de révision et page de vérification.' },
+
+    { numero: '1.0.01', date: '2026-09-11',
+      quoi: 'Habillage « salle de classe » : tableau vert, feuille à petits carreaux, ' +
+            'marelle de progression, objets de la trousse.' },
+
+    { numero: '1.1.00', date: '2026-09-12', majeur: true,
+      quoi: 'Les cahiers : un profil par enfant, conservé d\'une visite à l\'autre, ' +
+            'avec suivi des réussites et bascule d\'un cahier à l\'autre.' },
+
+    { numero: '1.1.01', date: '2026-09-12',
+      quoi: 'Marelle de cour dessinée en SVG, reprise d\'une série interrompue par un ' +
+            'rafraîchissement de la page, séries de 5 à 20 questions, barre de bas de ' +
+            'page portant la provenance des programmes et la licence.' },
+
+    { numero: '1.2.00', date: '2026-09-12', majeur: true,
+      quoi: 'Révision espacée : chaque notion et chaque exercice raté revient à 1, 3, 7 ' +
+            'puis 16 jours. Sauvegarde et restauration du cahier dans un fichier.' },
+
+    { numero: '1.3.00', date: '2026-09-12', majeur: true,
+      quoi: 'Couverture du programme portée à 105 objectifs de mathématiques sur 115 et ' +
+            '39 de français sur 82, dont les exercices avec figures : demi-droite ' +
+            'graduée, horloge, quadrillage, tableaux, diagrammes, patrons, angles.' },
+
+    { numero: '1.3.01', date: '2026-09-12',
+      quoi: 'Une série arrêtée volontairement ne reprend plus toute seule au ' +
+            'rechargement. Restauration d\'un cahier possible avant d\'en avoir créé un. ' +
+            'Pied de page raccourci.' },
+
+    { numero: '1.4.00', date: '2026-09-12', majeur: true,
+      quoi: 'Nouveau domaine : enseignement moral et civique. Banque de 35 questions ' +
+            'sur les 12 contenus évaluables du programme « Vivre en république », avec ' +
+            'contrôle automatique du rattachement au référentiel.' },
+
+    { numero: '1.4.01', date: '2026-09-12',
+      quoi: 'Numéro de version affiché en bas de page et inscrit dans les cahiers ' +
+            'exportés.' },
+
+    { numero: '1.4.02', date: '2026-09-12',
+      quoi: 'Fenêtre « à propos », ouverte par le « i » du tableau : ce que fait ' +
+            'l\'application, d\'où viennent les questions, ce que le cahier retient, à ' +
+            'quoi sert la page de vérification, et le journal des versions.' },
+
+    { numero: '1.5.00', date: '2026-09-12', majeur: true,
+      quoi: 'Oracle de correction : la réponse annoncée est désormais recalculée depuis ' +
+            'l\'énoncé, par un second chemin indépendant du code de l\'application, pour ' +
+            '91 sortes d\'exercices sur 163. Un QCM doit en outre n\'avoir qu\'une seule ' +
+            'proposition défendable. Le contrôle tourne en ligne de commande et dans la ' +
+            'page de vérification.' },
+
+    { numero: '1.5.01', date: '2026-09-12',
+      quoi: 'Six mascottes de plus — dinosaure, dragon, loup, requin, fusée, ballon — ' +
+            'soit dix-huit au choix, chacune annoncée par son nom pour les lecteurs ' +
+            'd\'écran.' },
+
+    { numero: '1.6.00', date: '2026-09-12', majeur: true,
+      quoi: 'La progression, enfin lisible : ce qui est travaillé est rattaché aux ' +
+            'domaines du programme officiel plutôt qu\'à des titres d\'exercices, et un ' +
+            'coin replié donne à l\'adulte les six dernières semaines, ce qui a l\'air ' +
+            'acquis, ce qui coince, et la part du programme couverte.' },
+
+    { numero: '1.7.00', date: '2026-09-12', majeur: true,
+      quoi: 'Les fiches à imprimer : dix, vingt ou trente exercices sur une feuille, le ' +
+            'corrigé sur la page suivante. Chaque fiche porte une référence qui permet de ' +
+            'la réimprimer à l\'identique. De quoi travailler au crayon, sans ordinateur.' },
+
+    { numero: '1.7.01', date: '2026-09-12',
+      quoi: 'Les fiches s\'impriment sans le bandeau d\'adresse « file:///… » que le ' +
+            'navigateur ajoutait en tête de page.' },
+
+    { numero: '1.7.02', date: '2026-09-12',
+      quoi: 'Les fiches se demandent en 5, 10, 15 ou 20 exercices — la même échelle que ' +
+            'les séries à l\'écran, au lieu de 10, 20 ou 30.' },
+
+    { numero: '1.7.03', date: '2026-09-13',
+      quoi: 'Les touches 1 à 4 répondent aux questions à choix : le numéro est écrit dans ' +
+            'la case de chaque proposition. Une réponse écrite fausse est désormais ' +
+            'remontrée telle qu\'elle a été tapée, pour distinguer la faute de frappe de ' +
+            'l\'erreur de raisonnement.' },
+
+    { numero: '1.7.04', date: '2026-09-13',
+      quoi: 'Les autres écritures d\'une même réponse sont acceptées — « 2 h 5 » vaut ' +
+            '« 2 h 05 » — et le corrigé des fiches les indique. Les durées ne sont plus ' +
+            'obligées de dépasser dix minutes pour rester sans ambiguïté.' },
+
+    { numero: '1.7.05', date: '2026-09-13',
+      quoi: 'Rappel de sauvegarde au bureau après cinq séances non enregistrées, avec le ' +
+            'nombre de séances que perdrait un effacement du navigateur.' },
+
+    { numero: '1.7.06', date: '2026-09-13',
+      quoi: 'Confort de lecture : texte plus grand, texte plus aéré. Les deux réglages ' +
+            'valent aussi pour les fiches imprimées et sont rangés dans le cahier de ' +
+            'l\'enfant.' },
+
+    { numero: '1.7.07', date: '2026-09-13',
+      quoi: 'Quatre objectifs de mathématiques de plus — la notation des angles, le patron ' +
+            'du pavé, l\'ordre des étapes d\'un programme de construction, les assemblages ' +
+            'de cubes — soit 109 objectifs couverts sur 115. Les six qui restent demandent ' +
+            'la règle, le compas ou le pliage : un écran ne peut pas les évaluer.' },
+
+    { numero: '1.8.00', date: '2026-09-13', majeur: true,
+      quoi: 'La vue enseignant : tous les cahiers de l\'ordinateur dans un tableau — où ' +
+            'chacun en est, ce qui lui reste à revoir, depuis quand il n\'est pas venu — ' +
+            'le détail d\'un enfant sans ouvrir son cahier, les domaines du programme ' +
+            'additionnés sur la classe, et les notions qui résistent à plusieurs enfants ' +
+            'à la fois. Imprimable. Les cahiers venus d\'un autre ordinateur s\'y ajoutent ' +
+            'par leur fichier de sauvegarde.' },
+
+    { numero: '1.8.01', date: '2026-09-13',
+      quoi: 'Revue du code. Une sorte d\'exercice retirée entre deux versions n\'apparaît ' +
+            'plus sous son identifiant technique dans « ce qui coince » : elle reste dans ' +
+            'le cahier, mais hors des listes. Les dates lues par un adulte s\'écrivent ' +
+            '13/09/2026 et non 2026-09-13. Accords au singulier corrigés dans la vue ' +
+            'enseignant.' },
+
+    { numero: '1.9.00', date: '2026-09-13', majeur: true,
+      quoi: 'Nouveau domaine : sciences et technologie. Banque de 92 questions couvrant ' +
+            'les 60 objectifs évaluables du programme — la matière et ses états, les ' +
+            'mélanges, les mouvements, la lumière et les ombres, le vivant et sa ' +
+            'classification, la digestion, les objets techniques, la Terre et les ' +
+            'écosystèmes. Contrôle automatique du rattachement au référentiel, objectif ' +
+            'par objectif.' },
+
+    { numero: '1.10.00', date: '2026-09-13', majeur: true,
+      quoi: 'Nouveau domaine : histoire et géographie. Banque de 33 questions sur 17 des ' +
+            '18 sujets d\'étude évaluables. Aucune date qui ne figure au programme, y ' +
+            'compris dans les leurres. Les guerres mondiales ne font l\'objet d\'aucune ' +
+            'question : le programme ne l\'autorise que sur des repères chronologiques ' +
+            'qu\'il n\'énonce pas. Les quatre sujets sur l\'âge industriel, que le ' +
+            'professeur choisit, ne sont posés que si le cahier les a cochés.' },
+
+    { numero: '1.11.00', date: '2026-09-13', majeur: true,
+      quoi: 'Nouveau domaine : le numérique, d\'après le cadre de référence des ' +
+            'compétences numériques. Banque de 25 questions sur les 17 repères évaluables ' +
+            'des niveaux 1 et 2 — sources, données personnelles, traces de navigation, ' +
+            'droit d\'auteur, sécurité, effets sur la santé et l\'environnement. Le ' +
+            'cyberharcèlement ne fait l\'objet d\'aucune question : il se traite en classe ' +
+            'avec un adulte.' },
+
+    { numero: '1.11.01', date: '2026-09-13',
+      quoi: 'La page de vérification contrôlait encore les seuls exercices des quatre ' +
+            'premiers domaines : les banques de sciences, d\'histoire-géographie et de ' +
+            'numérique y manquaient. Corrigé, et un contrôle interdit désormais qu\'un ' +
+            'fichier d\'exercices soit chargé par l\'application sans l\'être aussi par ' +
+            'la page de vérification.' }
+  ];
+
+  var actuelle = HISTORIQUE[HISTORIQUE.length - 1];
+
+  CM2.version = {
+    numero: actuelle.numero,
+    date: actuelle.date,
+    historique: HISTORIQUE
+  };
+})(window.CM2 = window.CM2 || {});

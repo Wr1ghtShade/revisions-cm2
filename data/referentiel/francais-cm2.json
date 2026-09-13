@@ -1,0 +1,387 @@
+{
+  "matiere": "francais",
+  "niveau": "CM2",
+  "annee_scolaire": "2026-2027",
+  "source": {
+    "texte": "Programme de français pour le cycle 3",
+    "bulletin_officiel": "BO n° 16 du 17 avril 2025",
+    "arrete": "Arrêté du 10 avril 2025 fixant les programmes d'enseignement de français et de mathématiques du cycle de consolidation (cycle 3)",
+    "url_bo": "https://www.education.gouv.fr/bo/2025/Hebdo16/MENE2504620A",
+    "url_annexe": "https://www.education.gouv.fr/sites/default/files/ensel620_annexe1.pdf",
+    "entree_en_vigueur_cm2": "rentrée scolaire 2026-2027",
+    "perimetre_extrait": "Sections « Cours moyen deuxième année » uniquement, plus les entrées de culture littéraire communes aux deux années du cours moyen. Les sections CM1 et Sixième du même texte sont hors périmètre.",
+    "licence": "Licence Ouverte / Open Licence 2.0 (Etalab)",
+    "date_extraction": "2026-09-11",
+    "note_decompte": "82 objectifs d'apprentissage extraits pour le CM2. Le CLAUDE.md du projet en annonçait 83 : l'écart tient à la ligne « Cette compétence se consolide en parallèle avec la compétence Analyser une phrase simple », qui figure sous un intitulé « Objectifs d'apprentissage » dans le PDF mais qui est une note de mise en œuvre et non un objectif. Elle est conservée ici en champ `note`."
+  },
+  "contraintes_generation": {
+    "interdits": [
+      {
+        "regle": "Ne jamais employer la notion de proposition (principale, subordonnée, indépendante). Elle est introduite en 6e.",
+        "citation": "Distinguer phrase simple et phrase complexe à partir du repérage des verbes conjugués.",
+        "consequence": "La distinction phrase simple / phrase complexe se fait uniquement en comptant les verbes conjugués."
+      },
+      {
+        "regle": "Ne conjuguer que les temps au programme, et uniquement sur la liste fermée de verbes ci-dessous.",
+        "detail": "Temps nouveaux au CM2 : passé simple et plus-que-parfait. Temps consolidés (acquis au CM1) : présent de l'indicatif, imparfait, futur, passé composé."
+      },
+      {
+        "regle": "Ne pas demander de mesure d'angle, de rapporteur ou d'outil hors du champ du français.",
+        "detail": "Sans objet ici, conservé pour homogénéité de schéma entre matières."
+      },
+      {
+        "regle": "Les compléments circonstanciels ne sont différenciés qu'en temps, lieu et cause.",
+        "citation": "Différencier les compléments circonstanciels de temps, de lieu, de cause."
+      },
+      {
+        "regle": "L'accord du participe passé avec le COD ne porte que sur les verbes étudiés et conjugués avec l'auxiliaire avoir.",
+        "citation": "Accorder le participe passé avec le COD pour les verbes étudiés et conjugués avec l'auxiliaire avoir."
+      }
+    ],
+    "conjugaison": {
+      "temps_nouveaux_cm2": ["passé simple", "plus-que-parfait"],
+      "temps_consolides_cm1": ["présent de l'indicatif", "imparfait", "futur", "passé composé"],
+      "citation_cm2": "Conjugaisons à mémoriser et à maîtriser : passé simple, plus-que-parfait des verbes être et avoir, des verbes des premier et deuxième groupes, des verbes irréguliers du troisième groupe : faire, aller, dire, venir, pouvoir, voir, vouloir, prendre",
+      "citation_cm1": "Conjugaisons à mémoriser et à maîtriser : présent de l'indicatif, imparfait, futur, passé composé des verbes être et avoir, des verbes du premier et du deuxième groupe et des verbes irréguliers du troisième groupe (faire, aller, dire, venir, pouvoir, voir, vouloir, prendre)",
+      "verbes_autorises": {
+        "auxiliaires": ["être", "avoir"],
+        "groupe_1": "tous les verbes du premier groupe",
+        "groupe_2": "tous les verbes du deuxième groupe",
+        "groupe_3_liste_fermee": ["faire", "aller", "dire", "venir", "pouvoir", "voir", "vouloir", "prendre"]
+      },
+      "regle_dure": "Aucun verbe du troisième groupe hors de la liste fermée ne doit apparaître dans un exercice de conjugaison.",
+      "variations_radical": "Verbes du premier groupe dont l'avant-dernière syllabe contient un e muet ou un é, verbes en -yer, -eler, -eter, -cer, -ger. Ces variations sont au programme du CM1 et consolidées au CM2."
+    },
+    "classes_grammaticales_au_programme": {
+      "identifiees_au_cm1": ["articles définis", "articles indéfinis", "déterminants possessifs", "déterminants démonstratifs", "conjonctions de coordination", "adverbes les plus fréquents", "pronoms personnels sujets", "pronoms personnels compléments"],
+      "nouvelles_au_cm2": ["prépositions", "conjonctions de subordination"]
+    },
+    "fonctions_au_programme": {
+      "cm1": ["sujet", "complément d'objet direct", "complément d'objet indirect", "groupe circonstanciel (sans distinction)", "épithète"],
+      "nouvelles_au_cm2": ["attribut du sujet", "complément du nom", "complément circonstanciel de temps", "complément circonstanciel de lieu", "complément circonstanciel de cause", "sujet inversé"]
+    },
+    "notes": [
+      "Le volume annuel de lecture attendu au CM2 est d'au moins 3 œuvres issues du patrimoine et 4 ouvrages de littérature de jeunesse.",
+      "L'objectif de fluence au CM2 est de 120 mots par minute en moyenne (110 au CM1, 130 en 6e).",
+      "Les entrées de culture littéraire sont communes au CM1 et au CM2 et ne sont pas évaluables par QCM : elles ne définissent pas de connaissances factuelles mais des parcours de lecture.",
+      "La perspective annuelle du cycle 3 est « Découvrir – Jouer »."
+    ]
+  },
+  "domaines": [
+    {
+      "id": "fra.lecture",
+      "nom": "Lecture",
+      "sous_domaines": [
+        {
+          "id": "fra.lecture.fluidite",
+          "nom": "Lire avec fluidité",
+          "objectifs": [
+            { "id": "fra.lecture.fluidite.01", "intitule": "Poursuivre l'entraînement à la lecture à voix haute et à la lecture silencieuse" },
+            { "id": "fra.lecture.fluidite.02", "intitule": "Lire à voix haute, après préparation, un texte long en tenant compte des marques de ponctuation, des liaisons et des unités syntaxiques" },
+            { "id": "fra.lecture.fluidite.03", "intitule": "Lire correctement en ciblant 120 mots par minute en moyenne" }
+          ]
+        },
+        {
+          "id": "fra.lecture.expressivite",
+          "nom": "Lire à voix haute avec expressivité",
+          "objectifs": [
+            { "id": "fra.lecture.expressivite.01", "intitule": "Lire à voix haute, avec aisance et expressivité, un texte travaillé en amont, en respectant l'articulation du texte" },
+            { "id": "fra.lecture.expressivite.02", "intitule": "Travailler la mise en voix d'un texte (intonation, effets)" },
+            { "id": "fra.lecture.expressivite.03", "intitule": "S'entraîner à faire vivre le texte et prendre du plaisir à le lire" }
+          ]
+        },
+        {
+          "id": "fra.lecture.comprendre_seul",
+          "nom": "Lire et comprendre seul des textes, des documents et des images",
+          "objectifs": [
+            { "id": "fra.lecture.comprendre_seul.01", "intitule": "Poursuivre son apprentissage de lecteur autonome face à des textes de plus en plus longs et de plus en plus complexes" },
+            { "id": "fra.lecture.comprendre_seul.02", "intitule": "Restituer l'essentiel d'un texte qui contient des informations explicites et des informations implicites" },
+            { "id": "fra.lecture.comprendre_seul.03", "intitule": "Reconnaître et nommer les principaux genres littéraires à l'aide de critères travaillés en classe" }
+          ]
+        },
+        {
+          "id": "fra.lecture.apprendre",
+          "nom": "Lire et comprendre des textes, des documents et des images pour apprendre dans toutes les disciplines",
+          "objectifs": [
+            { "id": "fra.lecture.apprendre.01", "intitule": "Reconnaître et nommer les caractéristiques des différents éléments d'un document composite" },
+            { "id": "fra.lecture.apprendre.02", "intitule": "Rapprocher deux documents convergents, de genres différents, pour repérer et compléter les informations" },
+            { "id": "fra.lecture.apprendre.03", "intitule": "À partir de questions posées, prélever des informations (en faisant des inférences si nécessaire) qui seront combinées pour donner un sens global au(x) document(s)" }
+          ]
+        },
+        {
+          "id": "fra.lecture.oeuvre",
+          "nom": "Lire une œuvre et se l'approprier",
+          "objectifs": [
+            { "id": "fra.lecture.oeuvre.01", "intitule": "Mettre en relation le texte lu avec une autre œuvre ou une autre référence culturelle" },
+            { "id": "fra.lecture.oeuvre.02", "intitule": "Mettre en relation le texte qu'il est en train de lire avec ses expériences personnelles" },
+            { "id": "fra.lecture.oeuvre.03", "intitule": "Développer le plaisir de lire, notamment avec des œuvres choisies" },
+            { "id": "fra.lecture.oeuvre.04", "intitule": "S'engager et persévérer dans sa lecture" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fra.culture",
+      "nom": "Culture littéraire et artistique",
+      "note": "Entrées communes au CM1 et au CM2. Elles structurent les parcours de lecture et ne constituent pas des connaissances évaluables par QCM.",
+      "evaluable": false,
+      "entrees": [
+        {
+          "id": "fra.culture.heros",
+          "nom": "Découvrir des héroïnes, des héros",
+          "notice": "Inviter les élèves à réfléchir sur ce qui constitue une héroïne ou un héros à travers des œuvres de la littérature patrimoniale et de la littérature de jeunesse (épopée, roman, fable, conte, nouvelle, pièce de théâtre)."
+        },
+        {
+          "id": "fra.culture.merveilleux",
+          "nom": "Se confronter au merveilleux, à l'étrange",
+          "notice": "Découvrir des mondes imaginaires et éveiller la sensibilité à l'inconnu permet à l'élève d'explorer des thèmes universels : la peur, le désir d'évasion et la curiosité pour l'inexplicable."
+        },
+        {
+          "id": "fra.culture.autres_vies",
+          "nom": "Imaginer et vivre d'autres vies",
+          "notice": "En s'identifiant aux personnages ou en s'en démarquant, en s'immergeant dans un univers étranger ou insolite, l'élève est invité à s'engager personnellement dans la lecture."
+        },
+        {
+          "id": "fra.culture.morale",
+          "nom": "Comprendre et interroger la morale",
+          "notice": "L'élève découvre des fondements de la vie en commun, notamment la justice, la tolérance, la liberté, le respect des différences, la préservation de l'environnement."
+        },
+        {
+          "id": "fra.culture.poesie",
+          "nom": "Savourer le goût des mots, imaginer et créer en poésie",
+          "notice": "Par l'écoute et la lecture d'un recueil de poèmes et de textes poétiques de siècles différents, l'élève développe une posture subjective de lecteur fondée sur la sensibilité à la langue."
+        },
+        {
+          "id": "fra.culture.rapport_autres",
+          "nom": "Se découvrir, s'affirmer dans le rapport aux autres",
+          "notice": "Face aux défis de l'existence, les personnages de récits, de romans, de bandes dessinées et de pièces de théâtre se construisent et se redéfinissent, au gré de leurs rencontres et de leur propre cheminement."
+        }
+      ]
+    },
+    {
+      "id": "fra.ecriture",
+      "nom": "Écriture",
+      "sous_domaines": [
+        {
+          "id": "fra.ecriture.geste",
+          "nom": "Écrire à la main de manière fluide et efficace",
+          "objectifs": [
+            { "id": "fra.ecriture.geste.01", "intitule": "Copier et produire des textes" },
+            { "id": "fra.ecriture.geste.02", "intitule": "Acquérir des stratégies de copie" }
+          ]
+        },
+        {
+          "id": "fra.ecriture.reflexif",
+          "nom": "Écrire pour réfléchir, apprendre et mémoriser",
+          "objectifs": [
+            { "id": "fra.ecriture.reflexif.01", "intitule": "Écrire pour comparer deux documents" },
+            { "id": "fra.ecriture.reflexif.02", "intitule": "Produire des écrits réflexifs courts pour s'entraîner à expliquer un point de vue intégrant plusieurs documents" },
+            { "id": "fra.ecriture.reflexif.03", "intitule": "Reformuler, avec l'aide du professeur et de ses pairs, l'essentiel d'une leçon, y compris de manière schématique" },
+            { "id": "fra.ecriture.reflexif.04", "intitule": "Produire des écrits courts pour appliquer une règle de grammaire ou employer et mémoriser le lexique appris" }
+          ]
+        },
+        {
+          "id": "fra.ecriture.varies",
+          "nom": "Produire des écrits variés",
+          "objectifs": [
+            { "id": "fra.ecriture.varies.01", "intitule": "Découvrir et manipuler des situations variées d'écriture : décrire, dialoguer" },
+            { "id": "fra.ecriture.varies.02", "intitule": "Écrire au quotidien des textes personnels (nuancer un avis, imaginer une suite de texte enrichie d'un court passage de dialogue et/ou de description, formuler les étapes d'une expérience vécue en sciences, etc.)" },
+            { "id": "fra.ecriture.varies.03", "intitule": "Faire preuve d'autonomie dans le respect des codes de l'écrit" },
+            { "id": "fra.ecriture.varies.04", "intitule": "Appliquer les principes de la cohérence textuelle" },
+            { "id": "fra.ecriture.varies.05", "intitule": "Utiliser le brouillon pour préparer son texte" },
+            { "id": "fra.ecriture.varies.06", "intitule": "Améliorer tout ou partie de son texte à partir des pistes données par l'enseignant, ses pairs et/ou son autoévaluation" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fra.oral",
+      "nom": "Oral",
+      "sous_domaines": [
+        {
+          "id": "fra.oral.ecouter",
+          "nom": "Écouter pour comprendre",
+          "objectifs": [
+            { "id": "fra.oral.ecouter.01", "intitule": "Construire sa posture d'auditeur en maintenant une écoute active orientée en fonction du but" },
+            { "id": "fra.oral.ecouter.02", "intitule": "Comprendre un message oral provenant d'un tiers ou d'un média (interview, reportage)" },
+            { "id": "fra.oral.ecouter.03", "intitule": "Manifester sa compréhension des textes entendus" },
+            { "id": "fra.oral.ecouter.04", "intitule": "Identifier les caractéristiques des différents genres de discours" },
+            { "id": "fra.oral.ecouter.05", "intitule": "Manifester sa sensibilité à l'écoute d'un texte" }
+          ]
+        },
+        {
+          "id": "fra.oral.dire",
+          "nom": "Dire pour être compris dans toutes les disciplines",
+          "objectifs": [
+            { "id": "fra.oral.dire.01", "intitule": "Réaliser une production orale, individuelle ou collective, claire et organisée pour raconter, expliquer, argumenter, justifier, partager des connaissances" },
+            { "id": "fra.oral.dire.02", "intitule": "Faire vivre un texte littéraire, historique ou documentaire par une lecture expressive devant un public" },
+            { "id": "fra.oral.dire.03", "intitule": "Utiliser l'oral comme outil réflexif" }
+          ]
+        },
+        {
+          "id": "fra.oral.echanges",
+          "nom": "Participer à des échanges verbaux",
+          "objectifs": [
+            { "id": "fra.oral.echanges.01", "intitule": "Prendre la parole en respectant les codes de la communication" },
+            { "id": "fra.oral.echanges.02", "intitule": "Utiliser des structures de langage en fonction du but recherché" },
+            { "id": "fra.oral.echanges.03", "intitule": "Construire et ajuster son propos pour présenter de façon claire et ordonnée des explications, des informations, un point de vue" },
+            { "id": "fra.oral.echanges.04", "intitule": "Se servir du langage oral pour construire une analyse collective en interaction" },
+            { "id": "fra.oral.echanges.05", "intitule": "Adapter son discours en fonction de la situation de communication" },
+            { "id": "fra.oral.echanges.06", "intitule": "Porter un regard critique sur l'oral produit" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fra.vocabulaire",
+      "nom": "Vocabulaire",
+      "sous_domaines": [
+        {
+          "id": "fra.vocabulaire.enrichir",
+          "nom": "Enrichir son vocabulaire dans toutes les disciplines",
+          "objectifs": [
+            { "id": "fra.vocabulaire.enrichir.01", "intitule": "Acquérir un vocabulaire précis dans différents univers de référence" },
+            { "id": "fra.vocabulaire.enrichir.02", "intitule": "Se servir du contexte et de la morphologie pour comprendre les mots inconnus rencontrés au cours de sa lecture" },
+            { "id": "fra.vocabulaire.enrichir.03", "intitule": "Utiliser des dictionnaires" }
+          ]
+        },
+        {
+          "id": "fra.vocabulaire.relations",
+          "nom": "Établir des relations entre les mots",
+          "objectifs": [
+            { "id": "fra.vocabulaire.relations.01", "intitule": "Approfondir sa compréhension de la notion de polysémie dans un contexte non référentiel" },
+            { "id": "fra.vocabulaire.relations.02", "intitule": "Approfondir les relations morphologiques et sémantiques entre les mots" }
+          ]
+        },
+        {
+          "id": "fra.vocabulaire.reemployer",
+          "nom": "Réemployer le vocabulaire étudié",
+          "objectifs": [
+            { "id": "fra.vocabulaire.reemployer.01", "intitule": "À l'oral et à l'écrit, utiliser précisément le vocabulaire de différents univers de référence et se l'approprier durablement" },
+            { "id": "fra.vocabulaire.reemployer.02", "intitule": "À l'oral et à l'écrit, utiliser à bon escient les mots polysémiques dans différents contextes disciplinaires et se les approprier durablement" }
+          ]
+        },
+        {
+          "id": "fra.vocabulaire.orthographe",
+          "nom": "Mémoriser l'orthographe des mots",
+          "objectifs": [
+            { "id": "fra.vocabulaire.orthographe.01", "intitule": "Écrire correctement les mots fréquents en s'appuyant sur les régularités et la formation" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fra.grammaire",
+      "nom": "Grammaire et orthographe grammaticale",
+      "sous_domaines": [
+        {
+          "id": "fra.grammaire.types_phrases",
+          "nom": "Connaître les trois types de phrases et leurs formes",
+          "parent": "Identifier les constituants d'une phrase simple",
+          "objectifs": [
+            { "id": "fra.grammaire.types_phrases.01", "intitule": "Consolider les objectifs du CM1 avec des corpus de plus en plus complexes" }
+          ],
+          "rappel_cm1": {
+            "types": ["déclaratif", "interrogatif", "impératif ou injonctif"],
+            "formes": ["négative", "exclamative"]
+          }
+        },
+        {
+          "id": "fra.grammaire.phrase_simple",
+          "nom": "Analyser une phrase simple",
+          "parent": "Identifier les constituants d'une phrase simple",
+          "objectifs": [
+            { "id": "fra.grammaire.phrase_simple.01", "intitule": "Consolider l'identification des différents types de sujets rencontrés au CM1" },
+            { "id": "fra.grammaire.phrase_simple.02", "intitule": "Identifier le sujet inversé dans des cas simples" },
+            { "id": "fra.grammaire.phrase_simple.03", "intitule": "Consolider l'identification du groupe sujet, groupe verbal, groupe circonstanciel" },
+            { "id": "fra.grammaire.phrase_simple.04", "intitule": "Différencier attribut du sujet et complément d'objet" },
+            { "id": "fra.grammaire.phrase_simple.05", "intitule": "Différencier complément d'objet direct et complément d'objet indirect" },
+            { "id": "fra.grammaire.phrase_simple.06", "intitule": "Différencier les compléments circonstanciels de temps, de lieu, de cause" },
+            { "id": "fra.grammaire.phrase_simple.07", "intitule": "Dans le prolongement du CM1, mobiliser les manipulations syntaxiques dans les activités langagières et plus particulièrement lors de la production/amélioration/révision des écrits et dans les activités d'étude de la langue" }
+          ]
+        },
+        {
+          "id": "fra.grammaire.nature_fonction",
+          "nom": "Distinguer les notions de nature/classe grammaticales et de fonction",
+          "parent": "Identifier les constituants d'une phrase simple",
+          "note": "Cette compétence se consolide en parallèle avec la compétence « Analyser une phrase simple ».",
+          "objectifs": [
+            { "id": "fra.grammaire.nature_fonction.01", "intitule": "Connaître et distinguer les notions de nature et fonction" },
+            { "id": "fra.grammaire.nature_fonction.02", "intitule": "Distinguer les natures/classes grammaticales de mots et les natures des groupes fonctionnels" }
+          ]
+        },
+        {
+          "id": "fra.grammaire.classes",
+          "nom": "Identifier les mots, un groupe de mots selon leur nature/classe grammaticale",
+          "parent": "Identifier les constituants d'une phrase simple",
+          "objectifs": [
+            { "id": "fra.grammaire.classes.01", "intitule": "Identifier et nommer les prépositions" },
+            { "id": "fra.grammaire.classes.02", "intitule": "Identifier et nommer les conjonctions de subordination (en lien avec l'introduction des phrases complexes)" },
+            { "id": "fra.grammaire.classes.03", "intitule": "Reconnaître les deux types de pronoms personnels (sujet, compléments)" },
+            { "id": "fra.grammaire.classes.04", "intitule": "Identifier les pronoms personnels compléments d'objet" },
+            { "id": "fra.grammaire.classes.05", "intitule": "Connaître les variations du pronom personnel (personne, nombre, fonction)" }
+          ]
+        },
+        {
+          "id": "fra.grammaire.groupe_nominal",
+          "nom": "Analyser le groupe nominal",
+          "parent": "Identifier les constituants d'une phrase simple",
+          "objectifs": [
+            { "id": "fra.grammaire.groupe_nominal.01", "intitule": "Aborder la notion d'expansion du nom : adjectif et/ou groupe nominal prépositionnel" },
+            { "id": "fra.grammaire.groupe_nominal.02", "intitule": "Aborder la notion de complément du nom" },
+            { "id": "fra.grammaire.groupe_nominal.03", "intitule": "Différencier épithète et attribut du sujet" }
+          ]
+        },
+        {
+          "id": "fra.grammaire.phrase_complexe",
+          "nom": "Différencier phrase simple et phrase complexe",
+          "parent": "Se repérer dans la phrase complexe",
+          "objectifs": [
+            { "id": "fra.grammaire.phrase_complexe.01", "intitule": "Distinguer phrase simple et phrase complexe à partir du repérage des verbes conjugués" }
+          ]
+        },
+        {
+          "id": "fra.grammaire.variations",
+          "nom": "Identifier les classes de mots subissant des variations",
+          "parent": "Acquérir l'orthographe grammaticale",
+          "objectifs": [
+            { "id": "fra.grammaire.variations.01", "intitule": "Consolider les capacités à identifier, classer et repérer les variations des classes de mots : déterminant, nom, adjectif, pronom personnel, verbe" },
+            { "id": "fra.grammaire.variations.02", "intitule": "Utiliser les outils de référence à sa disposition pour comprendre et différencier les variations" }
+          ]
+        },
+        {
+          "id": "fra.grammaire.accords_gn",
+          "nom": "Réaliser la chaîne d'accords au sein du groupe nominal",
+          "parent": "Acquérir l'orthographe grammaticale",
+          "objectifs": [
+            { "id": "fra.grammaire.accords_gn.01", "intitule": "Consolider la maîtrise de la chaîne d'accords dans le groupe nominal pour les cas les plus réguliers" },
+            { "id": "fra.grammaire.accords_gn.02", "intitule": "Rencontrer quelques variations particulières en contexte, en lien avec les apprentissages en orthographe lexicale" }
+          ]
+        },
+        {
+          "id": "fra.grammaire.accord_sujet_verbe",
+          "nom": "Accorder le sujet et le verbe",
+          "parent": "Acquérir l'orthographe grammaticale",
+          "objectifs": [
+            { "id": "fra.grammaire.accord_sujet_verbe.01", "intitule": "Repérer les groupes sujets inversés dans un contexte de phrases simples, puis dans des cas plus complexes" },
+            { "id": "fra.grammaire.accord_sujet_verbe.02", "intitule": "Conjointement à la notion de la fonction d'attribut du sujet, identifier et appliquer la chaîne d'accords sujet/verbe, sujet/attribut du sujet" },
+            { "id": "fra.grammaire.accord_sujet_verbe.03", "intitule": "Conjugaisons à mémoriser et à maîtriser : passé simple, plus-que-parfait des verbes être et avoir, des verbes des premier et deuxième groupes, des verbes irréguliers du troisième groupe : faire, aller, dire, venir, pouvoir, voir, vouloir, prendre" }
+          ]
+        },
+        {
+          "id": "fra.grammaire.conjugaison",
+          "nom": "Approfondir sa maîtrise de la conjugaison",
+          "parent": "Acquérir l'orthographe grammaticale",
+          "objectifs": [
+            { "id": "fra.grammaire.conjugaison.01", "intitule": "Connaître la composition en deux parties (auxiliaire + participe passé) des temps composés (passé composé et plus-que-parfait)" },
+            { "id": "fra.grammaire.conjugaison.02", "intitule": "Accorder le participe passé avec le sujet dans le cas de l'auxiliaire être" },
+            { "id": "fra.grammaire.conjugaison.03", "intitule": "Accorder le participe passé avec le COD pour les verbes étudiés et conjugués avec l'auxiliaire avoir" },
+            { "id": "fra.grammaire.conjugaison.04", "intitule": "Effectuer la transformation à la forme négative d'un verbe aux temps composés en plaçant les adverbes de négation au bon emplacement" },
+            { "id": "fra.grammaire.conjugaison.05", "intitule": "Identifier dans la terminaison des verbes conjugués : la marque de temps et la marque de personne" },
+            { "id": "fra.grammaire.conjugaison.06", "intitule": "Consolider la connaissance des variations du radical pour certains verbes du premier groupe et du troisième groupe" }
+          ]
+        }
+      ]
+    }
+  ]
+}

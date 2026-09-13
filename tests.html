@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vérification des générateurs</title>
+<style>
+  body { font: 15px/1.5 "Segoe UI", system-ui, sans-serif; margin: 0; background: #fbfaf7; color: #1f2328; }
+  main { max-width: 60rem; margin: 0 auto; padding: 1.5rem 1.25rem 4rem; }
+  h1 { font-size: 1.4rem; }
+  h2 { font-size: 1.1rem; margin: 2.4rem 0 .4rem; padding-top: 1.2rem;
+       border-top: 1px solid #eae5dc; }
+  p.intro { color: #5b6570; }
+  table { border-collapse: collapse; width: 100%; font-size: .9rem; }
+  th, td { text-align: left; padding: .35rem .6rem; border-bottom: 1px solid #eae5dc; }
+  th { font-weight: 600; color: #5b6570; }
+  td.nb { text-align: right; font-variant-numeric: tabular-nums; }
+  .ok { color: #2f6f4f; font-weight: 600; }
+  .ko { color: #a33a2a; font-weight: 600; }
+  #resume { font-size: 1.1rem; margin: 1rem 0 1.5rem; }
+  pre { background: #fff; border: 1px solid #eae5dc; border-radius: .4rem; padding: .8rem;
+        overflow-x: auto; font-size: .85rem; }
+  button { font: inherit; padding: .5rem 1rem; border: 1px solid #ddd8cf; background: #fff;
+           border-radius: .5rem; cursor: pointer; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Vérification des générateurs <small id="version" style="font-weight:400;font-size:.62em;color:#8a949e"></small></h1>
+  <p class="intro">
+    Deux contrôles indépendants, sur un grand nombre de graines. <strong>La forme</strong> :
+    aucun générateur ne lève d'erreur, l'exercice produit passe les contraintes de
+    programme, la même graine redonne exactement le même exercice, la bonne réponse d'un
+    QCM ne se retrouve pas toujours à la même place. <strong>La justesse</strong> : la
+    réponse annoncée est recalculée depuis l'énoncé, par un second chemin qui n'emprunte
+    rien au code de l'application.
+  </p>
+  <p><button type="button" id="relancer">Relancer sur 1 000 graines</button></p>
+
+  <h2>La justesse des réponses</h2>
+  <p class="intro">
+    Chaque énoncé est relu, le calcul refait à part, et le résultat comparé à la réponse
+    annoncée. Un QCM doit en outre n'avoir qu'une seule proposition défendable. Un énoncé
+    « non reconnu » n'est pas une faute de contenu : c'est la règle de recalcul qui a
+    cessé de correspondre à l'énoncé, et qu'il faut remettre à jour.
+  </p>
+  <p id="resume-oracle"></p>
+  <table>
+    <thead>
+      <tr><th>Générateur</th><th class="nb">Recalculés</th><th class="nb">Faux</th>
+          <th class="nb">Non reconnus</th><th class="nb">Hors cas</th></tr>
+    </thead>
+    <tbody id="lignes-oracle"></tbody>
+  </table>
+  <pre id="details-oracle" hidden></pre>
+  <p class="intro" id="couverture-oracle"></p>
+
+  <h2>La forme des exercices</h2>
+  <p id="resume"></p>
+  <table>
+    <thead>
+      <tr><th>Générateur</th><th>Matière</th><th class="nb">Énoncés distincts</th>
+          <th class="nb">Erreurs</th><th>Place de la bonne réponse</th></tr>
+    </thead>
+    <tbody id="lignes"></tbody>
+  </table>
+  <pre id="echecs" hidden></pre>
+</main>
+
+<script src="app/version.js"></script>
+<script src="app/rng.js"></script>
+<script src="app/format.js"></script>
+<script src="app/lettres.js"></script>
+<script src="app/contraintes.js"></script>
+<script src="app/qcm.js"></script>
+<script src="app/figures.js"></script>
+<script src="app/registre.js"></script>
+<script src="app/lexique/lexique.js"></script>
+<script src="app/conjugaison.js"></script>
+<script src="app/lexique/phrases.js"></script>
+<script src="app/generateurs/maths-entiers.js"></script>
+<script src="app/generateurs/maths-decimaux.js"></script>
+<script src="app/generateurs/maths-fractions.js"></script>
+<script src="app/generateurs/maths-calcul-mental.js"></script>
+<script src="app/generateurs/maths-operations.js"></script>
+<script src="app/generateurs/maths-mesures.js"></script>
+<script src="app/generateurs/maths-algebre.js"></script>
+<script src="app/generateurs/maths-problemes.js"></script>
+<script src="app/generateurs/maths-probabilites.js"></script>
+<script src="app/generateurs/maths-figures.js"></script>
+<script src="app/generateurs/maths-geometrie.js"></script>
+<script src="app/generateurs/francais-conjugaison.js"></script>
+<script src="app/generateurs/francais-accords.js"></script>
+<script src="app/generateurs/francais-grammaire.js"></script>
+<script src="app/generateurs/francais-vocabulaire.js"></script>
+<script src="app/banques/emc.js"></script>
+<script src="app/banques/sciences.js"></script>
+<script src="app/banques/histoire-geo.js"></script>
+<script src="app/banques/numerique.js"></script>
+<script src="tests/oracle-moteur.js"></script>
+<script>
+(function () {
+  'use strict';
+  var MARQUEURS = ['NaN', 'undefined', 'Infinity', '[object'];
+
+  /* --- La justesse : on recalcule la réponse depuis l'énoncé ---------- */
+
+  function oracle(graines) {
+    var corps = document.getElementById('lignes-oracle');
+    var details = [];
+    var recalculesEnTout = 0, fauxEnTout = 0, inconnusEnTout = 0, couverts = 0;
+    corps.innerHTML = '';
+
+    CM2.registre.liste().forEach(function (spec) {
+      if (!ORACLE.aUneRegle(spec.id)) return;
+      couverts++;
+      var recalcules = 0, faux = 0, inconnus = 0, horsCas = 0;
+
+      for (var g = 0; g < graines; g++) {
+        var ex;
+        try {
+          ex = CM2.registre.produire(spec.id, g);
+        } catch (e) {
+          continue;                                // le tableau de la forme le signale
+        }
+        var bilan = ORACLE.examiner(spec.id, ex);
+
+        if (bilan.etat === 'horsCas') { horsCas++; continue; }
+        if (bilan.etat === 'inconnu') {
+          inconnus++;
+          if (inconnus <= 2) {
+            details.push('NON RECONNU  ' + spec.id + ' / graine ' + g + ' : ' + bilan.raison +
+                         '\n    ' + bilan.enonce);
+          }
+          continue;
+        }
+        recalcules++;
+        if (bilan.etat === 'faux') {
+          faux++;
+          if (faux <= 3) {
+            details.push('FAUX  ' + spec.id + ' / graine ' + g +
+                         '\n    énoncé    : ' + bilan.enonce +
+                         '\n    annoncé   : ' + bilan.reponse +
+                         '\n    recalculé : ' + bilan.attendu +
+                         '   (lu dans la réponse : ' + bilan.obtenu + ')');
+          }
+        }
+      }
+
+      recalculesEnTout += recalcules;
+      fauxEnTout += faux;
+      inconnusEnTout += inconnus;
+
+      var tr = document.createElement('tr');
+      tr.innerHTML = '<td>' + spec.id + '</td>' +
+        '<td class="nb">' + recalcules + '</td>' +
+        '<td class="nb ' + (faux ? 'ko' : 'ok') + '">' + faux + '</td>' +
+        '<td class="nb ' + (inconnus ? 'ko' : '') + '">' + (inconnus || '') + '</td>' +
+        '<td class="nb">' + (horsCas || '') + '</td>';
+      corps.appendChild(tr);
+    });
+
+    var resume = document.getElementById('resume-oracle');
+    resume.className = (fauxEnTout || inconnusEnTout) ? 'ko' : 'ok';
+    resume.textContent = recalculesEnTout + ' réponses recalculées — ' +
+      (fauxEnTout ? fauxEnTout + ' fausse(s). ' : 'toutes justes. ') +
+      (inconnusEnTout ? inconnusEnTout + ' énoncé(s) non reconnu(s).' : '');
+
+    var bloc = document.getElementById('details-oracle');
+    bloc.hidden = !details.length;
+    bloc.textContent = details.join('\n\n');
+
+    /* Ce qui n'est pas recalculé, et pourquoi : la dette doit rester visible. */
+    var total = CM2.registre.liste().length;
+    var parRaison = {};
+    CM2.registre.liste().forEach(function (spec) {
+      if (ORACLE.aUneRegle(spec.id)) return;
+      var raison = ORACLE.raisonHorsPortee(spec.id) ||
+        (spec.matiere === 'mathematiques' ? 'aucune règle de recalcul écrite'
+         : spec.matiere === 'emc' ? 'banque écrite, contrôlée à part sur le référentiel'
+         : 'réponse de langue, contrôlée par relecture');
+      parRaison[raison] = (parRaison[raison] || 0) + 1;
+    });
+    document.getElementById('couverture-oracle').textContent =
+      couverts + ' sortes d\'exercices sur ' + total + ' sont recalculées. Les autres : ' +
+      Object.keys(parRaison).map(function (r) {
+        return parRaison[r] + ' — ' + r;
+      }).join(' ; ') + '.';
+  }
+
+  function verifier(graines) {
+    var lignes = document.getElementById('lignes');
+    var echecs = [];
+    lignes.innerHTML = '';
+    var total = 0;
+
+    CM2.registre.liste().forEach(function (spec) {
+      var positions = {}, vus = {}, erreurs = 0;
+
+      for (var g = 0; g < graines; g++) {
+        total++;
+        var ex;
+        try {
+          ex = CM2.registre.produire(spec.id, g);
+        } catch (e) {
+          erreurs++;
+          if (erreurs <= 3) echecs.push(spec.id + ' / graine ' + g + ' : ' + e.message);
+          continue;
+        }
+
+        var texte = ex.enonce + ' ' + (ex.explication || '') + ' ' + (ex.figure || '') + ' ' +
+                    (ex.propositions || []).join(' ') + ' ' + ex.bonne_reponse;
+        MARQUEURS.forEach(function (m) {
+          if (texte.indexOf(m) !== -1) {
+            erreurs++;
+            if (erreurs <= 3) echecs.push(spec.id + ' / graine ' + g + ' : « ' + m + ' » dans le texte');
+          }
+        });
+
+        if (ex.type === 'qcm') {
+          positions[ex.bonne_reponse] = (positions[ex.bonne_reponse] || 0) + 1;
+        }
+
+        if (JSON.stringify(CM2.registre.produire(spec.id, g)) !== JSON.stringify(ex)) {
+          erreurs++;
+          echecs.push(spec.id + ' / graine ' + g + ' : non reproductible');
+        }
+        vus[ex.enonce] = true;
+      }
+
+      var tr = document.createElement('tr');
+      tr.innerHTML = '<td>' + spec.id + '</td><td>' + spec.matiere + '</td>' +
+        '<td class="nb">' + Object.keys(vus).length + ' / ' + graines + '</td>' +
+        '<td class="nb ' + (erreurs ? 'ko' : 'ok') + '">' + erreurs + '</td>' +
+        '<td>' + Object.keys(positions).map(function (k) {
+          return k + ' : ' + positions[k];
+        }).join('   ') + '</td>';
+      lignes.appendChild(tr);
+    });
+
+    var resume = document.getElementById('resume');
+    resume.className = echecs.length ? 'ko' : 'ok';
+    resume.textContent = CM2.registre.liste().length + ' générateurs, ' + total +
+      ' exercices produits — ' + (echecs.length ? echecs.length + ' échec(s).' : 'aucun échec.');
+
+    var bloc = document.getElementById('echecs');
+    bloc.hidden = !echecs.length;
+    bloc.textContent = echecs.join('\n');
+  }
+
+  document.getElementById('version').textContent = 'v' + CM2.version.numero;
+  document.getElementById('relancer').addEventListener('click', function () {
+    oracle(1000);
+    verifier(1000);
+  });
+  oracle(200);
+  verifier(200);
+})();
+</script>
+</body>
+</html>

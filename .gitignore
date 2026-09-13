@@ -1,0 +1,13 @@
+# Résidus système (le projet est édité sous Windows, servi sous Linux)
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Éditeurs
+*.swp
+*~
+.vscode/
+.idea/
+
+# Rien d'autre : le projet est volontairement sans build ni dépendance
+# (zéro npm, zéro bundler — cf. CLAUDE.md, invariants d'architecture).

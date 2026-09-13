@@ -1,0 +1,189 @@
+{
+  "matiere": "emc",
+  "niveau": "CM2",
+  "annee_scolaire": "2026-2027",
+  "titre_annuel": "Vivre en république",
+  "source": {
+    "texte": "Programme d'enseignement moral et civique du cours préparatoire à la classe terminale",
+    "bulletin_officiel": "BO n° 24 du 13 juin 2024",
+    "arrete": "Arrêté du 24 mai 2024",
+    "url_bo": "https://www.education.gouv.fr/bo/2024/Hebdo24/MENE2413934A",
+    "url_annexe": "https://www.education.gouv.fr/sites/default/files/ensel934_annexe_ok.pdf",
+    "entree_en_vigueur_cm2": "rentrée scolaire 2025-2026",
+    "perimetre_extrait": "Section « CM2 : Vivre en république » uniquement. La section « CM1 : Faire société » et les niveaux du collège sont hors périmètre.",
+    "licence": "Licence Ouverte / Open Licence 2.0 (Etalab)",
+    "date_extraction": "2026-09-11",
+    "note_decompte": "14 contenus d'enseignement extraits pour le CM2. Le CLAUDE.md du projet en annonçait 37 : cet écart s'explique probablement par un périmètre incluant le CM1 (« Faire société ») ou par un découpage plus fin des puces. Le périmètre retenu ici est le CM2 seul, conformément à l'objet de l'application."
+  },
+  "attendus_et_objectifs": "Par la compréhension des notions de droit, de devoir, de règle et de liberté, les élèves ont commencé à appréhender la citoyenneté française. En CM2, ils sont amenés à comprendre les fondements de la vie en république. Ils découvrent ainsi le fonctionnement des institutions au moyen de cas pratiques en lien avec leur quotidien. Par la sensibilisation aux préjugés et aux stéréotypes, ils identifient les atteintes à autrui et apprennent le respect de la dignité de la personne humaine et l'égalité des droits.",
+  "contraintes_generation": {
+    "zone_sensible": {
+      "partie_concernee": "emc.p3",
+      "regle": "La partie « Respecter les droits de tous » (discriminations, stéréotypes, harcèlement) ne doit pas être transformée en QCM, à une exception près.",
+      "exception_evaluable": "Seul le fait que ces atteintes soient punies par la loi est factuel et évaluable. Toute question portant sur le jugement moral, sur la gravité comparée des atteintes, ou invitant l'élève à qualifier une situation vécue, est interdite.",
+      "citation": "faire reconnaitre les atteintes aux personnes : le racisme, l'antisémitisme, le sexisme, la xénophobie, l'homophobie, le harcèlement ; savoir que l'expression des discriminations est sanctionnée par la loi."
+    },
+    "interdits": [
+      {
+        "regle": "Ne jamais générer de question relevant du jugement moral ou de l'opinion personnelle.",
+        "detail": "L'EMC vise la formation du jugement, qui ne s'évalue pas par QCM. Seuls les faits institutionnels, juridiques et symboliques sont évaluables."
+      },
+      {
+        "regle": "Ne jamais générer de question sur un contenu marqué evaluable: false.",
+        "detail": "Ces contenus supposent un débat, une démarche de projet ou une appréciation morale."
+      },
+      {
+        "regle": "Ne pas inventer d'article de loi, de numéro d'article ni de date.",
+        "detail": "Tout repère chiffré doit provenir du bloc reperes_memorisables, qui est lui-même sourcé."
+      },
+      {
+        "regle": "Ne pas aborder les croyances religieuses elles-mêmes.",
+        "detail": "Seul le cadre juridique de la laïcité (ce que la loi protège et ce qu'elle limite) est au programme et évaluable."
+      }
+    ],
+    "notes": [
+      "La colonne « Démarches et situations d'apprentissage possibles » du programme est indicative : elle ne définit pas de connaissances exigibles et ne doit pas servir de source de faits.",
+      "Les mentions [EDD] (éducation au développement durable) et [EMI] (éducation aux médias et à l'information) signalent des liens transversaux, pas des contenus supplémentaires."
+    ]
+  },
+  "parties": [
+    {
+      "id": "emc.p1",
+      "nom": "Citoyenneté et nationalité",
+      "contenus": [
+        {
+          "id": "emc.p1.c01",
+          "notion": "Citoyenneté — Droits civils et politiques",
+          "contenu": "Connaître les conditions d'acquisition de la nationalité française : montrer le lien étroit entre citoyenneté et nationalité. Un citoyen bénéficie de droits civils, puis politiques à sa majorité, et tout individu bénéficie de droits civils.",
+          "evaluable": true
+        },
+        {
+          "id": "emc.p1.c02",
+          "notion": "Citoyenneté — Droits civils et politiques",
+          "contenu": "Connaître le rôle politique des citoyennes et des citoyens : ils ont vocation à participer à la vie politique du pays et à l'évolution des institutions (découverte des procédures générales d'élaboration de la loi).",
+          "evaluable": true
+        },
+        {
+          "id": "emc.p1.c03",
+          "notion": "Devoirs",
+          "contenu": "Connaître les devoirs du citoyen et de toute personne résidant sur le territoire national : respecter les lois, contribuer à financer les dépenses publiques. Chaque citoyen doit respecter les droits des autres qui sont identiques aux siens (Déclaration des droits de l'homme et du citoyen, art. 3 et 13).",
+          "evaluable": true
+        },
+        {
+          "id": "emc.p1.c04",
+          "notion": "Devoirs",
+          "contenu": "Comprendre que le terme de devoir peut aussi désigner une réalité plus morale, qui doit guider le citoyen dans son comportement dans l'espace public.",
+          "evaluable": false,
+          "raison_non_evaluable": "Relève du jugement moral et de l'appréciation du comportement, non d'une connaissance factuelle."
+        },
+        {
+          "id": "emc.p1.c05",
+          "notion": "Symboles républicains",
+          "contenu": "Connaître et comprendre les symboles républicains mentionnés par la Constitution : drapeau, hymne, devise, et d'autres coutumiers comme Marianne ; connaître la fête nationale du 14 juillet (héritière de la Fête de la Fédération de 1790) ; comprendre la nécessité de respecter ces symboles.",
+          "evaluable": true
+        },
+        {
+          "id": "emc.p1.c06",
+          "notion": "Symboles républicains",
+          "contenu": "Savoir que la République française est membre de l'Union européenne (UE).",
+          "evaluable": true
+        }
+      ]
+    },
+    {
+      "id": "emc.p2",
+      "nom": "Libertés et droits fondamentaux",
+      "contenus": [
+        {
+          "id": "emc.p2.c01",
+          "notion": "Liberté — Droits fondamentaux",
+          "contenu": "Faire connaître les droits et libertés fondamentaux institués par la Déclaration des droits de l'homme et du citoyen (1789), la Déclaration universelle des droits de l'homme (1948) et la Charte des droits fondamentaux de l'Union européenne (2000).",
+          "evaluable": true
+        },
+        {
+          "id": "emc.p2.c02",
+          "notion": "Liberté — Droits fondamentaux",
+          "contenu": "Mettre en avant certains droits politiques, économiques et sociaux qui en découlent : suffrage universel, droit à l'emploi, à la protection de la santé, à la gratuité de l'enseignement public, accès à la culture, droits environnementaux (Charte de l'environnement).",
+          "evaluable": true
+        },
+        {
+          "id": "emc.p2.c03",
+          "notion": "Liberté — Droits fondamentaux",
+          "contenu": "Montrer que les droits fondamentaux s'exercent dans le cadre de la loi (exemple de la liberté d'expression).",
+          "evaluable": true
+        },
+        {
+          "id": "emc.p2.c04",
+          "notion": "Liberté — Droits fondamentaux",
+          "contenu": "Approfondir avec les droits dits « de troisième génération », qui résultent du droit de chacun de « vivre dans un environnement équilibré et respectueux de la santé » (art. 1er de la Charte de l'environnement).",
+          "evaluable": true
+        }
+      ]
+    },
+    {
+      "id": "emc.p3",
+      "nom": "Respecter les droits de tous",
+      "zone_sensible": true,
+      "contenus": [
+        {
+          "id": "emc.p3.c01",
+          "notion": "Discriminations — Stéréotypes",
+          "contenu": "Montrer que la lutte contre les discriminations suppose la déconstruction des préjugés et des stéréotypes.",
+          "evaluable": false,
+          "raison_non_evaluable": "Suppose un travail de réflexion et de débat accompagné par un adulte. Non transformable en question fermée."
+        },
+        {
+          "id": "emc.p3.c02",
+          "notion": "Discriminations — Stéréotypes",
+          "contenu": "Faire reconnaitre les atteintes aux personnes : le racisme, l'antisémitisme, le sexisme, la xénophobie, l'homophobie, le harcèlement ; savoir que l'expression des discriminations est sanctionnée par la loi.",
+          "evaluable": true,
+          "restriction": "Seul le caractère illégal de ces atteintes est évaluable. Aucune question ne doit demander de qualifier, comparer ou hiérarchiser des situations, ni porter sur une expérience personnelle."
+        }
+      ]
+    },
+    {
+      "id": "emc.p4",
+      "nom": "À l'école laïque",
+      "contenus": [
+        {
+          "id": "emc.p4.c01",
+          "notion": "Laïcité",
+          "contenu": "Le respect des croyances est assuré, mais, comme ailleurs, leur expression est limitée par la loi. Celle-ci protège les élèves de toute influence religieuse et préserve leur liberté de conscience.",
+          "evaluable": true
+        },
+        {
+          "id": "emc.p4.c02",
+          "notion": "Laïcité",
+          "contenu": "Nul ne peut être discriminé pour sa croyance ou ses convictions, mais nul n'a non plus le droit d'imposer ses croyances ou ses convictions aux autres.",
+          "evaluable": true
+        }
+      ]
+    }
+  ],
+  "reperes_memorisables": [
+    { "id": "emc.rep.ddhc", "repere": "Déclaration des droits de l'homme et du citoyen", "valeur": "1789", "source": "Programme EMC CM2, partie « Libertés et droits fondamentaux »", "contenu_lie": "emc.p2.c01" },
+    { "id": "emc.rep.dudh", "repere": "Déclaration universelle des droits de l'homme", "valeur": "1948", "source": "Programme EMC CM2, partie « Libertés et droits fondamentaux »", "contenu_lie": "emc.p2.c01" },
+    { "id": "emc.rep.charte_ue", "repere": "Charte des droits fondamentaux de l'Union européenne", "valeur": "2000", "source": "Programme EMC CM2, partie « Libertés et droits fondamentaux »", "contenu_lie": "emc.p2.c01" },
+    { "id": "emc.rep.fete_nationale", "repere": "Fête nationale française", "valeur": "14 juillet", "source": "Programme EMC CM2, partie « Citoyenneté et nationalité »", "contenu_lie": "emc.p1.c05" },
+    { "id": "emc.rep.federation", "repere": "Fête de la Fédération, dont la fête nationale est héritière", "valeur": "1790", "source": "Programme EMC CM2, partie « Citoyenneté et nationalité »", "contenu_lie": "emc.p1.c05" },
+    { "id": "emc.rep.devise", "repere": "Devise de la République française", "valeur": "Liberté, Égalité, Fraternité", "source": "Constitution du 4 octobre 1958, article 2", "contenu_lie": "emc.p1.c05" },
+    { "id": "emc.rep.hymne", "repere": "Hymne national français", "valeur": "La Marseillaise", "source": "Constitution du 4 octobre 1958, article 2", "contenu_lie": "emc.p1.c05" },
+    { "id": "emc.rep.drapeau", "repere": "Drapeau national français", "valeur": "Le drapeau tricolore, bleu, blanc, rouge", "source": "Constitution du 4 octobre 1958, article 2", "contenu_lie": "emc.p1.c05" },
+    { "id": "emc.rep.marianne", "repere": "Symbole coutumier de la République, non mentionné par la Constitution", "valeur": "Marianne", "source": "Programme EMC CM2, partie « Citoyenneté et nationalité »", "contenu_lie": "emc.p1.c05" },
+    { "id": "emc.rep.ue", "repere": "La République française est membre de", "valeur": "l'Union européenne", "source": "Programme EMC CM2, partie « Citoyenneté et nationalité »", "contenu_lie": "emc.p1.c06" },
+    { "id": "emc.rep.souverainete", "repere": "Détenteur de la souveraineté nationale", "valeur": "le peuple", "source": "Programme EMC CM2 : « l'article 3 de la DDHC et l'article 3 de la Constitution affirmant que la souveraineté nationale appartient au peuple »", "contenu_lie": "emc.p1.c02" },
+    { "id": "emc.rep.ddhc_art11", "repere": "Article de la DDHC énonçant la liberté d'expression", "valeur": "article 11", "source": "Programme EMC CM2, partie « Citoyenneté et nationalité »", "contenu_lie": "emc.p2.c03" },
+    { "id": "emc.rep.ddhc_art10", "repere": "Article de la DDHC énonçant la liberté d'opinion", "valeur": "article 10", "source": "Programme EMC CM2, partie « Citoyenneté et nationalité »", "contenu_lie": "emc.p2.c01" },
+    { "id": "emc.rep.ddhc_art2", "repere": "Article de la DDHC énonçant le droit à la sûreté", "valeur": "article 2", "source": "Programme EMC CM2, partie « Citoyenneté et nationalité »", "contenu_lie": "emc.p2.c01" },
+    { "id": "emc.rep.ddhc_art13", "repere": "Article de la DDHC fondant la participation au financement des charges de l'État par l'impôt", "valeur": "article 13", "source": "Programme EMC CM2, partie « Citoyenneté et nationalité »", "contenu_lie": "emc.p1.c03" },
+    { "id": "emc.rep.loi_presse", "repere": "Loi sur la liberté de la presse, de l'imprimerie et de la librairie", "valeur": "29 juillet 1881", "source": "Programme EMC CM2, partie « Libertés et droits fondamentaux »", "contenu_lie": "emc.p2.c03" },
+    { "id": "emc.rep.constitution", "repere": "Constitution de la Ve République", "valeur": "1958", "source": "Programme EMC CM2, partie « Libertés et droits fondamentaux »", "contenu_lie": "emc.p2.c01" },
+    { "id": "emc.rep.lois_scolaires", "repere": "Lois scolaires fondant l'école gratuite, laïque et obligatoire", "valeur": "1881-1882", "source": "Programme EMC CM2, partie « À l'école laïque »", "contenu_lie": "emc.p4.c01" },
+    { "id": "emc.rep.loi_1905", "repere": "Loi comprise comme principe d'organisation de la société en matière de laïcité", "valeur": "1905", "source": "Programme EMC CM2, partie « À l'école laïque »", "contenu_lie": "emc.p4.c01" },
+    { "id": "emc.rep.journee_laicite", "repere": "Journée de la laïcité", "valeur": "9 décembre", "source": "Programme EMC CM2, partie « À l'école laïque »", "contenu_lie": "emc.p4.c01" },
+    { "id": "emc.rep.commemoration_11nov", "repere": "Date de commémoration citée par le programme", "valeur": "11 novembre", "source": "Programme EMC CM2, partie « Citoyenneté et nationalité »", "contenu_lie": "emc.p1.c05" },
+    { "id": "emc.rep.cide_art7", "repere": "Article de la Convention internationale des droits de l'enfant établissant le droit d'acquérir une nationalité dès la naissance", "valeur": "article 7", "source": "Programme EMC CM2, partie « Citoyenneté et nationalité »", "contenu_lie": "emc.p1.c01" },
+    { "id": "emc.rep.charte_env_art1", "repere": "Article de la Charte de l'environnement énonçant le droit de vivre dans un environnement équilibré et respectueux de la santé", "valeur": "article 1er", "source": "Programme EMC CM2, partie « Libertés et droits fondamentaux »", "contenu_lie": "emc.p2.c04" },
+    { "id": "emc.rep.majorite", "repere": "Moment où le citoyen bénéficie de ses droits politiques", "valeur": "à sa majorité", "source": "Programme EMC CM2, partie « Citoyenneté et nationalité »", "contenu_lie": "emc.p1.c01" }
+  ]
+}

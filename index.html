@@ -1,0 +1,1637 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#2f4a40">
+<title>Le cahier de révisions — CM2</title>
+<style>
+/* =========================================================================
+   Décor : une salle de classe.
+   Le tableau, en haut, appartient au maître : il annonce, il compte les points,
+   il dessine la marelle à la craie. La feuille, en dessous, appartient à
+   l'élève : c'est là que se posent les questions et que l'on répond.
+
+   Aucune police ni image n'est chargée depuis le réseau : tout est dessiné en
+   CSS ou en SVG, et les polices sont celles déjà installées sur la machine.
+   ========================================================================= */
+
+:root {
+  --bureau: #d9cdb8;          /* le bois du pupitre */
+  --bureau-fonce: #c6b79e;
+  --papier: #fffdf6;
+  --carreau: #cfdcea;         /* le bleu des petits carreaux */
+  --marge: #e4a0a0;           /* le trait rouge de la marge */
+  --encre: #24303a;
+  --encre-pale: #6d7a86;
+  --ardoise: #2f4a40;         /* le vert du tableau */
+  --ardoise-clair: #3d5c50;
+  --bois: #b4834a;            /* le cadre et le rebord */
+  --bois-fonce: #8d6134;
+  --craie: #f3f1e7;
+  --craie-rose: #f0a8ae;
+  --craie-jaune: #f4dc86;
+  --craie-bleue: #a6cde9;
+  --craie-verte: #a9dfb6;
+  --juste: #2f8a55;
+  --juste-fond: #e3f5e9;
+  --faux: #cf4436;
+  --faux-fond: #fdeae7;
+  --postit: #fdf0a8;
+  --postit-bleu: #cfe6f7;
+  --postit-vert: #d6f0d8;
+
+  --craie-police: "Segoe Print", "Bradley Hand", "Chalkboard SE", "Comic Sans MS", cursive;
+  --texte-police: "Segoe UI", system-ui, -apple-system, "Trebuchet MS", sans-serif;
+}
+
+* { box-sizing: border-box; }
+/* display:flex sur un élément masqué l'emporterait sur l'attribut hidden. */
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  padding: 0 0 4rem;
+  color: var(--encre);
+  font: 17px/1.55 var(--texte-police);
+  background:
+    repeating-linear-gradient(45deg,
+      rgba(255,255,255,.28) 0 2px, rgba(0,0,0,0) 2px 9px),
+    linear-gradient(180deg, var(--bureau) 0%, var(--bureau-fonce) 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+.salle { max-width: 56rem; margin: 0 auto; padding: 1.25rem 1rem 0; }
+
+/* Un contour visible au clavier, invisible à la souris : indispensable pour
+   qui navigue au clavier, discret pour les autres. */
+:focus-visible {
+  outline: 3px solid var(--juste);
+  outline-offset: 2px;
+  border-radius: .3rem;
+}
+.tableau :focus-visible { outline-color: var(--craie-jaune); }
+
+/* ---------------------------------------------------------------- Tableau */
+
+.tableau {
+  position: relative;
+  border: .7rem solid var(--bois);
+  border-radius: .5rem;
+  background:
+    radial-gradient(ellipse at 25% 20%, rgba(255,255,255,.07), rgba(255,255,255,0) 60%),
+    radial-gradient(ellipse at 75% 80%, rgba(255,255,255,.05), rgba(255,255,255,0) 55%),
+    linear-gradient(160deg, var(--ardoise-clair), var(--ardoise));
+  box-shadow: 0 .5rem 1.4rem rgba(0,0,0,.28), inset 0 0 3rem rgba(0,0,0,.28);
+  color: var(--craie);
+  padding: 1.1rem 1.2rem 1.2rem;
+  font-family: var(--craie-police);
+}
+
+.tableau h1 {
+  margin: 0;
+  padding-right: 2.4rem;      /* la place du « i », dans le coin */
+  font-size: 1.9rem;
+  font-weight: 400;
+  letter-spacing: .02em;
+  text-shadow: 0 0 .5rem rgba(255,255,255,.28);
+}
+.tableau .sous-titre {
+  margin: .35rem 0 0;
+  font-size: .95rem;
+  color: rgba(243,241,231,.72);
+}
+
+/* le rebord du tableau, avec sa craie et son éponge */
+.rebord {
+  height: .85rem;
+  margin: 0 .6rem;
+  border-radius: 0 0 .35rem .35rem;
+  background: linear-gradient(180deg, var(--bois), var(--bois-fonce));
+  box-shadow: 0 .25rem .5rem rgba(0,0,0,.2);
+  position: relative;
+}
+.rebord i {
+  position: absolute; top: -.3rem; height: .38rem; border-radius: .2rem; display: block;
+}
+.rebord .craie1 { left: 8%;  width: 2.6rem; background: var(--craie); }
+.rebord .craie2 { left: 20%; width: 1.8rem; background: var(--craie-rose); }
+.rebord .craie3 { left: 29%; width: 1.4rem; background: var(--craie-jaune); }
+.rebord .eponge {
+  right: 8%; width: 3rem; height: .8rem; top: -.62rem; border-radius: .18rem;
+  background: linear-gradient(180deg, #6d7f95 0 55%, #e8e3d6 55% 100%);
+}
+
+/* ---------------------------------------------------------------- Feuille */
+
+.feuille {
+  position: relative;
+  margin-top: 1.75rem;
+  padding: 1.6rem 1.5rem 1.8rem 3.6rem;
+  background-color: var(--papier);
+  background-image:
+    linear-gradient(var(--carreau) 1px, transparent 1px),
+    linear-gradient(90deg, var(--carreau) 1px, transparent 1px);
+  background-size: 24px 24px;
+  border-radius: .2rem .6rem .6rem .2rem;
+  box-shadow: 0 .6rem 1.5rem rgba(0,0,0,.22);
+}
+/* le trait rouge de la marge */
+.feuille::before {
+  content: ""; position: absolute; top: 0; bottom: 0; left: 2.7rem;
+  width: 2px; background: var(--marge); opacity: .75;
+}
+/* les trous de la reliure */
+.feuille::after {
+  content: ""; position: absolute; left: .75rem; top: 18%; bottom: 18%; width: 1.1rem;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 0%,   var(--bureau-fonce) 0 .38rem,
+                    rgba(0,0,0,.18) .38rem .44rem, transparent .45rem),
+    radial-gradient(circle at 50% 50%,  var(--bureau-fonce) 0 .38rem,
+                    rgba(0,0,0,.18) .38rem .44rem, transparent .45rem),
+    radial-gradient(circle at 50% 100%, var(--bureau-fonce) 0 .38rem,
+                    rgba(0,0,0,.18) .38rem .44rem, transparent .45rem);
+  background-repeat: no-repeat;
+}
+
+@media (max-width: 32rem) {
+  .feuille { padding: 1.2rem 1rem 1.4rem 2.6rem; }
+  .feuille::before { left: 1.9rem; }
+  .feuille::after { left: .45rem; }
+  .tableau h1 { font-size: 1.45rem; }
+  .enonce { font-size: 1.15rem; }
+  .case { width: 1.7rem; height: 1.7rem; }
+  .etiquette { padding: 1rem .9rem; }
+  .etiquette .intitule { min-width: 4.4rem; }
+  .etiquette input { min-width: 3rem; font-size: 1.05rem; }
+}
+
+h2 {
+  font-family: var(--craie-police);
+  font-size: 1.25rem; font-weight: 400;
+  margin: 1.8rem 0 .7rem;
+  color: var(--encre);
+}
+h2:first-child { margin-top: 0; }
+h2 .emoji { margin-right: .35rem; }
+
+p.aide { color: var(--encre-pale); margin: .2rem 0 1rem; }
+
+/* ------------------------------------------------------------------ Règle */
+
+.regle {
+  height: 1.5rem; margin: 1.6rem 0;
+  border-radius: .18rem;
+  background:
+    repeating-linear-gradient(90deg,
+      rgba(0,0,0,.45) 0 1px, transparent 1px 12px),
+    linear-gradient(180deg, #f6dd9c, #edc96f);
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.14);
+  opacity: .85;
+}
+
+/* ---------------------------------------------------------------- Boutons */
+
+button { font: inherit; cursor: pointer; }
+
+.bouton {
+  border: 2px solid var(--encre);
+  background: #fff;
+  color: var(--encre);
+  border-radius: .7rem;
+  padding: .6rem 1.1rem;
+  box-shadow: .18rem .18rem 0 var(--encre);
+  transition: transform .08s, box-shadow .08s;
+}
+.bouton:hover:not(:disabled) { transform: translate(-.08rem,-.08rem); box-shadow: .26rem .26rem 0 var(--encre); }
+.bouton:active:not(:disabled) { transform: translate(.18rem,.18rem); box-shadow: 0 0 0 var(--encre); }
+.bouton:disabled { cursor: default; opacity: .6; box-shadow: .18rem .18rem 0 var(--encre); }
+.bouton.choisi { background: var(--craie-jaune); }
+.bouton.vedette { background: var(--juste); color: #fff; border-color: #1e5c39; box-shadow: .18rem .18rem 0 #1e5c39; }
+
+.groupe { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; }
+.matiere { font-size: 1.05rem; padding: .85rem 1.3rem; font-family: var(--craie-police); }
+.matiere .emoji { font-size: 1.3rem; margin-right: .4rem; }
+
+/* ---------------------------------------------------------------- Cahiers */
+
+/* Des cahiers posés à plat : avatar à gauche, nom et score à droite. Une
+   vignette large et haute pour chaque enfant mangeait la moitié de l'écran. */
+.cahiers {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr));
+  gap: .55rem; max-width: 34rem;
+}
+
+.cahier {
+  display: flex; align-items: center; gap: .55rem;
+  text-align: left;
+  border: none; border-radius: .12rem .4rem .4rem .12rem;
+  padding: .45rem .7rem .45rem .85rem;
+  background: linear-gradient(90deg, #b33f3f 0 .3rem, #f3efe2 .3rem 100%);
+  box-shadow: .12rem .18rem .4rem rgba(0,0,0,.22);
+  transition: transform .1s;
+  font: inherit; color: var(--encre); cursor: pointer;
+}
+.cahier:hover { transform: translateY(-.15rem) rotate(-.8deg); }
+.cahier .avatar { font-size: 1.45rem; line-height: 1; flex: 0 0 auto; }
+.cahier .texte { display: flex; flex-direction: column; min-width: 0; }
+.cahier .nom { font-family: var(--craie-police); font-size: 1.05rem; line-height: 1.2; }
+.cahier .stat { color: var(--encre-pale); font-size: .74rem; line-height: 1.2; }
+
+/* Le nouveau cahier : l'étiquette à gauche, les mascottes à droite. */
+.nouveau {
+  display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: flex-start;
+}
+/* min-width:0 : sans cela, la largeur minimale du contenu de l'étiquette
+   empêche le flex de la rétrécir, et elle déborde de la feuille sur mobile. */
+.nouveau .etiquette { flex: 1 1 20rem; min-width: 0; }
+.nouveau .choix-mascotte { flex: 1 1 18rem; min-width: 0; }
+
+.etiquette {
+  background: #fff;
+  border: 1px solid #cfc8b6;
+  outline: 3px double #cfc8b6; outline-offset: -7px;
+  border-radius: .2rem;
+  padding: 1.2rem 1.3rem;
+  box-shadow: .15rem .2rem .5rem rgba(0,0,0,.14);
+  transform: rotate(-.7deg);
+}
+.etiquette .ligne { display: flex; align-items: baseline; gap: .6rem; margin: .55rem 0; }
+.etiquette .intitule {
+  font-family: var(--craie-police); color: var(--encre-pale);
+  min-width: 5.2rem; white-space: nowrap;
+}
+.etiquette input {
+  flex: 1; min-width: 6rem;
+  font: 1.15rem var(--craie-police); color: var(--encre);
+  border: none; border-bottom: 2px solid var(--carreau); background: none; padding: .15rem .2rem;
+}
+.etiquette input:focus { outline: none; border-bottom-color: var(--juste); }
+.etiquette .fixe { font-family: var(--craie-police); font-size: 1.1rem; }
+
+.intitule-mascotte {
+  font-family: var(--craie-police); font-size: 1.05rem;
+  margin: 0 0 .5rem; color: var(--encre);
+}
+/* auto-fit plutôt qu'un nombre de colonnes figé : dix-huit mascottes tiennent
+   en trois rangées pleines de six sur un écran large, et les rangées se
+   recomposent toutes seules sur un téléphone au lieu de laisser des orphelines. */
+.avatars {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(2.7rem, 1fr));
+  gap: .4rem; max-width: 18.5rem;
+}
+.avatars button {
+  font-size: 1.5rem; line-height: 1; padding: .4rem 0;
+  border: 2px solid transparent; border-radius: .6rem; background: #fff;
+  box-shadow: 0 1px 2px rgba(0,0,0,.1);
+}
+.avatars button[aria-pressed="true"] { border-color: var(--juste); background: var(--juste-fond); }
+
+/* Bascule d'un cahier à l'autre. Elle est posée sur le pupitre, entre le
+   tableau et la feuille : quand elle est là, la feuille se rapproche. */
+.bascule { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1.3rem 0 0; }
+.bascule:not([hidden]) ~ .feuille { margin-top: .9rem; }
+.jeton-cahier {
+  display: inline-flex; align-items: center; gap: .4rem;
+  border: none; border-radius: .15rem .5rem .5rem .15rem;
+  padding: .4rem .8rem .4rem .75rem;
+  background: linear-gradient(90deg, #b33f3f 0 .3rem, #f6f2e5 .3rem 100%);
+  font: .95rem var(--craie-police); color: var(--encre);
+  box-shadow: .1rem .16rem .35rem rgba(0,0,0,.2);
+  transition: transform .1s;
+}
+.jeton-cahier:hover { transform: translateY(-.12rem) rotate(-.8deg); }
+.jeton-cahier[aria-current="true"] {
+  background: linear-gradient(90deg, #b33f3f 0 .3rem, var(--craie-jaune) .3rem 100%);
+  cursor: default;
+}
+.jeton-cahier[aria-current="true"]:hover { transform: none; }
+.jeton-cahier .avatar { font-size: 1.15rem; }
+.jeton-nouveau {
+  background: #fff; border: 2px dashed #c3bba9; border-radius: .5rem;
+  padding: .35rem .8rem; font: .95rem var(--craie-police); color: var(--encre-pale);
+}
+.jeton-nouveau:hover { color: var(--encre); border-color: var(--encre-pale); }
+
+/* ---------------------------------------------------------------- Post-it */
+
+/* Les post-it sont posés de travers : un peu d'air dessous, sinon leur coin
+   bas vient toucher le titre suivant. */
+.postits { display: flex; flex-wrap: wrap; gap: .8rem; margin-bottom: .9rem; }
+.postit {
+  background: var(--postit);
+  padding: .8rem 1rem; min-width: 8rem;
+  box-shadow: .12rem .3rem .6rem rgba(0,0,0,.18);
+  transform: rotate(-1.2deg);
+  font-family: var(--craie-police);
+}
+.postit:nth-child(2) { background: var(--postit-bleu); transform: rotate(1deg); }
+.postit:nth-child(3) { background: var(--postit-vert); transform: rotate(-.4deg); }
+.postit .chiffre { display: block; font-size: 1.7rem; line-height: 1.1; }
+.postit .quoi { font-size: .85rem; color: #55606b; }
+
+.liste-notions { list-style: none; padding: 0; margin: .6rem 0 0; }
+.liste-notions li {
+  padding: .45rem .2rem .45rem 1.6rem; position: relative;
+  border-bottom: 1px dashed var(--carreau);
+}
+.liste-notions li::before { content: "✎"; position: absolute; left: .2rem; color: var(--encre-pale); }
+.liste-notions .taux { color: var(--encre-pale); font-size: .85rem; }
+
+/* ------------------------------------------- Les objets de la trousse ---
+   Les commandes secondaires (arrêter, changer de cahier, effacer) ne sont pas
+   des liens soulignés : ce sont des objets qu'on trouve sur un bureau d'écolier.
+   On les reconnaît à leur forme avant de lire leur texte. */
+
+.objets { display: flex; flex-wrap: wrap; gap: .7rem; align-items: center; }
+
+.objet {
+  border: none;
+  border-radius: .4rem;
+  padding: .5rem .95rem;
+  font: .95rem/1.2 var(--craie-police);
+  color: var(--encre);
+  box-shadow: .12rem .22rem .45rem rgba(0,0,0,.22);
+  transition: transform .1s, box-shadow .1s;
+}
+.objet:hover { transform: translateY(-.15rem) rotate(-1.2deg); box-shadow: .16rem .3rem .6rem rgba(0,0,0,.26); }
+.objet:active { transform: translateY(.05rem) rotate(0); box-shadow: .06rem .1rem .3rem rgba(0,0,0,.22); }
+
+/* la gomme : corps rose, embout bleu, comme celle du fond de la trousse */
+.objet-gomme {
+  background: linear-gradient(100deg, #7fa8cd 0 1.5rem, #f3a9b6 1.5rem 100%);
+  color: #4a2f37;
+  padding-left: 2.1rem;
+  border-radius: .35rem;
+}
+
+/* un petit cahier, avec sa reliure rouge */
+.objet-cahier {
+  background: linear-gradient(90deg, #b33f3f 0 .4rem, #f6f2e5 .4rem 100%);
+  padding-left: 1.1rem;
+  border-radius: .12rem .4rem .4rem .12rem;
+}
+
+/* la corbeille : volontairement terne, on ne s'y trompe pas */
+.objet-corbeille {
+  background: #ece6da;
+  color: #8b4b42;
+  border: 1px dashed #c59c95;
+  box-shadow: none;
+}
+.objet-corbeille:hover { box-shadow: .1rem .18rem .35rem rgba(0,0,0,.16); }
+
+/* un classeur : la sauvegarde et la restauration du cahier */
+.objet-classeur {
+  background: linear-gradient(180deg, #cfe0ee 0 .45rem, #f2f6fa .45rem 100%);
+  color: #2b4257;
+}
+
+.attente {
+  margin: .4rem 0 0; font-size: .88rem; color: var(--encre-pale);
+  padding-left: 1.6rem; position: relative;
+}
+.attente::before { content: "F3"; position: absolute; left: .2rem; }
+
+.note-confort { margin: .45rem 0 0; font-size: .85rem; color: var(--encre-pale); }
+
+/* Le rappel de sauvegarde. Assez visible pour être lu par un adulte de
+   passage, assez discret pour ne pas ressembler à une erreur. */
+.rappel {
+  margin: 1.2rem 0 0; padding: .8rem 1rem;
+  border: 2px dashed var(--marge); border-radius: .5rem;
+  background: rgba(255, 249, 226, .75);
+}
+.rappel p { margin: 0 0 .6rem; }
+
+.message {
+  margin: .8rem 0 0; padding: .6rem .9rem; border-radius: .4rem;
+  font-size: .9rem; background: var(--postit); max-width: 34rem;
+}
+.message.rate { background: var(--faux-fond); border: 1px solid var(--faux); }
+.message.reussi { background: var(--juste-fond); border: 1px solid var(--juste); }
+
+/* -------------------------------------------- Les jetons du compte ------ */
+
+.jetons { display: flex; flex-wrap: wrap; gap: .7rem; margin: .2rem 0 1rem; }
+.jeton {
+  border-radius: .6rem;
+  padding: .55rem .9rem;
+  min-width: 6.5rem;
+  background: var(--craie-jaune);
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.07);
+}
+.jeton:nth-child(2) { background: var(--postit-bleu); }
+.jeton:nth-child(3) { background: var(--postit-vert); }
+.jeton b {
+  display: block; font: 400 1.5rem/1.1 var(--craie-police); color: var(--encre);
+}
+.jeton span { font-size: .8rem; color: #55606b; }
+
+.hors-ligne {
+  display: inline-block; margin: 0;
+  font: .85rem var(--craie-police); color: #46525d;
+  background: #fff; border: 1px dashed var(--carreau);
+  border-radius: 2rem; padding: .3rem .9rem;
+}
+
+.pied {
+  margin-top: 2rem; padding-top: .9rem; border-top: 1px dashed var(--carreau);
+  color: var(--encre-pale); font-size: .85rem;
+}
+
+/* --------------------------------------------------------------- Marelle */
+
+.marelle { display: flex; flex-wrap: wrap; gap: .3rem; margin: .9rem 0 0; }
+.case {
+  width: 2rem; height: 2rem; flex: 0 0 auto;
+  display: flex; align-items: center; justify-content: center;
+  border: 2px solid rgba(243,241,231,.5);
+  border-radius: .25rem;
+  font-family: var(--craie-police); font-size: .85rem;
+  color: rgba(243,241,231,.72);
+}
+.case.juste { color: var(--craie-verte); border-color: var(--craie-verte); }
+.case.faux  { color: var(--craie-rose); border-color: var(--craie-rose); }
+.case.courante {
+  background: rgba(243,241,231,.16);
+  border-color: var(--craie); color: var(--craie);
+  box-shadow: 0 0 .6rem rgba(243,241,231,.35);
+}
+.case.courante::after { content: "●"; font-size: .55rem; position: relative; top: .5rem; left: -.55rem; }
+
+/* -------------------------------------------------------------- Exercice */
+
+.etiquette-notion {
+  display: inline-block;
+  font-family: var(--craie-police); font-size: .82rem;
+  background: var(--craie-jaune); color: #4a4026;
+  padding: .15rem .6rem; border-radius: .3rem;
+  transform: rotate(-.8deg);
+}
+.enonce {
+  font-size: 1.35rem; line-height: 1.5; margin: .9rem 0 1.4rem;
+  max-width: 42rem;
+  /* Un énoncé qui énumère — les étapes d'un programme de construction, par
+     exemple — porte de vraies fins de ligne. Elles doivent se voir. */
+  white-space: pre-line;
+}
+
+/* Une figure : demi-droite graduée, horloge, tableau, diagramme. */
+.figure {
+  margin: 0 0 1.4rem; padding: .9rem 1rem; max-width: 42rem;
+  background: rgba(255,255,255,.75); border: 1px solid var(--carreau);
+  border-radius: .5rem; text-align: center;
+}
+.figure svg { max-width: 100%; height: auto; }
+
+#reponses { display: grid; gap: .55rem; max-width: 42rem; }
+
+/* Quand les propositions sont des dessins, on les range en deux colonnes et on
+   retire la case à cocher : c'est la figure qu'on regarde, pas un libellé. */
+.propositions-illustrees { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.propositions-illustrees .proposition { padding: 1.6rem .7rem .7rem; text-align: center; }
+/* Sur une proposition dessinée, le numéro de touche va dans le coin : au
+   milieu, il passerait par-dessus la figure. */
+.propositions-illustrees .proposition::before {
+  left: .5rem; top: .5rem; margin-top: 0;
+}
+.propositions-illustrees .proposition svg { max-width: 100%; height: auto; }
+@media (max-width: 30rem) { .propositions-illustrees { grid-template-columns: 1fr; } }
+.proposition {
+  text-align: left; padding: .8rem 1rem .8rem 2.8rem; position: relative;
+  border: 2px solid var(--encre); background: #fff; border-radius: .7rem;
+  box-shadow: .16rem .16rem 0 rgba(36,48,58,.5);
+  font-size: 1.05rem;
+  transition: transform .08s;
+}
+/* La case à cocher porte le numéro de la touche qui répond : le clavier est
+   ainsi annoncé là où on regarde, sans une ligne de consigne en plus. Après la
+   réponse, ce même carré devient la coche ou la croix. */
+.proposition::before {
+  content: attr(data-touche); position: absolute; left: .9rem; top: 50%; margin-top: -.55rem;
+  width: 1.1rem; height: 1.1rem; border: 2px solid var(--encre-pale); border-radius: .25rem;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--craie-police); font-size: .82rem; color: var(--encre-pale);
+}
+.proposition:hover:not(:disabled) { transform: translateX(.15rem) rotate(-.3deg); }
+.proposition.juste { background: var(--juste-fond); border-color: var(--juste); box-shadow: .16rem .16rem 0 var(--juste); }
+.proposition.juste::before { content: "✔"; border-color: var(--juste); color: var(--juste);
+  display: flex; align-items: center; justify-content: center; font-size: .9rem; }
+.proposition.faux { background: var(--faux-fond); border-color: var(--faux); box-shadow: .16rem .16rem 0 var(--faux); }
+.proposition.faux::before { content: "✘"; border-color: var(--faux); color: var(--faux);
+  display: flex; align-items: center; justify-content: center; font-size: .9rem; }
+/* Les propositions restent lisibles une fois la réponse donnée : le gris que le
+   navigateur applique aux boutons désactivés effacerait la correction. */
+.proposition:disabled { cursor: default; color: var(--encre); opacity: 1; }
+
+#zone-saisie { display: flex; gap: .5rem; flex-wrap: wrap; max-width: 42rem; }
+#saisie {
+  flex: 1; min-width: 10rem;
+  font: 1.25rem var(--craie-police); color: var(--encre);
+  padding: .55rem .8rem;
+  border: none; border-bottom: 3px solid var(--marge); background: rgba(255,255,255,.6);
+  border-radius: .3rem .3rem 0 0;
+}
+#saisie:focus { outline: none; border-bottom-color: var(--juste); background: #fff; }
+
+.retour {
+  margin-top: 1.4rem; padding: 1rem 1.1rem; border-radius: .6rem; max-width: 42rem;
+  border: 2px dashed var(--carreau); background: rgba(255,255,255,.7);
+}
+.retour-juste { border: 2px solid var(--juste); background: var(--juste-fond); animation: surgir .25s ease-out; }
+.retour-faux { border: 2px solid var(--faux); background: var(--faux-fond); animation: secouer .3s ease-out; }
+@keyframes surgir { from { transform: scale(.96); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes secouer { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-.35rem); } 75% { transform: translateX(.35rem); } }
+@media (prefers-reduced-motion: reduce) {
+  .retour-juste, .retour-faux { animation: none; }
+  .bouton, .proposition, .cahier, .objet, .jeton-cahier { transition: none; }
+}
+.verdict { margin: 0 0 .5rem; font-family: var(--craie-police); font-size: 1.25rem; }
+.retour-juste .verdict { color: var(--juste); }
+.retour-faux .verdict { color: var(--faux); }
+/* Ce que l'enfant a tapé, remontré quand c'est faux : une faute de frappe et
+   une erreur de raisonnement ne se corrigent pas de la même façon, et lui seul
+   peut faire la différence. */
+.reponse-tapee { margin: 0 0 .35rem; color: #46525d; }
+.bonne-reponse { margin: 0 0 .5rem; font-weight: 600; }
+.explication { margin: 0; color: #46525d; }
+
+.barre-seance { display: flex; flex-wrap: wrap; justify-content: space-between;
+                align-items: baseline; gap: .5rem 1rem; }
+
+/* --------------------------------------------------------------- Bulletin */
+
+.bulletin {
+  border: 3px double var(--encre-pale); border-radius: .3rem;
+  padding: 1.2rem 1.3rem; background: #fff; max-width: 42rem;
+  box-shadow: .15rem .25rem .6rem rgba(0,0,0,.14);
+}
+.bulletin .mention { font-family: var(--craie-police); font-size: 1.6rem; margin: 0 0 .3rem; }
+.bulletin .note { font-size: 1.15rem; margin: 0 0 .6rem; }
+.etoiles { font-size: 1.7rem; letter-spacing: .2rem; color: #e0a81f;
+           text-shadow: 0 1px 0 rgba(0,0,0,.12); }
+.etoiles .eteinte { color: #cfc8b6; text-shadow: none; }
+
+.alerte {
+  background: var(--postit); padding: .7rem .9rem; border-radius: .4rem;
+  font-size: .9rem; margin: 0 0 1.2rem; max-width: 42rem;
+}
+
+/* ------------------------------------------------- Le bas de la classe ---
+   Le pied de page reprend le tableau du haut, retourné : le rebord passe
+   au-dessus, et l'ardoise porte la provenance des questions. */
+
+.pied-page { margin-top: 2.5rem; }
+
+.rebord-haut {
+  border-radius: .35rem .35rem 0 0;
+  background: linear-gradient(0deg, var(--bois), var(--bois-fonce));
+  box-shadow: 0 -.25rem .5rem rgba(0,0,0,.2);
+}
+.rebord-haut i { top: auto; bottom: -.3rem; }
+.rebord-haut .eponge { top: auto; bottom: -.62rem; }
+
+/* Le pied de page reste plus bas que le tableau du haut : c'est une mention,
+   pas une deuxième en-tête. */
+.tableau-bas { padding: .7rem 1.2rem .8rem; font-size: .85rem; }
+.tableau-bas .titre-pied {
+  margin: 0 0 .25rem; font-size: 1.05rem; color: var(--craie);
+  text-shadow: 0 0 .5rem rgba(255,255,255,.25);
+  /* Le numéro de version se range au bout de la ligne du titre : discret, et
+     sans ajouter de hauteur au pied de page. */
+  display: flex; justify-content: space-between; align-items: baseline;
+  gap: 1rem; flex-wrap: wrap;
+}
+.tableau-bas .version {
+  font: .72rem var(--texte-police);
+  color: rgba(243,241,231,.45);
+  text-shadow: none;
+  letter-spacing: .02em;
+}
+.tableau-bas p { margin: 0; color: rgba(243,241,231,.78); }
+.tableau-bas .source { color: rgba(243,241,231,.62); font-size: .8rem; line-height: 1.45; }
+.tableau-bas a { color: var(--craie-jaune); text-decoration: underline; text-underline-offset: .2em; }
+.tableau-bas a:hover { color: #fff; }
+
+/* ------------------------------------------ La fenêtre d'information ----
+   Le « i » est tracé à la craie dans le coin du tableau : présent pour qui le
+   cherche, invisible pour qui révise. */
+.bouton-info {
+  position: absolute; top: .5rem; right: .6rem;
+  width: 1.9rem; height: 1.9rem; border-radius: 50%;
+  border: 2px solid rgba(243,241,231,.55);
+  background: none; color: rgba(243,241,231,.75);
+  font: 1.05rem var(--craie-police); line-height: 1;
+  transition: transform .1s, color .1s, border-color .1s;
+}
+.bouton-info:hover { color: var(--craie); border-color: var(--craie); transform: scale(1.08); }
+
+dialog.infos {
+  max-width: 38rem; width: calc(100% - 2rem);
+  border: none; border-radius: .6rem;
+  padding: 1.6rem 1.7rem 1.8rem;
+  background-color: var(--papier);
+  background-image:
+    linear-gradient(var(--carreau) 1px, transparent 1px),
+    linear-gradient(90deg, var(--carreau) 1px, transparent 1px);
+  background-size: 24px 24px;
+  color: var(--encre);
+  box-shadow: 0 1rem 2.5rem rgba(0,0,0,.35);
+}
+dialog.infos::backdrop { background: rgba(36,48,58,.55); }
+dialog.infos h2 { margin: 0 0 .8rem; font-size: 1.4rem; }
+dialog.infos h3 {
+  font-family: var(--craie-police); font-size: 1.1rem; font-weight: 400;
+  margin: 1.4rem 0 .4rem;
+}
+dialog.infos p { margin: .5rem 0; }
+dialog.infos ul { margin: .5rem 0; padding-left: 1.2rem; }
+dialog.infos li { margin: .45rem 0; }
+dialog.infos a { color: var(--juste); }
+dialog.infos code {
+  font-size: .9em; background: #fff; border: 1px solid var(--carreau);
+  border-radius: .25rem; padding: 0 .25rem;
+}
+dialog.infos .journal { list-style: none; padding: 0; font-size: .9rem; }
+dialog.infos .journal li {
+  padding: .35rem 0 .35rem 4.4rem; position: relative;
+  border-bottom: 1px dashed var(--carreau); color: #46525d;
+}
+dialog.infos .journal b {
+  position: absolute; left: 0; font: 400 .95rem var(--craie-police); color: var(--encre);
+}
+dialog.infos .journal .majeur { color: var(--juste); }
+
+.fermer-infos {
+  position: absolute; top: .6rem; right: .8rem;
+  width: 2rem; height: 2rem; border: none; border-radius: 50%;
+  background: none; color: var(--encre-pale); font-size: 1.5rem; line-height: 1;
+}
+.fermer-infos:hover { color: var(--encre); background: rgba(0,0,0,.05); }
+
+/* ------------------------------------------- La marelle de la cour ------
+   Purement décorative, tracée à la craie de couleur sur le sol à gauche du
+   pupitre. Elle n'apparaît que s'il reste de la place à côté de la feuille,
+   et grandit à mesure que l'écran s'élargit — trois tailles, pour qu'elle
+   soit présente sur un portable comme sur un grand écran. */
+.marelle-cour {
+  position: fixed;
+  top: 50%;
+  --largeur: 9.5rem;
+  /* 29,5rem = la demi-largeur de la feuille (28rem) plus un peu d'air. */
+  left: calc(50% - 29.5rem - var(--largeur));
+  width: var(--largeur);
+  transform: translateY(-50%) rotate(-1.5deg);
+  display: none;
+  pointer-events: none;
+}
+.marelle-cour svg { display: block; width: 100%; height: auto; }
+.marelle-cour text { font-family: var(--craie-police); }
+
+/* Chaque palier est calculé pour que la marelle tienne entièrement à gauche de
+   la feuille, en largeur comme en hauteur. En dessous, elle s'efface. */
+/* ------------------------------------------------------------ Progression */
+
+.domaines { list-style: none; padding: 0; margin: .8rem 0 0; }
+.domaines > li { margin-bottom: 1rem; }
+.domaines .titre-domaine {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: .5rem;
+  align-items: baseline; font-family: var(--craie-police); font-size: 1.05rem;
+}
+.domaines .chiffres { font-family: var(--texte-police); font-size: .85rem; color: var(--encre-pale); }
+
+/* La barre : un trait de crayon de couleur rempli au feutre. */
+.barre {
+  height: .75rem; margin-top: .3rem;
+  background: #fff; border: 1px solid var(--carreau); border-radius: .4rem;
+  overflow: hidden;
+}
+.barre .part { height: 100%; background: var(--juste); border-radius: .4rem 0 0 .4rem; }
+.barre.tiede .part { background: var(--craie-jaune); }
+.barre.froide .part { background: var(--marge); }
+.barre.vide { border-style: dashed; }
+
+.sous-domaines { list-style: none; padding: 0 0 0 .2rem; margin: .45rem 0 0; }
+.sous-domaines li {
+  font-size: .85rem; color: var(--encre-pale);
+  display: flex; flex-wrap: wrap; gap: .35rem; align-items: baseline;
+}
+.sous-domaines .nom { color: var(--encre); }
+
+/* Le coin de l'adulte : replié par défaut, pour que la page de l'enfant
+   reste la sienne. */
+.coin-adulte {
+  border: 2px dashed var(--bureau-fonce); border-radius: .6rem;
+  padding: .2rem .9rem; background: rgba(255,255,255,.55);
+}
+.coin-adulte > summary {
+  font-family: var(--craie-police); font-size: 1.02rem;
+  padding: .7rem .2rem; cursor: pointer;
+}
+.coin-adulte h3 { font-family: var(--craie-police); font-size: 1rem; margin: 1.2rem 0 .3rem; }
+.coin-adulte .dedans { padding-bottom: 1rem; }
+
+/* L'histogramme des semaines : des colonnes en divs, qui s'impriment. */
+.histo { display: flex; align-items: flex-end; gap: .5rem; height: 7rem; margin: .6rem 0 .2rem; }
+.histo .colonne { flex: 1 1 0; display: flex; flex-direction: column; justify-content: flex-end;
+                  height: 100%; min-width: 0; }
+.histo .tige { background: var(--craie-bleue); border: 1px solid #7fb3d5; border-radius: .2rem .2rem 0 0; }
+.histo .colonne.courante .tige { background: var(--juste); border-color: #1e5c39; }
+.histo .valeur { font-size: .7rem; text-align: center; color: var(--encre-pale); }
+.legende-histo { display: flex; gap: .5rem; }
+.legende-histo span { flex: 1 1 0; text-align: center; font-size: .7rem; color: var(--encre-pale);
+                      min-width: 0; overflow: hidden; }
+
+/* ---------------------------------------------------------- Vue enseignant */
+
+.avertissement {
+  margin: .8rem 0 1.2rem; padding: .7rem .9rem;
+  border-left: 4px solid var(--marge); background: rgba(255, 249, 226, .7);
+  border-radius: 0 .4rem .4rem 0; font-size: .9rem;
+}
+
+/* Le tableau des cahiers défile tout seul sur un écran étroit : c'est lui qui
+   déborde, jamais la page. */
+.tableau-classe { overflow-x: auto; margin: .6rem 0 .4rem; }
+.tableau-classe table { border-collapse: collapse; width: 100%; min-width: 36rem; }
+.tableau-classe th, .tableau-classe td {
+  text-align: left; padding: .45rem .6rem; border-bottom: 1px solid var(--carreau);
+  font-size: .92rem; white-space: nowrap;
+}
+.tableau-classe th {
+  font-family: var(--craie-police); font-weight: normal; font-size: .82rem;
+  color: var(--encre-pale); border-bottom: 2px solid var(--encre-pale);
+}
+.tableau-classe .nb { text-align: right; font-variant-numeric: tabular-nums; }
+.tableau-classe tr:hover td { background: rgba(255, 255, 255, .55); }
+/* Une date trop ancienne se signale : c'est l'information la plus utile du
+   tableau, et celle qu'on ne voit pas en lisant des chiffres. */
+.tableau-classe .alerte { color: var(--faux); font-weight: 600; }
+
+.lien-eleve {
+  border: none; background: none; padding: 0; cursor: pointer;
+  font: inherit; color: var(--encre); text-decoration: underline dotted;
+  text-underline-offset: .18rem;
+}
+.lien-eleve:hover { color: var(--juste); }
+
+.detail-eleve {
+  margin: 1.2rem 0; padding: .9rem 1.1rem;
+  border: 2px dashed var(--carreau); border-radius: .6rem;
+  background: rgba(255, 255, 255, .6);
+}
+.entete-detail {
+  display: flex; flex-wrap: wrap; justify-content: space-between;
+  align-items: baseline; gap: .5rem 1rem;
+}
+.detail-eleve h2 { margin: 0; }
+.detail-eleve h3 { margin: 1rem 0 .3rem; font-size: .95rem; }
+
+/* -------------------------------------------------------- Fiche à imprimer */
+
+.fiche-tete h3 { font-family: var(--craie-police); font-size: 1.25rem; margin: 0 0 .3rem; }
+.fiche-lignes-a-remplir { margin: .2rem 0; color: var(--encre-pale); letter-spacing: .02em; }
+.fiche-reference { margin: .2rem 0 1rem; font-size: .8rem; color: var(--encre-pale); }
+
+.fiche-exercices, .fiche-reponses { padding-left: 1.6rem; }
+.fiche-exercices > li { margin-bottom: 1.1rem; }
+.fiche-notion { margin: 0; font-size: .75rem; text-transform: uppercase;
+                letter-spacing: .04em; color: var(--encre-pale); }
+.fiche-enonce { margin: .1rem 0 .35rem; white-space: pre-line; }
+.fiche-figure { margin: .3rem 0; }
+.fiche-figure svg, .fiche-vignette svg { max-width: 100%; height: auto; }
+
+.fiche-choix { list-style: none; padding: 0; margin: .2rem 0 0;
+               display: flex; flex-wrap: wrap; gap: .3rem 1.2rem; }
+.fiche-choix li { display: flex; gap: .35rem; align-items: baseline; }
+.fiche-lettre { color: var(--encre-pale); }
+.fiche-choix-figures { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .6rem; }
+.fiche-choix-figures li { flex-direction: column; align-items: center; }
+
+/* La ligne à remplir : un pointillé, comme sur un cahier. */
+.fiche-reglure {
+  margin: .3rem 0 0; height: 1.3rem;
+  border-bottom: 1px dotted var(--encre-pale);
+}
+.fiche-corrige { margin-top: 2rem; }
+.fiche-corrige h3 { font-family: var(--craie-police); font-size: 1.25rem; margin: 0 0 .2rem; }
+.fiche-reponses > li { margin-bottom: .45rem; font-size: .92rem; }
+.fiche-explication { color: var(--encre-pale); }
+.fiche-acceptees { color: var(--encre-pale); }
+
+/* -------------------------------------------------- Confort de lecture ---
+
+   Deux réglages, rangés dans le cahier de l'enfant. Ils ne changent pas la
+   mise en page : ils agrandissent et ils espacent, c'est tout — ce sont les
+   deux leviers qui servent vraiment en cas de dyslexie ou de fatigue visuelle.
+
+   Ils s'appliquent à la page entière, donc aussi à la fiche imprimée : une
+   fiche demandée avec un texte plus grand sort avec un texte plus grand. */
+
+.lecture-grande .enonce { font-size: 1.6rem; }
+.lecture-grande .proposition { font-size: 1.2rem; }
+.lecture-grande .retour,
+.lecture-grande .fiche-enonce,
+.lecture-grande .fiche-choix,
+.lecture-grande .fiche-reponses > li { font-size: 1.1rem; }
+.lecture-grande #saisie { font-size: 1.45rem; }
+.lecture-grande .feuille { font-size: 1.08rem; }
+
+.lecture-aeree .enonce,
+.lecture-aeree .proposition,
+.lecture-aeree .retour,
+.lecture-aeree .fiche-enonce,
+.lecture-aeree .fiche-choix,
+.lecture-aeree .fiche-reponses > li,
+.lecture-aeree #saisie {
+  line-height: 1.9; letter-spacing: .06em; word-spacing: .18em;
+}
+.lecture-aeree .fiche-exercices > li { margin-bottom: 1.5rem; }
+
+/* ------------------------------------------------------------- Impression */
+
+/* Une fiche doit sortir en noir sur blanc : ni tableau vert, ni petits
+   carreaux, ni ombres. Tout ce qui sert à l'écran est retiré. */
+@media print {
+  /* Le bandeau « Le cahier de révisions — file:///C:/… » en tête et en pied des
+     pages imprimées est dessiné par le navigateur lui-même, dans la marge de la
+     feuille : aucune règle CSS ne peut le désigner. En revanche, une marge nulle
+     ne lui laisse plus de place. On la remet donc en padding sur le contenu, ce
+     qui garde le blanc autour du texte sans rendre la marge au navigateur.
+
+     Cela suffit sous Chrome et Edge. Ailleurs, ou si le bandeau revient, c'est
+     la case « En-têtes et pieds de page » de la fenêtre d'impression qui
+     commande. */
+  @page { margin: 0; }
+
+  body { background: #fff; }
+  .salle { max-width: none; margin: 0; padding: 12mm 14mm; }
+  .tableau, .rebord, .bascule, .pied-page, .marelle-cour,
+  .barre-seance, .regle, .objet, .bouton, .rappel, .note-confort,
+  .non-imprimable, dialog.infos { display: none !important; }
+  .feuille {
+    margin: 0; padding: 0; background: #fff; background-image: none;
+    border-radius: 0; box-shadow: none;
+  }
+  .feuille::before, .feuille::after { display: none; }
+  .fiche-corrige { break-before: page; page-break-before: always; }
+  /* Le padding de .salle ne vaut que pour le haut de la première page et le bas
+     de la dernière : au-delà, un exercice qui tombe en début de page arriverait
+     au ras du papier. Quelques millimètres sur chaque exercice tiennent le texte
+     à l'écart du bord, quelle que soit la page. */
+  .fiche-exercices > li, .fiche-reponses > li {
+    break-inside: avoid; page-break-inside: avoid;
+    padding: 3mm 0;
+  }
+  .fiche-tete, .fiche-corrige h3 { break-after: avoid; page-break-after: avoid; }
+  a { text-decoration: none; color: inherit; }
+
+  /* La vue enseignant s'imprime pour être emportée : le tableau ne défile plus,
+     il tient sur la largeur du papier, et aucune ligne n'est coupée en deux. */
+  .tableau-classe { overflow: visible; }
+  .tableau-classe table { min-width: 0; }
+  .tableau-classe th, .tableau-classe td { padding: 1.2mm 2mm; font-size: 9pt; }
+  .tableau-classe tr, .detail-eleve, .domaines > li, .liste-notions > li {
+    break-inside: avoid; page-break-inside: avoid;
+  }
+  .detail-eleve { border-style: solid; }
+  /* Le nom de l'enfant est un bouton à l'écran ; sur le papier, c'est du texte. */
+  .lien-eleve { text-decoration: none; }
+}
+
+@media (min-width: 79rem) and (min-height: 30rem) { .marelle-cour { display: block; } }
+@media (min-width: 87rem) and (min-height: 38rem) { .marelle-cour { --largeur: 13rem; } }
+@media (min-width: 97rem) and (min-height: 48rem) { .marelle-cour { --largeur: 18rem; } }
+</style>
+</head>
+<body>
+
+<!-- La marelle tracée à la craie sur le sol de la cour, à côté du pupitre.
+     Décor pur : aucun clic, aucune lecture d'écran. -->
+<div class="marelle-cour" aria-hidden="true">
+<svg viewBox="0 0 240 612" xmlns="http://www.w3.org/2000/svg"
+     fill="none" stroke="#fff" stroke-width="3"
+     stroke-linecap="round" stroke-linejoin="round">
+  <defs>
+    <radialGradient id="sol" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#4d4740" stop-opacity=".58"/>
+      <stop offset="62%"  stop-color="#4d4740" stop-opacity=".34"/>
+      <stop offset="100%" stop-color="#4d4740" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- La zone d'asphalte : la craie blanche n'accroche pas sur un sol clair. -->
+  <ellipse cx="120" cy="306" rx="120" ry="306" fill="url(#sol)" stroke="none"/>
+
+  <!-- Le ciel, avec son soleil -->
+  <path d="M42,106 L42,70 A78,44 0 0 1 198,70 L198,106"/>
+  <g transform="translate(120,66)">
+    <circle r="14"/>
+    <g stroke-width="2.6">
+      <line y1="-19" y2="-26"/>
+      <line y1="-19" y2="-26" transform="rotate(45)"/>
+      <line y1="-19" y2="-26" transform="rotate(90)"/>
+      <line y1="-19" y2="-26" transform="rotate(135)"/>
+      <line y1="-19" y2="-26" transform="rotate(180)"/>
+      <line y1="-19" y2="-26" transform="rotate(225)"/>
+      <line y1="-19" y2="-26" transform="rotate(270)"/>
+      <line y1="-19" y2="-26" transform="rotate(315)"/>
+    </g>
+    <circle cx="-5" cy="-3" r="1.8" fill="#fff"/>
+    <circle cx="5"  cy="-3" r="1.8" fill="#fff"/>
+    <path d="M-6,3 Q0,9 6,3" stroke-width="2.4"/>
+  </g>
+
+  <!-- Les cases. Chacune est légèrement de travers : une marelle tracée à la
+       main n'a pas d'angle droit. -->
+  <rect x="42"  y="110" width="76"  height="62" transform="rotate(-.8 80 141)"/>
+  <rect x="122" y="110" width="76"  height="62" transform="rotate(.7 160 141)"/>
+  <rect x="42"  y="176" width="156" height="62" transform="rotate(.5 120 207)"/>
+  <rect x="42"  y="242" width="76"  height="62" transform="rotate(.9 80 273)"/>
+  <rect x="122" y="242" width="76"  height="62" transform="rotate(-.6 160 273)"/>
+  <rect x="42"  y="308" width="156" height="62" transform="rotate(-.5 120 339)"/>
+  <rect x="42"  y="374" width="76"  height="62" transform="rotate(-.9 80 405)"/>
+  <rect x="122" y="374" width="76"  height="62" transform="rotate(.8 160 405)"/>
+  <rect x="42"  y="440" width="156" height="62" transform="rotate(.6 120 471)"/>
+  <rect x="42"  y="506" width="156" height="62" transform="rotate(-.7 120 537)"/>
+
+  <!-- Les numéros, une craie de couleur par case -->
+  <g stroke="none" font-size="38" text-anchor="middle">
+    <text x="80"  y="154" fill="#ef8b3c" transform="rotate(-4 80 154)">9</text>
+    <text x="160" y="154" fill="#f2c744" transform="rotate(3 160 154)">10</text>
+    <text x="120" y="220" fill="#ef7fa6" transform="rotate(-2 120 220)">8</text>
+    <text x="80"  y="286" fill="#3fc0d8" transform="rotate(4 80 286)">6</text>
+    <text x="160" y="286" fill="#4a90e2" transform="rotate(-3 160 286)">7</text>
+    <text x="120" y="352" fill="#6cc46a" transform="rotate(2 120 352)">5</text>
+    <text x="80"  y="418" fill="#ef8b3c" transform="rotate(-3 80 418)">3</text>
+    <text x="160" y="418" fill="#ef5a4a" transform="rotate(4 160 418)">4</text>
+    <text x="120" y="484" fill="#a98ee0" transform="rotate(-2 120 484)">2</text>
+    <text x="120" y="550" fill="#f2c744" transform="rotate(3 120 550)">1</text>
+  </g>
+
+  <!-- Les gribouillis autour, comme sur toutes les marelles de cour -->
+  <g stroke-width="2.4" opacity=".9">
+    <path d="M20,120 Q22,110 24,120 Q34,122 24,124 Q22,134 20,124 Q10,122 20,120" transform="translate(-2,0)"/>
+    <path d="M218,148 C212,141 216,135 220,139 C224,135 228,141 222,148 Z"/>
+    <path d="M16,246 m0,-9 a9,9 0 1 0 .1,0 M16,237 v-7 M16,255 v7 M7,246 h-7 M25,246 h7"/>
+    <path d="M224,252 L216,264 L221,264 L218,276 L228,262 L223,262 Z"/>
+    <path d="M18,400 c5,-5 -5,-8 -8,-1 c-3,7 9,10 14,2 c5,-8 -3,-16 -13,-11"/>
+    <path d="M222,404 l-4,9 M228,400 l-4,9 M216,408 l-4,9"/>
+    <path d="M18,556 L25,563 L18,570 L11,563 Z"/>
+    <path d="M212,566 Q217,558 222,566 Q227,574 232,566"/>
+  </g>
+
+  <!-- Le caillou, posé devant la première case -->
+  <circle cx="78" cy="590" r="5" fill="#8d7a5c" stroke="none" opacity=".85"/>
+</svg>
+</div>
+
+<div class="salle">
+
+  <!-- ================================================== le tableau du maître -->
+  <div class="tableau">
+    <button type="button" class="bouton-info" id="ouvrir-infos"
+            aria-label="À propos de ce cahier de révisions">i</button>
+    <h1 id="tableau-titre">Le cahier de révisions</h1>
+    <p class="sous-titre" id="tableau-sous-titre">CM2 — année 2026-2027</p>
+    <div id="tableau-marelle" hidden>
+      <p class="sous-titre" id="progression" style="margin-top:.8rem"></p>
+      <div class="marelle" id="marelle" aria-hidden="true"></div>
+    </div>
+  </div>
+  <div class="rebord" aria-hidden="true">
+    <i class="craie1"></i><i class="craie2"></i><i class="craie3"></i><i class="eponge"></i>
+  </div>
+
+  <!-- Les cahiers posés sur le pupitre, entre le tableau et la feuille : ils
+       occupent un espace qui ne servait à rien et libèrent d'autant la page. -->
+  <nav class="bascule" id="bascule" aria-label="Changer de cahier" hidden></nav>
+
+  <!-- ============================================ 1. choisir son cahier -->
+  <section class="feuille" id="ecran-cahiers">
+    <p class="alerte" id="sans-memoire" hidden>
+      Ton navigateur n'autorise pas la mémoire sur cette page : tu peux réviser, mais
+      ton cahier ne sera pas retrouvé la prochaine fois.
+    </p>
+
+    <div id="bloc-cahiers-existants" hidden>
+      <h2><span class="emoji" aria-hidden="true">📚</span>Reprends ton cahier</h2>
+      <div class="cahiers" id="liste-cahiers"></div>
+      <div class="regle" aria-hidden="true"></div>
+    </div>
+
+    <h2><span class="emoji" aria-hidden="true">🎒</span>Ou commence un nouveau cahier</h2>
+    <div class="nouveau">
+      <div class="etiquette">
+        <div class="ligne"><span class="intitule">Cahier de</span>
+          <input id="nom-nouveau" type="text" maxlength="18" autocomplete="off"
+                 placeholder="ton prénom" aria-label="Ton prénom"></div>
+        <div class="ligne"><span class="intitule">Classe</span><span class="fixe">CM2</span></div>
+        <div class="ligne"><span class="intitule">Année</span><span class="fixe">2026 – 2027</span></div>
+      </div>
+
+      <div class="choix-mascotte">
+        <p class="intitule-mascotte" id="titre-mascotte">
+          <span class="emoji" aria-hidden="true">🖍️</span>Choisis ta mascotte
+        </p>
+        <div class="avatars" id="avatars" role="group" aria-labelledby="titre-mascotte"></div>
+      </div>
+    </div>
+
+    <p style="margin-top:1.4rem">
+      <button type="button" class="bouton vedette" id="creer">Ouvrir mon cahier</button>
+    </p>
+
+    <h2><span class="emoji" aria-hidden="true">📂</span>Tu as déjà un fichier de sauvegarde ?</h2>
+    <p class="aide">Un cahier enregistré sur cet ordinateur, ou rapporté d'un autre, se
+       retrouve ici — même si aucun cahier n'apparaît au-dessus.</p>
+    <div class="objets">
+      <button type="button" class="objet objet-classeur" id="restaurer-accueil">
+        <span aria-hidden="true">📂</span> Restaurer un cahier</button>
+    </div>
+    <p class="message message-cahier" role="status" aria-live="polite" hidden></p>
+
+    <div class="regle" aria-hidden="true"></div>
+
+    <h2><span class="emoji" aria-hidden="true">🧑‍🏫</span>Pour l'adulte</h2>
+    <p class="aide">Une vue d'ensemble des cahiers rangés sur cet ordinateur : où
+       chacun en est, ce qui coince, ce qui est acquis.</p>
+    <p>
+      <button type="button" class="bouton" id="voir-classe">
+        <span class="emoji" aria-hidden="true">📋</span>Vue enseignant</button>
+    </p>
+
+    <div class="regle" aria-hidden="true"></div>
+
+    <h2><span class="emoji" aria-hidden="true">🧮</span>Ce qu'il y a dans le cartable</h2>
+    <div class="jetons">
+      <div class="jeton"><b id="compte-total">0</b><span>sortes d'exercices</span></div>
+      <div class="jeton"><b id="compte-maths">0</b><span>en mathématiques</span></div>
+      <div class="jeton"><b id="compte-francais">0</b><span>en français</span></div>
+      <div class="jeton"><b id="compte-sciences">0</b><span>en sciences</span></div>
+      <div class="jeton"><b id="compte-histoire-geo">0</b><span>en histoire-géo</span></div>
+      <div class="jeton"><b id="compte-numerique">0</b><span>en numérique</span></div>
+      <div class="jeton"><b id="compte-emc">0</b><span>en EMC</span></div>
+    </div>
+    <p class="hors-ligne"><span aria-hidden="true">✈️</span> Tout fonctionne sans connexion</p>
+  </section>
+
+  <!-- ================================================ 2. le bureau de l'élève -->
+  <section class="feuille" id="ecran-bureau" hidden>
+    <p id="bloc-reprendre" hidden style="margin:0 0 1.4rem">
+      <button type="button" class="bouton vedette" id="reprendre-serie"></button>
+    </p>
+
+    <h2><span class="emoji" aria-hidden="true">📌</span>Où tu en es</h2>
+    <div class="postits">
+      <div class="postit"><span class="chiffre" id="stat-questions">0</span>
+        <span class="quoi">questions faites</span></div>
+      <div class="postit"><span class="chiffre" id="stat-taux">–</span>
+        <span class="quoi">de bonnes réponses</span></div>
+      <div class="postit"><span class="chiffre" id="stat-serie">0</span>
+        <span class="quoi" id="stat-serie-mot">jour de suite</span></div>
+    </div>
+
+    <div id="bloc-fragiles" hidden>
+      <h2><span class="emoji" aria-hidden="true">🔍</span>À retravailler</h2>
+      <ul class="liste-notions" id="liste-fragiles"></ul>
+    </div>
+
+    <div class="regle" aria-hidden="true"></div>
+
+    <h2><span class="emoji" aria-hidden="true">🔢</span>Combien de questions ?</h2>
+    <div class="groupe" role="group" aria-label="Nombre de questions">
+      <button type="button" class="bouton" data-nombre="5" aria-pressed="false">5</button>
+      <button type="button" class="bouton choisi" data-nombre="10" aria-pressed="true">10</button>
+      <button type="button" class="bouton" data-nombre="15" aria-pressed="false">15</button>
+      <button type="button" class="bouton" data-nombre="20" aria-pressed="false">20</button>
+    </div>
+
+    <h2><span class="emoji" aria-hidden="true">✏️</span>On révise quoi ?</h2>
+    <div class="groupe">
+      <button type="button" class="bouton matiere" data-matiere="mathematiques">
+        <span class="emoji" aria-hidden="true">📐</span>Mathématiques</button>
+      <button type="button" class="bouton matiere" data-matiere="francais">
+        <span class="emoji" aria-hidden="true">🖋️</span>Français</button>
+      <button type="button" class="bouton matiere" data-matiere="sciences">
+        <span class="emoji" aria-hidden="true">🔬</span>Sciences</button>
+      <button type="button" class="bouton matiere" data-matiere="histoire_geo">
+        <span class="emoji" aria-hidden="true">🗺️</span>Histoire-géo</button>
+      <button type="button" class="bouton matiere" data-matiere="numerique">
+        <span class="emoji" aria-hidden="true">💻</span>Numérique</button>
+      <button type="button" class="bouton matiere" data-matiere="emc">
+        <span class="emoji" aria-hidden="true">🏛️</span>Vivre en république</button>
+      <button type="button" class="bouton matiere" data-matiere="tout">
+        <span class="emoji" aria-hidden="true">🎒</span>Tout</button>
+    </div>
+
+    <p style="margin-top:1.1rem">
+      <button type="button" class="bouton" id="revoir-erreurs" hidden></button>
+    </p>
+    <p class="attente" id="bloc-attente" hidden><span id="texte-attente"></span></p>
+
+    <div class="regle" aria-hidden="true"></div>
+
+    <h2><span class="emoji" aria-hidden="true">🗺️</span>Et aussi</h2>
+    <div class="groupe">
+      <button type="button" class="bouton" id="voir-progres">
+        <span class="emoji" aria-hidden="true">📈</span>Ma progression</button>
+      <button type="button" class="bouton" id="voir-fiche">
+        <span class="emoji" aria-hidden="true">🖨️</span>Une fiche à imprimer</button>
+    </div>
+
+    <div id="bloc-sujets-choix" hidden>
+      <h2><span class="emoji" aria-hidden="true">🏭</span>Sujets vus en classe</h2>
+      <p class="aide">Le programme d'histoire propose quatre sujets sur l'âge industriel
+         et le professeur en choisit deux. Coche ceux qui ont été étudiés : les autres ne
+         seront pas demandés.</p>
+      <div class="groupe" id="liste-sujets-choix" role="group"
+           aria-label="Sujets d'histoire vus en classe"></div>
+      <p class="aide" id="texte-sujets-choix"></p>
+      <div class="regle" aria-hidden="true"></div>
+    </div>
+
+    <h2><span class="emoji" aria-hidden="true">👓</span>Confort de lecture</h2>
+    <div class="groupe">
+      <button type="button" class="bouton" id="confort-grand" aria-pressed="false">
+        <span class="emoji" aria-hidden="true">🔠</span>Texte plus grand</button>
+      <button type="button" class="bouton" id="confort-aere" aria-pressed="false">
+        <span class="emoji" aria-hidden="true">↔️</span>Texte plus aéré</button>
+    </div>
+    <p class="note-confort">Ces deux réglages valent aussi pour les fiches
+      imprimées. Ils sont rangés dans ce cahier-ci.</p>
+
+    <!-- Le rappel de sauvegarde : il attend au bureau, jamais pendant une
+         question, et le bouton qui le fait disparaître est dedans. -->
+    <div class="rappel" id="bloc-sauvegarde" role="status" hidden>
+      <p><span class="emoji" aria-hidden="true">💾</span><span id="texte-sauvegarde"></span></p>
+      <button type="button" class="bouton" id="sauvegarder-maintenant">Sauvegarder maintenant</button>
+    </div>
+
+    <div class="pied objets">
+      <button type="button" class="objet objet-classeur" id="sauver-cahier">
+        <span aria-hidden="true">💾</span> Sauvegarder mon cahier</button>
+      <button type="button" class="objet objet-classeur" id="restaurer-cahier">
+        <span aria-hidden="true">📂</span> Restaurer un cahier</button>
+      <button type="button" class="objet objet-corbeille" id="effacer-cahier">
+        <span aria-hidden="true">🗑️</span> Effacer ce cahier</button>
+    </div>
+    <p class="message message-cahier" role="status" aria-live="polite" hidden></p>
+  </section>
+
+  <!-- ============================================================ 3. séance -->
+  <section class="feuille" id="ecran-seance" hidden>
+    <div class="barre-seance">
+      <span class="etiquette-notion" id="titre-exercice"></span>
+      <button type="button" class="objet objet-gomme" id="abandonner">Arrêter</button>
+    </div>
+
+    <p class="enonce" id="enonce"></p>
+    <div class="figure" id="figure" hidden></div>
+
+    <div id="reponses" role="group" aria-label="Propositions"></div>
+
+    <div id="zone-saisie" hidden>
+      <input id="saisie" type="text" autocomplete="off" autocapitalize="off"
+             spellcheck="false" aria-label="Ta réponse" placeholder="ta réponse…">
+      <button type="button" class="bouton" id="valider">Valider</button>
+    </div>
+
+    <div class="retour" id="retour" role="status" aria-live="polite" hidden></div>
+    <p><button type="button" class="bouton vedette" id="suivant" hidden>Question suivante</button></p>
+  </section>
+
+  <!-- ============================================================= 4. bilan -->
+  <section class="feuille" id="ecran-bilan" hidden>
+    <h2><span class="emoji" aria-hidden="true">🔔</span>C'est la récréation</h2>
+    <div class="bulletin">
+      <p class="mention" id="mention"></p>
+      <p class="etoiles" id="etoiles"></p>
+      <p class="note" id="score"></p>
+      <div id="bloc-rates" hidden>
+        <p class="aide" style="margin-top:1rem">Ces notions reviendront dans une prochaine série :</p>
+        <ul class="liste-notions" id="liste-rates"></ul>
+      </div>
+    </div>
+    <p style="margin-top:1.3rem" class="groupe">
+      <button type="button" class="bouton vedette" id="encore">Encore une série</button>
+      <button type="button" class="bouton" id="retour-bureau">Retour au bureau</button>
+    </p>
+  </section>
+
+
+  <!-- ==================================================== 5. progression -->
+  <section class="feuille" id="ecran-progres" hidden>
+    <div class="barre-seance">
+      <span class="etiquette-notion">📈 Ta progression</span>
+      <button type="button" class="objet objet-gomme" id="progres-retour">Retour</button>
+    </div>
+
+    <p class="aide" id="progres-resume"></p>
+
+    <h2><span class="emoji" aria-hidden="true">🗺️</span>Les domaines du programme</h2>
+    <ul class="domaines" id="progres-domaines"></ul>
+    <p class="aide" id="progres-note"></p>
+
+    <div class="regle" aria-hidden="true"></div>
+
+    <!-- Replié par défaut : la page appartient d'abord à l'enfant. -->
+    <details class="coin-adulte" id="coin-adulte">
+      <summary>👓 Pour l'adulte — l'évolution, ce qui est acquis, ce qui coince</summary>
+      <div class="dedans">
+        <h3>Les six dernières semaines</h3>
+        <div class="histo" id="progres-histo" role="img" aria-label="Questions faites par semaine"></div>
+        <div class="legende-histo" id="progres-histo-legende" aria-hidden="true"></div>
+        <p class="aide" id="progres-semaines-texte"></p>
+
+        <h3>Ce qui a l'air acquis</h3>
+        <ul class="liste-notions" id="progres-acquis"></ul>
+        <p class="aide" id="progres-acquis-vide" hidden>Rien encore : il faut avoir
+           rencontré une notion au moins trois fois pour pouvoir en juger.</p>
+
+        <h3>Ce qui coince</h3>
+        <ul class="liste-notions" id="progres-coince"></ul>
+        <p class="aide" id="progres-coince-vide" hidden>Rien ne ressort pour le moment.</p>
+
+        <h3>Couverture du programme</h3>
+        <p class="aide" id="progres-couverture"></p>
+      </div>
+    </details>
+  </section>
+
+  <!-- ================================================= 6. vue enseignant -->
+  <section class="feuille" id="ecran-classe" hidden>
+    <div class="barre-seance non-imprimable">
+      <span class="etiquette-notion">📋 Vue enseignant</span>
+      <button type="button" class="objet objet-gomme" id="classe-retour">Retour</button>
+    </div>
+
+    <p class="aide" id="classe-resume" role="status" aria-live="polite"></p>
+
+    <!-- Ce que cette vue ne sait pas, dit avant qu'on la lise : un tableau qui
+         paraît complet alors qu'il manque la moitié de la classe est pire
+         qu'un tableau vide. -->
+    <p class="avertissement">Cette vue ne montre que les cahiers rangés dans <b>ce
+       navigateur, sur cet ordinateur</b>. Un enfant qui travaille ailleurs n'y
+       figure qu'une fois son fichier de sauvegarde restauré ici. Rien n'est
+       envoyé nulle part.</p>
+
+    <div class="objets non-imprimable">
+      <button type="button" class="objet objet-classeur" id="classe-restaurer">
+        <span aria-hidden="true">📂</span> Ajouter le cahier d'un enfant</button>
+      <button type="button" class="objet objet-classeur" id="classe-imprimer">
+        <span aria-hidden="true">🖨️</span> Imprimer cette vue</button>
+    </div>
+    <p class="message message-cahier" role="status" aria-live="polite" hidden></p>
+
+    <h2><span class="emoji" aria-hidden="true">📚</span>Les cahiers</h2>
+    <div class="tableau-classe" id="classe-tableau" hidden>
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Enfant</th>
+            <th scope="col">Dernière visite</th>
+            <th scope="col" class="nb">Séances</th>
+            <th scope="col" class="nb">Questions</th>
+            <th scope="col" class="nb">Réussite</th>
+            <th scope="col" class="nb">À revoir</th>
+            <th scope="col" class="nb">Objectifs</th>
+          </tr>
+        </thead>
+        <tbody id="classe-lignes"></tbody>
+      </table>
+    </div>
+    <p class="aide">« Réussite » reste vide tant qu'il y a moins de trois questions :
+       un pourcentage calculé sur deux réponses est un chiffre faux qui a l'air vrai.
+       « Objectifs » compte les objectifs du programme déjà travaillés, sur ceux que
+       l'application sait proposer.</p>
+
+    <!-- Le détail d'un enfant, ouvert par un clic sur son nom. -->
+    <div class="detail-eleve" id="classe-detail" hidden>
+      <!-- Pas de .barre-seance ici : elle est retirée à l'impression, et le nom
+           de l'enfant est précisément ce qu'une feuille imprimée doit porter. -->
+      <div class="entete-detail">
+        <h2 id="classe-detail-titre"></h2>
+        <button type="button" class="objet objet-gomme non-imprimable"
+                id="classe-detail-fermer">Fermer</button>
+      </div>
+      <p class="aide" id="classe-detail-resume"></p>
+
+      <h3>Les six dernières semaines</h3>
+      <div class="histo" id="classe-histo" role="img" aria-label="Questions faites par semaine"></div>
+      <div class="legende-histo" id="classe-histo-legende" aria-hidden="true"></div>
+
+      <h3>Ce qui a l'air acquis</h3>
+      <ul class="liste-notions" id="classe-acquis"></ul>
+      <p class="aide" id="classe-acquis-vide" hidden>Rien encore : il faut avoir
+         rencontré une notion au moins trois fois pour pouvoir en juger.</p>
+
+      <h3>Ce qui coince</h3>
+      <ul class="liste-notions" id="classe-coince"></ul>
+      <p class="aide" id="classe-coince-vide" hidden>Rien ne ressort pour le moment.</p>
+    </div>
+
+    <div class="regle" aria-hidden="true"></div>
+
+    <h2><span class="emoji" aria-hidden="true">🗺️</span>Les domaines, tous cahiers réunis</h2>
+    <ul class="domaines" id="classe-domaines"></ul>
+    <p class="aide" id="classe-domaines-vide" hidden>Aucun domaine travaillé pour
+       l'instant.</p>
+    <p class="aide">Un exercice qui relève de deux domaines est compté dans les deux :
+       les totaux par domaine dépassent le total général. Le nombre d'enfants est
+       rappelé, car un taux venu d'un seul cahier ne se lit pas comme un taux venu
+       de six.</p>
+
+    <h2><span class="emoji" aria-hidden="true">🔍</span>Ce qui coince, et chez qui</h2>
+    <ul class="liste-notions" id="classe-difficultes"></ul>
+    <p class="aide" id="classe-difficultes-vide" hidden>Rien ne ressort encore : une
+       notion doit avoir été rencontrée au moins trois fois pour être jugée.</p>
+    <p class="aide">Classé par nombre d'enfants concernés. Une notion qui résiste à
+       plusieurs demande d'y revenir ensemble ; une notion qui résiste à un seul
+       demande un coup de main.</p>
+  </section>
+
+  <!-- =============================================== 7. fiche à imprimer -->
+  <section class="feuille" id="ecran-fiche" hidden>
+    <div class="barre-seance non-imprimable">
+      <span class="etiquette-notion">🖨️ Fiche à imprimer</span>
+      <button type="button" class="objet objet-gomme" id="fiche-retour">Retour</button>
+    </div>
+
+    <div class="non-imprimable">
+      <p class="aide">Une feuille d'exercices à faire au crayon, et son corrigé sur la page
+         suivante. Les réponses écrites sur le papier ne sont pas connues de l'ordinateur :
+         une fiche ne compte donc pas dans le cahier, et ne change rien aux révisions.</p>
+
+      <h2><span class="emoji" aria-hidden="true">🔢</span>Combien d'exercices ?</h2>
+      <!-- Même échelle que les séries à l'écran : 5, 10, 15 ou 20. -->
+      <div class="groupe" role="group" aria-label="Nombre d'exercices">
+        <button type="button" class="bouton" data-fiche-nombre="5" aria-pressed="false">5</button>
+        <button type="button" class="bouton" data-fiche-nombre="10" aria-pressed="false">10</button>
+        <button type="button" class="bouton" data-fiche-nombre="15" aria-pressed="false">15</button>
+        <button type="button" class="bouton choisi" data-fiche-nombre="20" aria-pressed="true">20</button>
+      </div>
+
+      <h2><span class="emoji" aria-hidden="true">✏️</span>Sur quoi ?</h2>
+      <div class="groupe" role="group" aria-label="Matière de la fiche">
+        <button type="button" class="bouton matiere choisi" data-fiche-matiere="mathematiques"
+                aria-pressed="true"><span class="emoji" aria-hidden="true">📐</span>Mathématiques</button>
+        <button type="button" class="bouton matiere" data-fiche-matiere="francais"
+                aria-pressed="false"><span class="emoji" aria-hidden="true">🖋️</span>Français</button>
+        <button type="button" class="bouton matiere" data-fiche-matiere="sciences"
+                aria-pressed="false"><span class="emoji" aria-hidden="true">🔬</span>Sciences</button>
+        <button type="button" class="bouton matiere" data-fiche-matiere="histoire_geo"
+                aria-pressed="false"><span class="emoji" aria-hidden="true">🗺️</span>Histoire-géo</button>
+        <button type="button" class="bouton matiere" data-fiche-matiere="numerique"
+                aria-pressed="false"><span class="emoji" aria-hidden="true">💻</span>Numérique</button>
+        <button type="button" class="bouton matiere" data-fiche-matiere="emc"
+                aria-pressed="false"><span class="emoji" aria-hidden="true">🏛️</span>Vivre en république</button>
+        <button type="button" class="bouton matiere" data-fiche-matiere="tout"
+                aria-pressed="false"><span class="emoji" aria-hidden="true">🎒</span>Tout</button>
+      </div>
+
+      <p style="margin-top:1.2rem" class="groupe">
+        <button type="button" class="bouton vedette" id="fiche-imprimer">
+          <span aria-hidden="true">🖨️</span> Imprimer cette fiche</button>
+        <button type="button" class="bouton" id="fiche-autre">Une autre fiche</button>
+      </p>
+
+      <h2><span class="emoji" aria-hidden="true">🔎</span>Retrouver une fiche déjà imprimée</h2>
+      <p class="aide">Recopie la référence inscrite en haut de la feuille — par exemple
+         <code>7K3QP2-M20</code> — pour refaire exactement la même fiche, ou pour en
+         réimprimer le corrigé.</p>
+      <div class="groupe">
+        <input id="fiche-reference" type="text" maxlength="20" autocomplete="off"
+               spellcheck="false" aria-label="Référence de la fiche" placeholder="7K3QP2-M20">
+        <button type="button" class="bouton" id="fiche-refaire">Retrouver cette fiche</button>
+      </div>
+      <p class="message" id="fiche-message" role="status" aria-live="polite" hidden></p>
+
+      <div class="regle" aria-hidden="true"></div>
+    </div>
+
+    <div id="fiche-apercu"></div>
+  </section>
+
+  <!-- ============================================== fenêtre d'information -->
+  <dialog class="infos" id="infos" aria-labelledby="infos-titre">
+    <button type="button" class="fermer-infos" id="fermer-infos" aria-label="Fermer">×</button>
+
+    <h2 id="infos-titre"><span class="emoji" aria-hidden="true">📘</span>À propos de ce cahier</h2>
+
+    <p>Un cahier de révisions pour le CM2, fait pour l'année 2026-2027. Il fonctionne
+       entièrement sur cet ordinateur : aucune connexion n'est nécessaire, et rien de ce
+       que tu écris ne part sur internet.</p>
+
+    <h3>D'où viennent les questions</h3>
+    <p>Elles suivent les programmes officiels du cycle 3, publiés au Bulletin officiel.
+       Elles sont fabriquées de deux façons.</p>
+    <ul>
+      <li><strong>Calculées.</strong> En mathématiques et en français, un petit programme
+        fabrique la question <em>et</em> sa réponse. Comme il calcule les deux, il ne peut pas
+        se tromper sur le programme : les limites du CM2 (pas de nombres trop grands, pas de
+        division par un nombre à deux chiffres, pas de calculatrice) sont vérifiées avant que
+        la question ne soit posée.</li>
+      <li><strong>Écrites.</strong> En enseignement moral et civique, les contenus ne se
+        calculent pas : les questions sont rédigées à la main, à partir du seul texte du
+        programme, puis contrôlées automatiquement — chaque date et chaque numéro d'article
+        doit se retrouver dans le programme officiel.</li>
+    </ul>
+
+    <h3>Ce que le cahier retient</h3>
+    <p>Chaque enfant a son cahier. On y garde ce qui a été réussi, ce qui a été raté, et
+       <strong>quand chaque chose doit revenir</strong> : le lendemain, puis trois jours après,
+       puis une semaine, puis seize jours. Un exercice raté revient à l'identique — c'est la
+       même question, pas une question « du même genre ».</p>
+    <p>Tout cela vit dans la mémoire du navigateur, qui peut être effacée. Le bouton
+       <strong>Sauvegarder mon cahier</strong> écrit un fichier à mettre à l'abri ;
+       <strong>Restaurer un cahier</strong> le relit, ici ou sur un autre ordinateur.
+       Au bout de cinq séances non sauvegardées, le bureau le rappelle, en disant
+       combien de séances seraient perdues.</p>
+
+    <h3>Répondre au clavier, et ce qu'on a écrit</h3>
+    <p>Devant un choix de réponses, les touches <strong>1</strong> à <strong>4</strong>
+       répondent : le numéro est écrit dans la case, à gauche de chaque proposition.
+       <strong>Entrée</strong> valide une réponse écrite, puis passe à la question suivante.</p>
+    <p>Quand une réponse écrite est fausse, l'application <strong>remontre ce qui a été
+       tapé</strong>. Une virgule à la place d'un point et un raisonnement faux ne se
+       corrigent pas de la même façon, et l'enfant est le seul à pouvoir faire la
+       différence.</p>
+    <p>Certaines réponses s'écrivent de plusieurs façons également correctes — « 2 h 05 »
+       et « 2 h 5 », par exemple. Ces écritures-là sont <strong>toutes acceptées</strong>,
+       et le corrigé des fiches les indique. Il ne s'agit jamais d'accepter deux réponses
+       différentes : quand une question a deux réponses défendables, c'est la question
+       qu'il faut corriger.</p>
+
+    <h3>Confort de lecture</h3>
+    <p>Deux réglages sur le bureau : <strong>texte plus grand</strong> et <strong>texte
+       plus aéré</strong> (lignes, lettres et mots espacés, ce qui aide en cas de
+       dyslexie). Ils valent pour l'écran et pour les fiches imprimées, et ils sont rangés
+       dans le cahier : chaque enfant garde les siens.</p>
+
+    <h3>Ce que le cahier sait raconter</h3>
+    <p><strong>Ma progression</strong> range ce qui a été fait par domaine du programme
+       officiel — les fractions, les aires, la conjugaison — et non par titre d'exercice :
+       c'est ce qui permet de voir où on avance et où on s'arrête. Un même exercice peut
+       relever de deux domaines à la fois ; il est alors compté dans les deux, et les totaux
+       par domaine s'additionnent donc à plus que le total général.</p>
+    <p>Un coin replié, au bas de cette page, s'adresse à l'adulte : les six dernières
+       semaines, ce qui a l'air acquis, ce qui résiste, et la part du programme couverte.
+       Une notion n'y est jamais jugée avant d'avoir été rencontrée trois fois — un taux
+       calculé sur deux réponses ne veut rien dire.</p>
+
+    <h3>Les sciences et la technologie</h3>
+    <p>Comme l'EMC, les sciences ne se calculent pas : leurs contenus sont des faits, pas
+       des paramètres. Les questions sont donc <strong>rédigées une à une</strong>, en ne
+       disant que ce que dit l'intitulé du programme, puis rattachées chacune à l'objectif
+       dont elles relèvent. Un contrôle automatique vérifie ce rattachement objectif par
+       objectif, refuse toute question sur un objectif que le programme déclare non
+       évaluable, et signale toute date qui ne figurerait pas dans le texte officiel.</p>
+    <p>Les 21 objectifs restants demandent de fabriquer, de monter ou de mener un projet :
+       il n'y a pas de fait à restituer derrière un geste, et une question fermée ne peut
+       pas s'en saisir.</p>
+
+    <h3>L'histoire-géographie, et ce qui n'y est pas</h3>
+    <p>Le programme d'histoire-géographie est écrit en termes de <strong>démarches</strong>,
+       pas de listes de faits : il dit comment enseigner, non ce qu'il faut retenir. C'est
+       la matière où le risque d'inventer une date est le plus grand. Les questions n'en
+       emploient donc aucune qui ne figure au programme — <strong>même dans les mauvaises
+       réponses</strong>, car une date fausse mise sous les yeux s'apprend aussi.</p>
+    <p>Deux absences volontaires. Les <strong>guerres mondiales</strong> ne font l'objet
+       d'aucune question : le programme ne les autorise que sur des repères chronologiques
+       qu'il n'énonce nulle part, et la Résistance, la collaboration et le génocide des
+       Juifs se traitent en classe avec un adulte, jamais par un questionnaire. Et aucune
+       question ne suppose l'étude d'une ville ou d'un quartier particulier, puisque ces
+       études de cas sont choisies par chaque professeur.</p>
+    <p>Sur l'âge industriel, le programme propose quatre sujets et précise que le
+       professeur en choisit deux. L'application ne peut pas deviner lesquels : ces quatre
+       sujets ne sont posés que si on les a <strong>cochés sur le bureau</strong>.</p>
+
+    <h3>Le numérique</h3>
+    <p>Le cadre de référence des compétences numériques décrit surtout des gestes sur un
+       outil — produire, paramétrer, sauvegarder — qui s'évaluent en situation et non par
+       un questionnaire. Sur 47 repères, 17 seulement se prêtent à une question fermée :
+       juger d'une source, reconnaître une donnée personnelle, savoir ce qu'est une trace
+       de navigation, le droit d'auteur, la sécurité, les effets sur la santé et sur
+       l'environnement.</p>
+    <p>Le <strong>cyberharcèlement</strong> ne fait l'objet d'aucune question, sous aucune
+       forme : l'Éducation nationale impose qu'il soit traité en classe avec un adulte
+       présent. En cas de besoin, le <strong>3018</strong> est le numéro national contre les
+       violences numériques. Enfin, aucune question ne laisse entendre qu'il existerait un
+       test d'informatique à l'entrée au collège : il n'en existe pas.</p>
+
+    <h3>La vue enseignant</h3>
+    <p>Sur l'écran d'accueil, <strong>Vue enseignant</strong> rassemble tous les cahiers
+       rangés dans ce navigateur : où chacun en est, depuis quand il n'est pas venu, ce
+       qui lui reste à revoir. Un clic sur un prénom ouvre son détail — les six dernières
+       semaines, ce qui est acquis, ce qui coince — <strong>sans ouvrir son cahier</strong> :
+       consulter ne laisse pas de trace et ne compte pas comme une visite.</p>
+    <p>Deux lectures d'ensemble s'y ajoutent : les domaines du programme additionnés sur
+       tous les cahiers, et les notions qui résistent, classées par nombre d'enfants
+       concernés. Le tout s'imprime.</p>
+    <p>Cette vue ne voit que ce qui est sur <strong>cet ordinateur</strong>. Un enfant qui
+       travaille ailleurs n'y apparaît qu'une fois son fichier de sauvegarde restauré, ce
+       que le bouton <strong>Ajouter le cahier d'un enfant</strong> permet de faire sans
+       quitter la vue. Rien n'est envoyé nulle part : il n'y a ni serveur, ni compte, ni
+       classe en ligne.</p>
+
+    <h3>Les fiches à imprimer</h3>
+    <p>Cinq, dix, quinze ou vingt exercices sur une feuille, le corrigé sur la page suivante.
+       Les exercices sont répartis entre les domaines du programme, et chaque fiche porte
+       une référence : elle permet de savoir quel corrigé va avec quelle feuille, et de
+       réimprimer exactement la même fiche. Une fiche faite au crayon ne compte pas dans le
+       cahier — l'ordinateur ne connaît pas les réponses écrites sur le papier.</p>
+
+    <h3>La page de vérification</h3>
+    <p>Elle sert aux adultes. Elle relance chaque sorte d'exercice sur des centaines de
+       tirages différents et vérifie deux choses. <strong>La forme</strong> : aucune erreur,
+       la même question redonne toujours le même énoncé, la bonne réponse ne se trouve pas
+       toujours à la même place. <strong>La justesse</strong> : pour la plupart des exercices
+       de mathématiques, la réponse est recalculée à partir du seul énoncé, par un programme
+       écrit exprès qui n'emprunte rien au code qui a fabriqué la question — et un exercice à
+       choix ne doit avoir qu'une seule réponse défendable. Si les deux programmes ne tombent
+       pas d'accord, la page le dit.</p>
+    <p><a href="tests.html">Ouvrir la page de vérification</a></p>
+
+    <h3>Sources</h3>
+    <p>Programmes officiels du cycle 3, ministère de l'Éducation nationale, réutilisés sous
+       Licence Ouverte 2.0 (Etalab). Les textes d'origine sont archivés dans le dossier
+       <code>data/sources</code> du projet, avec leur empreinte, pour pouvoir vérifier
+       n'importe quelle question en remontant au texte.</p>
+
+    <h3>Ce qu'il y a dedans</h3>
+    <p id="infos-compte"></p>
+
+    <h3>Versions</h3>
+    <ul class="journal" id="infos-versions"></ul>
+
+    <p style="margin-top:1.3rem">
+      <button type="button" class="bouton vedette" id="fermer-infos-bas">J'ai compris</button>
+    </p>
+  </dialog>
+
+  <!-- Un seul champ de fichier pour les deux boutons de restauration. -->
+  <input type="file" id="fichier-cahier" accept="application/json,.json" hidden>
+
+  <!-- ============================================================ bas de page -->
+  <div class="pied-page">
+    <div class="rebord rebord-haut" aria-hidden="true">
+      <i class="craie1"></i><i class="craie2"></i><i class="craie3"></i><i class="eponge"></i>
+    </div>
+    <footer class="tableau tableau-bas">
+      <p class="titre-pied">Révisions CM2 — année 2026-2027<span class="version" id="version"></span></p>
+      <p class="source"><span id="pied-compte"></span> Tout est calculé sur cet ordinateur,
+         rien n'est envoyé sur internet. Questions établies d'après les programmes officiels
+         du cycle 3, ministère de l'Éducation nationale, sous Licence Ouverte 2.0 (Etalab).
+         <a href="tests.html">Vérifier les exercices</a></p>
+    </footer>
+  </div>
+
+</div>
+
+<!-- Scripts classiques et espace de noms global : le protocole file:// bloque
+     les modules ES et fetch(). Rien n'est chargé depuis le réseau. -->
+<script src="app/version.js"></script>
+<script src="app/rng.js"></script>
+<script src="app/format.js"></script>
+<script src="app/lettres.js"></script>
+<script src="app/contraintes.js"></script>
+<script src="app/qcm.js"></script>
+<script src="app/figures.js"></script>
+<script src="app/registre.js"></script>
+<script src="app/domaines.js"></script>
+<script src="app/lexique/lexique.js"></script>
+<script src="app/conjugaison.js"></script>
+<script src="app/lexique/phrases.js"></script>
+<script src="app/generateurs/maths-entiers.js"></script>
+<script src="app/generateurs/maths-decimaux.js"></script>
+<script src="app/generateurs/maths-fractions.js"></script>
+<script src="app/generateurs/maths-calcul-mental.js"></script>
+<script src="app/generateurs/maths-operations.js"></script>
+<script src="app/generateurs/maths-mesures.js"></script>
+<script src="app/generateurs/maths-algebre.js"></script>
+<script src="app/generateurs/maths-problemes.js"></script>
+<script src="app/generateurs/maths-probabilites.js"></script>
+<script src="app/generateurs/maths-figures.js"></script>
+<script src="app/generateurs/maths-geometrie.js"></script>
+<script src="app/generateurs/francais-conjugaison.js"></script>
+<script src="app/generateurs/francais-accords.js"></script>
+<script src="app/generateurs/francais-grammaire.js"></script>
+<script src="app/generateurs/francais-vocabulaire.js"></script>
+<script src="app/banques/emc.js"></script>
+<script src="app/banques/sciences.js"></script>
+<script src="app/banques/histoire-geo.js"></script>
+<script src="app/banques/numerique.js"></script>
+<script src="app/profil.js"></script>
+<script src="app/progression.js"></script>
+<script src="app/bilan.js"></script>
+<script src="app/classe.js"></script>
+<script src="app/fiche.js"></script>
+<script src="app/ui.js"></script>
+<script>CM2.ui.initialiser();</script>
+</body>
+</html>

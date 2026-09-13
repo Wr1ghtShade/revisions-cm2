@@ -1,0 +1,175 @@
+{
+  "matiere": "histoire_geographie",
+  "niveau": "CM2",
+  "annee_scolaire": "2026-2027",
+  "source": {
+    "texte": "Programme d'enseignement du cycle de consolidation (cycle 3) — Histoire et géographie",
+    "bulletin_officiel": "BO n° 31 du 30 juillet 2020",
+    "document_consolide": "Programme du cycle 3 en vigueur à la rentrée 2023, éduscol — « D'après le BOEN n° 31 du 30 juillet 2020 et le BOEN n° 25 du 22 juin 2023 »",
+    "url_document": "https://eduscol.education.gouv.fr/sites/default/files/document/programme-d-enseignement-du-cycle-3-2023-100806.pdf",
+    "version_applicable_cm2_2026_2027": "Ancien programme (BO 2020). Le nouveau programme d'histoire-géographie, publié en 2026, ne s'applique au CM2 qu'à la rentrée 2027.",
+    "perimetre_extrait": "Sections « Classe de CM2 » en histoire et en géographie uniquement. Les classes de CM1 et de sixième sont hors périmètre.",
+    "licence": "Licence Ouverte / Open Licence 2.0 (Etalab)",
+    "date_extraction": "2026-09-11"
+  },
+  "contraintes_generation": {
+    "couverture_incomplete": {
+      "theme_concerne": "hg.hist.t2",
+      "regle": "Au thème 2 d'histoire, le professeur ne traite que deux des quatre sujets d'étude proposés.",
+      "citation": "Parmi les sujets d'étude proposés, le professeur en choisit deux.",
+      "consequence": "L'application ne doit jamais supposer que les quatre sujets ont été vus. Chaque sujet de ce thème porte le champ `couverture_variable: true` et doit être servi avec un état « non vu » possible, réglable par l'élève ou par défaut inactif."
+    },
+    "zone_sensible": {
+      "theme_concerne": "hg.hist.t3",
+      "regle": "Les guerres mondiales, la Résistance, la collaboration et le génocide des Juifs ne doivent pas faire l'objet d'un questionnement fermé.",
+      "autorise": "Les repères chronologiques seuls : dates et bornes des deux conflits, dates de commémoration, étapes de la construction européenne.",
+      "interdit": "Toute question portant sur la collaboration, le génocide des Juifs, les persécutions, ou demandant de caractériser, comparer ou juger ces faits. Ces contenus se traitent en classe avec un adulte.",
+      "detail_sujets": {
+        "hg.hist.t3.s1": "Évaluable uniquement sur les repères chronologiques des deux guerres mondiales.",
+        "hg.hist.t3.s2": "Évaluable : la construction européenne ne relève pas de la zone sensible."
+      }
+    },
+    "interdits": [
+      {
+        "regle": "Ne pas générer de question sur un sujet d'étude marqué evaluable: false.",
+        "detail": "Ces sujets relèvent de l'étude de cas locale, du projet ou du débat, et n'ont pas de contenu factuel national stable."
+      },
+      {
+        "regle": "Ne pas inventer de date. Seuls les repères figurant dans le bloc reperes_chronologiques sont utilisables.",
+        "detail": "Le programme d'histoire-géographie est rédigé en termes de démarches, pas de listes de faits. Le risque d'invention de dates y est maximal."
+      },
+      {
+        "regle": "Les sujets de géographie reposent sur des études de cas choisies localement par le professeur.",
+        "detail": "Ne jamais poser de question supposant l'étude d'un territoire particulier (telle ville, tel quartier, tel écoquartier). Seules les notions générales sont évaluables."
+      }
+    ]
+  },
+  "histoire": {
+    "id": "hg.hist",
+    "nom": "Histoire",
+    "themes": [
+      {
+        "id": "hg.hist.t1",
+        "nom": "Le temps de la République",
+        "sujets_etude": [
+          {
+            "id": "hg.hist.t1.s1",
+            "nom": "1892 : la République fête ses cent ans.",
+            "evaluable": true
+          },
+          {
+            "id": "hg.hist.t1.s2",
+            "nom": "L'école primaire au temps de Jules Ferry.",
+            "evaluable": true
+          },
+          {
+            "id": "hg.hist.t1.s3",
+            "nom": "Des républiques, une démocratie : des libertés, des droits et des devoirs.",
+            "evaluable": true
+          }
+        ],
+        "demarches": "L'étude du centenaire de la République célébré en 1892 est mise en perspective pour montrer que les Français ont vécu différentes expériences politiques depuis la Révolution y compris celles ayant suscité conflits et violences (1830, 1848, 1870). Les cérémonies mettent en scène les symboles républicains. On montre aux élèves que pendant cette période s'enclenche également un nouveau processus de colonisation. À partir des années 1880, l'adhésion à la République se construit en partie par l'école gratuite, laïque et obligatoire. Les bâtiments et les programmes de l'école de la République facilitent l'entrée concrète dans le sujet d'étude. À partir de quelques exemples accessibles, on montre que les libertés (liberté d'expression, liberté de culte…) et les droits (droit de vote, droits des femmes…) en vigueur aujourd'hui, sous la Ve République, sont le fruit d'une conquête et d'une évolution de la démocratie et de la société et qu'ils sont toujours questionnés. On découvre des devoirs des citoyens."
+      },
+      {
+        "id": "hg.hist.t2",
+        "nom": "L'âge industriel en France",
+        "couverture_variable": true,
+        "note_couverture": "Le professeur choisit deux de ces quatre sujets d'étude. Prévoir un état « non vu » pour chacun.",
+        "sujets_etude": [
+          {
+            "id": "hg.hist.t2.s1",
+            "nom": "Les énergies majeures de l'âge industriel (charbon puis pétrole) et les machines.",
+            "evaluable": true,
+            "couverture_variable": true
+          },
+          {
+            "id": "hg.hist.t2.s2",
+            "nom": "Le travail à la mine, à l'usine, à l'atelier, au grand magasin.",
+            "evaluable": true,
+            "couverture_variable": true
+          },
+          {
+            "id": "hg.hist.t2.s3",
+            "nom": "La ville industrielle.",
+            "evaluable": true,
+            "couverture_variable": true
+          },
+          {
+            "id": "hg.hist.t2.s4",
+            "nom": "Le monde rural.",
+            "evaluable": true,
+            "couverture_variable": true
+          }
+        ],
+        "demarches": "Parmi les sujets d'étude proposés, le professeur en choisit deux. Les entrées concrètes doivent être privilégiées pour saisir les nouveaux modes et lieux de production. On montre que l'industrialisation est un processus qui s'inscrit dans la durée, qui touche tous les secteurs de la production et qui entraîne des évolutions des mondes urbain et rural et de profonds changements sociaux et environnementaux."
+      },
+      {
+        "id": "hg.hist.t3",
+        "nom": "La France, des guerres mondiales à l'Union européenne",
+        "zone_sensible": true,
+        "sujets_etude": [
+          {
+            "id": "hg.hist.t3.s1",
+            "nom": "Deux guerres mondiales au vingtième siècle.",
+            "evaluable": true,
+            "restriction": "Repères chronologiques uniquement. Aucune question sur la Résistance, la collaboration, le génocide des Juifs ou les persécutions."
+          },
+          {
+            "id": "hg.hist.t3.s2",
+            "nom": "La construction européenne.",
+            "evaluable": true
+          }
+        ],
+        "demarches": "À partir des traces de la Grande Guerre et de la Seconde Guerre mondiale dans l'environnement des élèves (lieux de mémoire et du souvenir, paysages montrant les reconstructions, dates de commémoration), on présente l'ampleur des deux conflits en les situant dans leurs contextes européen et mondial. On évoque la Résistance, la France combattante et la collaboration. On aborde le génocide des Juifs ainsi que les persécutions à l'encontre d'autres populations. L'élève découvre que des pays européens, autrefois en guerre les uns contre les autres, sont aujourd'hui rassemblés au sein de l'Union européenne."
+      }
+    ]
+  },
+  "geographie": {
+    "id": "hg.geo",
+    "nom": "Géographie",
+    "themes": [
+      {
+        "id": "hg.geo.t1",
+        "nom": "Se déplacer",
+        "sujets_etude": [
+          { "id": "hg.geo.t1.s1", "nom": "Se déplacer au quotidien en France.", "evaluable": true },
+          { "id": "hg.geo.t1.s2", "nom": "Se déplacer au quotidien dans un autre lieu du monde.", "evaluable": false, "raison_non_evaluable": "Repose sur une étude de cas choisie localement par le professeur." },
+          { "id": "hg.geo.t1.s3", "nom": "Se déplacer de ville en ville, en France, en Europe et dans le monde.", "evaluable": true },
+          { "id": "hg.geo.t1.s4", "nom": "Déplacement et développement durable.", "evaluable": true }
+        ],
+        "demarches": "Les thèmes traités en CM1 ont introduit l'importance des déplacements. En s'appuyant sur les exemples de mobilité déjà abordés et en proposant de nouvelles situations, on étudie les modes et réseaux de transport utilisés par les habitants dans leur quotidien ou dans des déplacements plus lointains. L'élève découvre aussi les aménagements liés aux infrastructures de communication. On étudie différents types de mobilités et on dégage des enjeux de nouvelles formes de mobilités. On étudie les déplacements dans le cadre du développement durable : la lutte contre la pollution, le recyclage, les moyens de transport."
+      },
+      {
+        "id": "hg.geo.t2",
+        "nom": "Communiquer d'un bout à l'autre du monde grâce à l'Internet",
+        "liaison_crcn": "num.1",
+        "sujets_etude": [
+          { "id": "hg.geo.t2.s1", "nom": "Un monde de réseaux.", "evaluable": true },
+          { "id": "hg.geo.t2.s2", "nom": "Un habitant connecté au monde.", "evaluable": true },
+          { "id": "hg.geo.t2.s3", "nom": "Des habitants inégalement connectés dans le monde.", "evaluable": true }
+        ],
+        "demarches": "À partir des usages personnels de l'élève de l'Internet et des activités proposées pour développer la compétence « S'informer dans le monde du numérique », on propose à l'élève de réfléchir sur le fonctionnement de ce réseau. On découvre les infrastructures matérielles nécessaires au fonctionnement et au développement de l'Internet. Ses usages définissent un nouveau rapport à l'espace et au temps caractérisé par l'immédiateté et la proximité. Ils questionnent la citoyenneté. On constate les inégalités d'accès à l'Internet en France et dans le monde."
+      },
+      {
+        "id": "hg.geo.t3",
+        "nom": "Mieux habiter",
+        "sujets_etude": [
+          { "id": "hg.geo.t3.s1", "nom": "Favoriser la place de la « nature » en ville.", "evaluable": true },
+          { "id": "hg.geo.t3.s2", "nom": "Recycler.", "evaluable": true },
+          { "id": "hg.geo.t3.s3", "nom": "Habiter un écoquartier.", "evaluable": true }
+        ],
+        "demarches": "Améliorer le cadre de vie et préserver l'environnement sont au cœur des préoccupations actuelles. Il s'agit d'explorer, à l'échelle des territoires de proximité (quartier, commune, métropole, région), des cas de réalisations ou des projets qui contribuent au « mieux habiter ». La place réservée dans la ville aux espaces verts, aux circulations douces, aux berges et corridors verts, au développement de la biodiversité, le recyclage au-delà du tri des déchets, l'aménagement d'un écoquartier sont autant d'occasions de réfléchir aux choix des acteurs dans les politiques de développement durable."
+      }
+    ]
+  },
+  "reperes_chronologiques": [
+    { "id": "hg.rep.1892", "repere": "Centenaire de la République : la République fête ses cent ans", "valeur": "1892", "source": "Repères annuels de programmation, classe de CM2, thème 1 d'histoire", "theme_lie": "hg.hist.t1" },
+    { "id": "hg.rep.1830", "repere": "Année d'une des expériences politiques vécues par les Français depuis la Révolution, citée par le programme", "valeur": "1830", "source": "Démarches et contenus d'enseignement, classe de CM2, thème 1 d'histoire", "theme_lie": "hg.hist.t1" },
+    { "id": "hg.rep.1848", "repere": "Année d'une des expériences politiques vécues par les Français depuis la Révolution, citée par le programme", "valeur": "1848", "source": "Démarches et contenus d'enseignement, classe de CM2, thème 1 d'histoire", "theme_lie": "hg.hist.t1" },
+    { "id": "hg.rep.1870", "repere": "Année d'une des expériences politiques vécues par les Français depuis la Révolution, citée par le programme", "valeur": "1870", "source": "Démarches et contenus d'enseignement, classe de CM2, thème 1 d'histoire", "theme_lie": "hg.hist.t1" },
+    { "id": "hg.rep.1880", "repere": "Décennie à partir de laquelle l'adhésion à la République se construit en partie par l'école gratuite, laïque et obligatoire", "valeur": "les années 1880", "source": "Démarches et contenus d'enseignement, classe de CM2, thème 1 d'histoire", "theme_lie": "hg.hist.t1" },
+    { "id": "hg.rep.republique_actuelle", "repere": "République sous laquelle les libertés et droits sont en vigueur aujourd'hui", "valeur": "la Ve République", "source": "Démarches et contenus d'enseignement, classe de CM2, thème 1 d'histoire", "theme_lie": "hg.hist.t1" },
+    { "id": "hg.rep.energies", "repere": "Énergies majeures de l'âge industriel, dans l'ordre donné par le programme", "valeur": "le charbon puis le pétrole", "source": "Repères annuels de programmation, classe de CM2, thème 2 d'histoire", "theme_lie": "hg.hist.t2", "couverture_variable": true }
+  ],
+  "note_reperes": "Ce bloc ne contient que les repères explicitement écrits dans le programme du CM2. Les dates des deux guerres mondiales n'y figurent pas : le programme ne les énonce pas, il renvoie aux traces et aux commémorations. Toute date de guerre utilisée dans une question devra être ajoutée ici avec une source citée, et relève de la zone sensible du thème 3."
+}

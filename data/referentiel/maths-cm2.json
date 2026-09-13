@@ -1,0 +1,365 @@
+{
+  "matiere": "mathematiques",
+  "niveau": "CM2",
+  "annee_scolaire": "2026-2027",
+  "source": {
+    "texte": "Programme de mathématiques pour le cycle 3",
+    "bulletin_officiel": "BO n° 16 du 17 avril 2025",
+    "arrete": "Arrêté du 10 avril 2025 fixant les programmes d'enseignement de français et de mathématiques du cycle de consolidation (cycle 3)",
+    "url_bo": "https://www.education.gouv.fr/bo/2025/Hebdo16/MENE2504620A",
+    "url_annexe": "https://www.education.gouv.fr/sites/default/files/ensel620_annexe2-v2.pdf",
+    "entree_en_vigueur_cm2": "rentrée scolaire 2026-2027",
+    "perimetre_extrait": "Sections « Cours moyen deuxième année » uniquement. Les sections CM1 et Sixième du même texte sont hors périmètre.",
+    "licence": "Licence Ouverte / Open Licence 2.0 (Etalab)",
+    "date_extraction": "2026-09-11"
+  },
+  "contraintes_generation": {
+    "champ_numerique": {
+      "entiers_max": 999999999,
+      "entiers_commentaire": "Les connaissances et savoir-faire attendus en fin de CM2 concernent les nombres s'écrivant avec au plus neuf chiffres.",
+      "decimaux_precision_max": "millièmes",
+      "decimaux_commentaire": "Au CM2 l'étude des nombres décimaux s'étend aux millièmes.",
+      "fractions_denominateur_max": 60,
+      "fractions_decimales_denominateurs": [10, 100, 1000],
+      "fractions_commentaire": "Les fractions rencontrées au CM2 ont toutes un dénominateur inférieur ou égal à 60, hormis les fractions décimales qui peuvent avoir un dénominateur égal à 100 ou à 1 000."
+    },
+    "interdits": [
+      {
+        "regle": "Ne jamais utiliser de tableau de conversion pour les unités de mesure.",
+        "citation": "Au cours moyen, les élèves n'utilisent pas de tableaux pour effectuer des conversions ; ils s'appuient sur les relations connues entre les unités en jeu."
+      },
+      {
+        "regle": "Ne jamais exiger la mémorisation d'une formule de périmètre.",
+        "citation": "Il n'est pas attendu de mémorisation de formules de périmètres de figures planes au CM2, l'enseignement privilégiant l'acquisition du sens."
+      },
+      {
+        "regle": "Ne jamais faire intervenir le rapporteur ni une mesure d'angle en degrés autre que celle de l'angle droit.",
+        "citation": "L'utilisation d'un instrument de mesure des angles (rapporteur) ne relève pas du CM2 et sera introduite au collège. Au cours moyen, les élèves ne travaillent qu'avec des angles saillants."
+      },
+      {
+        "regle": "Ne jamais utiliser de tableau de proportionnalité, de coefficient de proportionnalité ni de produit en croix.",
+        "citation": "Les élèves n'utilisent pas de tableaux de proportionnalité au cours moyen. Seuls des raisonnements fondés sur les propriétés de linéarité pour la multiplication et pour l'addition sont attendus ; ni l'utilisation du coefficient de proportionnalité, ni le recours au « produit en croix » ne sont enseignés au cours moyen."
+      },
+      {
+        "regle": "Les problèmes de proportionnalité portent toujours sur des grandeurs, jamais sur des suites de nombres hors contexte.",
+        "citation": "Les problèmes posés le sont tous dans le cadre des grandeurs et ne portent pas sur des suites de nombres hors contexte."
+      },
+      {
+        "regle": "Aucun exercice ne doit supposer l'usage d'une calculatrice.",
+        "citation": "Au cours moyen, les élèves ne disposent pas de calculatrice personnelle."
+      },
+      {
+        "regle": "Les notations géométriques (AB), [AB], [AB) ne sont pas exigibles : toujours expliciter le mot (« le segment [AB] »).",
+        "citation": "Aucune connaissance de ces conventions n'est exigible pour les élèves : les consignes expliciteront donc systématiquement les symboles utilisés."
+      },
+      {
+        "regle": "La division posée se limite à un diviseur à un chiffre.",
+        "citation": "Poser et effectuer des divisions décimales avec un dividende entier et un diviseur à un chiffre ; avec un dividende décimal et un diviseur à un chiffre."
+      },
+      {
+        "regle": "La multiplication posée se limite au produit d'un nombre décimal par un nombre entier. Le produit de deux décimaux relève de la 6e.",
+        "citation": "Poser et effectuer la multiplication d'un nombre décimal par un nombre entier."
+      },
+      {
+        "regle": "Les critères de divisibilité au programme sont uniquement ceux par 2, par 5 et par 10.",
+        "citation": "Seuls les critères de divisibilité par 2, 5 et 10 figurent au programme."
+      },
+      {
+        "regle": "La symétrie se construit sur papier quadrillé, par rapport à une droite verticale, horizontale ou une diagonale du quadrillage.",
+        "citation": "Construire, sur papier quadrillé, la figure symétrique d'une figure donnée par rapport à une droite verticale, horizontale ou une diagonale du quadrillage."
+      },
+      {
+        "regle": "Le pourcentage n'est pas au programme du CM2 : il est introduit en 6e.",
+        "citation": "En classe de 6e, l'élève consolide sa compréhension des nombres décimaux et utilise leurs différentes écritures apprises au cours moyen. À celles-ci vient s'ajouter l'écriture sous forme de pourcentage."
+      },
+      {
+        "regle": "Les lettres ne sont pas utilisées pour désigner les inconnues : on emploie des symboles ou des mots. Les lettres relèvent du cycle 4.",
+        "citation": "Il s'agit de raisonner sur des nombres inconnus, qui seront représentés au cycle 4 par des lettres."
+      }
+    ],
+    "notes": [
+      "Le terme « pavé » désigne le parallélépipède rectangle. « Pavé droit » et « pavé » sont interchangeables.",
+      "Les élèves savent identifier un solide à partir d'une représentation en perspective, mais ne construisent pas eux-mêmes de telles représentations.",
+      "La probabilité s'exprime sous la forme « a chances sur b », jamais sous forme de fraction ou de pourcentage.",
+      "Le domaine « Initiation à la pensée informatique » ne possède pas de liste propre d'objectifs d'apprentissage : ses contenus sont répartis dans les autres domaines (programmes de calcul en Algèbre, programmes de construction en Géométrie, suites évolutives en Algèbre, codages de déplacements en Espace et géométrie).",
+      "Le recoupement avec la compétence CRCN 3.4 « Programmer » doit être traité par liaison entre référentiels, sans duplication des questions."
+    ]
+  },
+  "domaines": [
+    {
+      "id": "mat.nc",
+      "nom": "Nombres, calcul et résolution de problèmes",
+      "sous_domaines": [
+        {
+          "id": "mat.nc.entiers",
+          "nom": "Les nombres entiers",
+          "objectifs": [
+            { "id": "mat.nc.entiers.01", "intitule": "Connaître et utiliser les relations entre les unités de numération" },
+            { "id": "mat.nc.entiers.02", "intitule": "Connaître la suite écrite et la suite orale des nombres jusqu'à 999 999 999" },
+            { "id": "mat.nc.entiers.03", "intitule": "Connaître et utiliser diverses représentations d'un nombre et passer de l'une à l'autre" },
+            { "id": "mat.nc.entiers.04", "intitule": "Connaître la valeur des chiffres en fonction de leur position dans un nombre" },
+            { "id": "mat.nc.entiers.05", "intitule": "Comparer, encadrer, intercaler des nombres entiers en utilisant les symboles =, < et >" },
+            { "id": "mat.nc.entiers.06", "intitule": "Ordonner des nombres dans l'ordre croissant ou décroissant" },
+            { "id": "mat.nc.entiers.07", "intitule": "Placer des nombres et repérer des points sur une demi-droite graduée" },
+            { "id": "mat.nc.entiers.08", "intitule": "Déterminer si un nombre entier inférieur ou égal à 10 est un diviseur d'un nombre entier donné ou si un nombre entier donné est un multiple d'un nombre entier inférieur ou égal à 10" },
+            { "id": "mat.nc.entiers.09", "intitule": "Déterminer des diviseurs d'un nombre entier inférieur ou égal à 100" },
+            { "id": "mat.nc.entiers.10", "intitule": "Déterminer tous les diviseurs d'un nombre entier inférieur ou égal à 30" },
+            { "id": "mat.nc.entiers.11", "intitule": "Déterminer les diviseurs communs à deux nombres entiers inférieurs ou égaux à 30" },
+            { "id": "mat.nc.entiers.12", "intitule": "Déterminer des multiples communs à deux nombres entiers inférieurs à 15" }
+          ]
+        },
+        {
+          "id": "mat.nc.fractions",
+          "nom": "Les fractions",
+          "objectifs": [
+            { "id": "mat.nc.fractions.01", "intitule": "Interpréter, représenter, écrire et lire des fractions" },
+            { "id": "mat.nc.fractions.02", "intitule": "Écrire une fraction supérieure à 1 comme la somme d'un entier et d'une fraction inférieure à 1" },
+            { "id": "mat.nc.fractions.03", "intitule": "Écrire la somme d'un entier et d'une fraction inférieure à 1 comme une unique fraction" },
+            { "id": "mat.nc.fractions.04", "intitule": "Encadrer une fraction entre deux nombres entiers consécutifs" },
+            { "id": "mat.nc.fractions.05", "intitule": "Placer une fraction ou la somme d'un nombre entier et d'une fraction inférieure à un sur une demi-droite graduée" },
+            { "id": "mat.nc.fractions.06", "intitule": "Repérer un point d'une demi-droite graduée par une fraction ou par la somme d'un nombre entier et d'une fraction" },
+            { "id": "mat.nc.fractions.07", "intitule": "Comparer des fractions" },
+            { "id": "mat.nc.fractions.08", "intitule": "Additionner et soustraire des fractions" },
+            { "id": "mat.nc.fractions.09", "intitule": "Calculer le produit d'un entier et d'une fraction" },
+            { "id": "mat.nc.fractions.10", "intitule": "Déterminer une fraction d'une quantité ou d'une grandeur" }
+          ]
+        },
+        {
+          "id": "mat.nc.decimaux",
+          "nom": "Les nombres décimaux",
+          "objectifs": [
+            { "id": "mat.nc.decimaux.01", "intitule": "Interpréter, représenter, écrire et lire des fractions décimales" },
+            { "id": "mat.nc.decimaux.02", "intitule": "Connaître et utiliser les relations entre unités simples, dixièmes, centièmes et millièmes" },
+            { "id": "mat.nc.decimaux.03", "intitule": "Placer une fraction décimale sur une demi-droite graduée et repérer un point d'une demi-droite graduée par une fraction décimale" },
+            { "id": "mat.nc.decimaux.04", "intitule": "Écrire une fraction décimale supérieure à 1 comme la somme d'un nombre entier et d'une fraction décimale inférieure à 1" },
+            { "id": "mat.nc.decimaux.05", "intitule": "Écrire une fraction décimale supérieure à 1 comme la somme d'un nombre entier et de fractions décimales ayant un numérateur inférieur à 10" },
+            { "id": "mat.nc.decimaux.06", "intitule": "Comparer, encadrer, intercaler des fractions décimales en utilisant les symboles =, < et >" },
+            { "id": "mat.nc.decimaux.07", "intitule": "Ordonner des fractions décimales dans l'ordre croissant ou décroissant" },
+            { "id": "mat.nc.decimaux.08", "intitule": "Passer d'une écriture sous forme d'une fraction décimale ou de la somme de fractions décimales à une écriture à virgule et réciproquement" },
+            { "id": "mat.nc.decimaux.09", "intitule": "Interpréter, représenter, écrire et lire des nombres décimaux (écriture à virgule)" },
+            { "id": "mat.nc.decimaux.10", "intitule": "Placer un nombre décimal en écriture à virgule sur une demi-droite graduée et repérer un point d'une demi-droite graduée par un nombre en écriture à virgule" },
+            { "id": "mat.nc.decimaux.11", "intitule": "Savoir donner la partie entière et l'arrondi à l'entier d'un nombre décimal" },
+            { "id": "mat.nc.decimaux.12", "intitule": "Comparer, encadrer, intercaler, ordonner par ordre croissant ou décroissant des nombres décimaux donnés par leur écriture à virgule en utilisant les symboles =, < et >" }
+          ]
+        },
+        {
+          "id": "mat.nc.calcul_mental",
+          "nom": "Le calcul mental",
+          "blocs": [
+            {
+              "id": "mat.nc.calcul_mental.faits",
+              "nom": "Mémoriser des faits numériques",
+              "objectifs": [
+                { "id": "mat.nc.calcul_mental.faits.01", "intitule": "Connaître des faits numériques usuels avec des entiers" },
+                { "id": "mat.nc.calcul_mental.faits.02", "intitule": "Connaître la moitié des nombres impairs jusqu'à 15" },
+                { "id": "mat.nc.calcul_mental.faits.03", "intitule": "Connaître quelques relations entre des fractions usuelles" },
+                { "id": "mat.nc.calcul_mental.faits.04", "intitule": "Connaître l'écriture décimale de fractions usuelles" }
+              ]
+            },
+            {
+              "id": "mat.nc.calcul_mental.numeration",
+              "nom": "Utiliser ses connaissances en numération pour calculer mentalement",
+              "objectifs": [
+                { "id": "mat.nc.calcul_mental.numeration.01", "intitule": "Ajouter ou soustraire un nombre entier à un nombre décimal lorsqu'il n'y a pas de retenue" },
+                { "id": "mat.nc.calcul_mental.numeration.02", "intitule": "Ajouter un nombre entier à un nombre décimal lorsqu'il y a une retenue" },
+                { "id": "mat.nc.calcul_mental.numeration.03", "intitule": "Multiplier un nombre décimal par 10, 100 ou 1 000" },
+                { "id": "mat.nc.calcul_mental.numeration.04", "intitule": "Diviser un nombre décimal par 10, 100 ou 1 000" }
+              ]
+            },
+            {
+              "id": "mat.nc.calcul_mental.procedures",
+              "nom": "Apprendre des procédures de calcul mental",
+              "objectifs": [
+                { "id": "mat.nc.calcul_mental.procedures.01", "intitule": "Ajouter deux nombres décimaux inférieurs à 10, s'écrivant avec au plus un chiffre après la virgule" },
+                { "id": "mat.nc.calcul_mental.procedures.02", "intitule": "Ajouter ou soustraire 8, 9, 18, 19, 28, 29, …, 98 ou 99 à un nombre" },
+                { "id": "mat.nc.calcul_mental.procedures.03", "intitule": "Multiplier un nombre entier, inférieur à 10, de dizaines, de centaines ou de milliers par un nombre entier, inférieur à 10, de dizaines, de centaines ou de milliers" },
+                { "id": "mat.nc.calcul_mental.procedures.04", "intitule": "Utiliser la distributivité de la multiplication par rapport à l'addition dans des cas simples" },
+                { "id": "mat.nc.calcul_mental.procedures.05", "intitule": "Calculer le double d'un nombre décimal dans des cas simples" },
+                { "id": "mat.nc.calcul_mental.procedures.06", "intitule": "Calculer la moitié d'un nombre décimal dans des cas simples" },
+                { "id": "mat.nc.calcul_mental.procedures.07", "intitule": "Diviser un nombre entier par 4 ou par 8" },
+                { "id": "mat.nc.calcul_mental.procedures.08", "intitule": "Multiplier un nombre décimal par 5" },
+                { "id": "mat.nc.calcul_mental.procedures.09", "intitule": "Multiplier un nombre décimal par 50" }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "mat.nc.operations",
+          "nom": "Les quatre opérations",
+          "objectifs": [
+            { "id": "mat.nc.operations.01", "intitule": "Estimer le résultat d'une opération" },
+            { "id": "mat.nc.operations.02", "intitule": "Savoir réaliser un calcul contenant une ou deux paires de parenthèses" },
+            { "id": "mat.nc.operations.03", "intitule": "Poser et effectuer la multiplication d'un nombre décimal par un nombre entier" },
+            { "id": "mat.nc.operations.04", "intitule": "Poser et effectuer des divisions décimales avec un dividende entier et un diviseur à un chiffre" },
+            { "id": "mat.nc.operations.05", "intitule": "Poser et effectuer des divisions décimales avec un dividende décimal et un diviseur à un chiffre" }
+          ]
+        },
+        {
+          "id": "mat.nc.problemes",
+          "nom": "La résolution de problèmes",
+          "objectifs": [
+            { "id": "mat.nc.problemes.01", "intitule": "Résoudre des problèmes additifs en une ou plusieurs étapes" },
+            { "id": "mat.nc.problemes.02", "intitule": "Résoudre des problèmes multiplicatifs de type « parties-tout » en une étape" },
+            { "id": "mat.nc.problemes.03", "intitule": "Résoudre des problèmes mixtes en plusieurs étapes" },
+            { "id": "mat.nc.problemes.04", "intitule": "Résoudre des problèmes de comparaison multiplicative" },
+            { "id": "mat.nc.problemes.05", "intitule": "Résoudre des problèmes de dénombrement" },
+            { "id": "mat.nc.problemes.06", "intitule": "Résoudre des problèmes d'optimisation" },
+            { "id": "mat.nc.problemes.07", "intitule": "Résoudre des problèmes préparant à l'utilisation d'algorithmes" }
+          ]
+        },
+        {
+          "id": "mat.nc.algebre",
+          "nom": "Algèbre",
+          "objectifs": [
+            { "id": "mat.nc.algebre.01", "intitule": "Trouver le nombre manquant dans une égalité à trous" },
+            { "id": "mat.nc.algebre.02", "intitule": "Résoudre des problèmes algébriques" },
+            { "id": "mat.nc.algebre.03", "intitule": "Exécuter ou produire un programme de calcul" },
+            { "id": "mat.nc.algebre.04", "intitule": "Identifier et formuler une règle de calcul pour poursuivre une suite de nombres" },
+            { "id": "mat.nc.algebre.05", "intitule": "Identifier des régularités et poursuivre une suite de motifs évolutive" },
+            { "id": "mat.nc.algebre.06", "intitule": "Trouver le nombre d'éléments pour une étape donnée dans une suite de motifs évolutive" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mat.gm",
+      "nom": "Grandeurs et mesures",
+      "sous_domaines": [
+        {
+          "id": "mat.gm.aires",
+          "nom": "Les aires",
+          "objectifs": [
+            { "id": "mat.gm.aires.01", "intitule": "Comparer les aires de différentes figures planes" },
+            { "id": "mat.gm.aires.02", "intitule": "Déterminer des aires" },
+            { "id": "mat.gm.aires.03", "intitule": "Connaître et utiliser les unités centimètre carré, décimètre carré et mètre carré pour exprimer des aires" },
+            { "id": "mat.gm.aires.04", "intitule": "Convertir des aires entre différentes unités" },
+            { "id": "mat.gm.aires.05", "intitule": "Déterminer l'aire d'un carré ou d'un rectangle" }
+          ]
+        },
+        {
+          "id": "mat.gm.angles",
+          "nom": "Les angles",
+          "objectifs": [
+            { "id": "mat.gm.angles.01", "intitule": "Utiliser le lexique spécifique associé aux angles" },
+            { "id": "mat.gm.angles.02", "intitule": "Comprendre et utiliser les notations des angles" },
+            { "id": "mat.gm.angles.03", "intitule": "Comparer des angles" },
+            { "id": "mat.gm.angles.04", "intitule": "Construire un angle égal à la somme de deux angles donnés ou un angle multiple d'un angle donné" },
+            { "id": "mat.gm.angles.05", "intitule": "Construire par pliage la moitié d'un angle donné" },
+            { "id": "mat.gm.angles.06", "intitule": "Savoir qu'un angle droit mesure 90°" }
+          ]
+        },
+        {
+          "id": "mat.gm.temps",
+          "nom": "Le repérage dans le temps et les durées",
+          "objectifs": [
+            { "id": "mat.gm.temps.01", "intitule": "Lire l'heure sur une horloge à aiguilles" },
+            { "id": "mat.gm.temps.02", "intitule": "Positionner les aiguilles d'une horloge correspondant à une heure donnée en heure, minute et seconde" },
+            { "id": "mat.gm.temps.03", "intitule": "Comparer et mesurer des durées écoulées entre deux instants affichés sur une horloge (instants et durées sont exprimés en heure, minute et seconde)" },
+            { "id": "mat.gm.temps.04", "intitule": "Résoudre des problèmes à une ou plusieurs étapes impliquant des durées" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mat.eg",
+      "nom": "Espace et géométrie",
+      "sous_domaines": [
+        {
+          "id": "mat.eg.plane",
+          "nom": "La géométrie plane",
+          "objectifs": [
+            { "id": "mat.eg.plane.01", "intitule": "Utiliser le vocabulaire géométrique approprié dans le contexte d'apprentissage des notions correspondantes" },
+            { "id": "mat.eg.plane.02", "intitule": "Utiliser les outils géométriques usuels : règle, règle graduée, équerre et compas" },
+            { "id": "mat.eg.plane.03", "intitule": "Connaître les notations et les codes usuels utilisés en géométrie" },
+            { "id": "mat.eg.plane.04", "intitule": "Reconnaître et utiliser la notion de perpendicularité" },
+            { "id": "mat.eg.plane.05", "intitule": "Reconnaître et utiliser la notion de parallélisme" },
+            { "id": "mat.eg.plane.06", "intitule": "Décrire et reconnaître un cercle et un disque comme un ensemble de points caractérisés par leur distance à un point donné" },
+            { "id": "mat.eg.plane.07", "intitule": "Reconnaître et nommer les figures suivantes en s'appuyant sur leur définition : triangle, triangle rectangle, triangle isocèle, triangle équilatéral, quadrilatère, carré, rectangle, losange, trapèze, trapèze rectangle, pentagone et hexagone" },
+            { "id": "mat.eg.plane.08", "intitule": "Connaître les propriétés de parallélisme des côtés opposés, des égalités de longueurs et d'angles pour les figures usuelles : triangle rectangle, triangle isocèle, triangle équilatéral, carré, rectangle, losange, trapèze et trapèze rectangle" },
+            { "id": "mat.eg.plane.09", "intitule": "Reproduire ou construire un carré, un rectangle, un triangle, un triangle rectangle ou un cercle ou des assemblages de ces figures sur tout support (papier quadrillé, pointé ou uni), avec une règle graduée, une équerre ou un compas" },
+            { "id": "mat.eg.plane.10", "intitule": "Construire une figure géométrique composée de segments, de droites, de polygones usuels et de cercles" },
+            { "id": "mat.eg.plane.11", "intitule": "Élaborer un programme de construction" },
+            { "id": "mat.eg.plane.12", "intitule": "Construire, sur papier quadrillé, la figure symétrique d'une figure donnée par rapport à une droite verticale, horizontale ou une diagonale du quadrillage" }
+          ]
+        },
+        {
+          "id": "mat.eg.solides",
+          "nom": "Les solides",
+          "objectifs": [
+            { "id": "mat.eg.solides.01", "intitule": "Nommer un cube, une boule, un pavé, un cône, une pyramide, un cylindre ou un prisme droit" },
+            { "id": "mat.eg.solides.02", "intitule": "Décrire un cube, un pavé, une pyramide ou un prisme droit en faisant référence à des propriétés et en utilisant le vocabulaire approprié" },
+            { "id": "mat.eg.solides.03", "intitule": "Reconnaître un patron d'un cube" },
+            { "id": "mat.eg.solides.04", "intitule": "Construire un patron d'un cube" },
+            { "id": "mat.eg.solides.05", "intitule": "Reconnaître un patron d'un pavé" }
+          ]
+        },
+        {
+          "id": "mat.eg.deplacements",
+          "nom": "Déplacements dans l'espace",
+          "objectifs": [
+            { "id": "mat.eg.deplacements.01", "intitule": "Connaître et utiliser le vocabulaire lié aux déplacements" },
+            { "id": "mat.eg.deplacements.02", "intitule": "Comprendre, utiliser et produire une suite d'instructions qui décrivent un déplacement en utilisant un vocabulaire spatial précis" },
+            { "id": "mat.eg.deplacements.03", "intitule": "Résoudre des problèmes portant sur des assemblages de cubes" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mat.ogd",
+      "nom": "Organisation et gestion de données et probabilités",
+      "sous_domaines": [
+        {
+          "id": "mat.ogd.donnees",
+          "nom": "Organisation et gestion de données",
+          "objectifs": [
+            { "id": "mat.ogd.donnees.01", "intitule": "Recueillir des données et produire un tableau, un diagramme en barres ou un ensemble de points dans un repère pour présenter des données recueillies" },
+            { "id": "mat.ogd.donnees.02", "intitule": "Lire et interpréter les données d'un tableau, d'un diagramme en barres, d'un diagramme circulaire ou d'une courbe" },
+            { "id": "mat.ogd.donnees.03", "intitule": "Résoudre des problèmes en une ou deux étapes en utilisant les données d'un tableau, d'un diagramme en barres, d'un diagramme circulaire ou d'une courbe" }
+          ]
+        },
+        {
+          "id": "mat.ogd.probabilites",
+          "nom": "Les probabilités",
+          "objectifs": [
+            { "id": "mat.ogd.probabilites.01", "intitule": "Identifier toutes les issues possibles lors d'une expérience aléatoire simple" },
+            { "id": "mat.ogd.probabilites.02", "intitule": "Identifier toutes les issues réalisant un évènement dans une expérience aléatoire simple" },
+            { "id": "mat.ogd.probabilites.03", "intitule": "Dans une situation d'équiprobabilité, lors d'une expérience aléatoire simple, exprimer la probabilité d'un évènement sous la forme « a chances sur b »" },
+            { "id": "mat.ogd.probabilites.04", "intitule": "Comparer des probabilités dans des cas simples" },
+            { "id": "mat.ogd.probabilites.05", "intitule": "Comprendre la notion d'indépendance lors de la répétition de la même expérience aléatoire" },
+            { "id": "mat.ogd.probabilites.06", "intitule": "Dans des situations d'équiprobabilité, recenser toutes les issues possibles d'une expérience aléatoire en deux étapes dans un tableau ou dans un arbre afin de déterminer des probabilités" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mat.prop",
+      "nom": "La proportionnalité",
+      "sous_domaines": [
+        {
+          "id": "mat.prop.prop",
+          "nom": "La proportionnalité",
+          "objectifs": [
+            { "id": "mat.prop.prop.01", "intitule": "Identifier une situation de proportionnalité" },
+            { "id": "mat.prop.prop.02", "intitule": "Savoir résoudre un problème de proportionnalité" }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mat.info",
+      "nom": "Initiation à la pensée informatique",
+      "sans_objectifs_propres": true,
+      "note": "Ce domaine ne comporte pas de liste d'objectifs d'apprentissage propre au cours moyen : ses contenus sont intégrés aux autres domaines. Au CM2, l'élève produit des codages de déplacements comportant davantage d'instructions, poursuit des suites évolutives de nombres ou de motifs, exécute des programmes de calcul comportant jusqu'à trois instructions, et apprend à produire des programmes de construction dans des cas simples.",
+      "objectifs_rattaches": [
+        "mat.nc.algebre.03",
+        "mat.nc.algebre.04",
+        "mat.nc.algebre.05",
+        "mat.nc.algebre.06",
+        "mat.nc.problemes.07",
+        "mat.eg.plane.11",
+        "mat.eg.deplacements.02"
+      ],
+      "liaison_crcn": "num.3.4"
+    }
+  ]
+}

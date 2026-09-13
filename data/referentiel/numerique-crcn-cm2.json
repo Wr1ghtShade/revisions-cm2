@@ -1,0 +1,539 @@
+{
+  "matiere": "numerique_crcn",
+  "niveau": "CM2",
+  "annee_scolaire": "2026-2027",
+  "source": {
+    "texte": "Cadre de référence des compétences numériques (CRCN)",
+    "texte_fondateur": "Décret n° 2019-919 du 30 août 2019 et arrêté du 30 août 2019, BO n° 37 du 10 octobre 2019",
+    "url_bo": "https://www.education.gouv.fr/bo/19/Hebdo37/MENE1915146D.htm",
+    "document_accompagnement": "Document d'accompagnement — Mise en œuvre du Cadre de Référence des Compétences Numériques (CRCN), DNE, novembre 2019, actualisation août 2020",
+    "url_document_accompagnement": "https://eduscol.education.fr/document/20404/download",
+    "perimetre_extrait": "5 domaines et 16 compétences. Seuls les niveaux de maîtrise 1 et 2 concernent l'école élémentaire.",
+    "licence": "Licence Ouverte / Open Licence 2.0 (Etalab)",
+    "date_extraction": "2026-09-11"
+  },
+  "etat_du_fichier": {
+    "domaines_et_competences": "complet et vérifié",
+    "reperes": "complet — 47 repères aux niveaux de maîtrise 1 et 2, sur les 16 compétences",
+    "methode_extraction": "Extraits du document d'accompagnement CRCN avec pdftotext -table, qui restitue correctement le tableau à trois colonnes là où -layout faisait déborder la colonne « pistes d'activités » sur celle des repères.",
+    "fiabilite_des_niveaux": "Le numéro de niveau de maîtrise est centré verticalement sur sa ligne de tableau, dont la hauteur dépend de la colonne voisine : sa position dans le texte extrait ne permet donc pas de trancher seule. Le partage niveau 1 / niveau 2 et la limite école élémentaire / collège ont été calculés par découpage en bandes entre les numéros de niveau successifs, puis validés sur deux compétences relues à la main dans le texte source (1.1 et 4.3) : les deux sortent exactes, cyberharcèlement compris au niveau 2. Le champ niveau reste néanmoins indicatif pour les 14 autres compétences ; il ne conditionne ni le flag evaluable ni le contenu des questions.",
+    "volume_cible": "Le CLAUDE.md du projet annonce 42 repères ; 47 ont été retenus."
+  },
+  "contraintes_generation": {
+    "zone_sensible": {
+      "competence": "num.4.3",
+      "repere": "num.4.3.n2.03",
+      "sujet": "Cyberharcèlement",
+      "regle": "Le cyberharcèlement ne doit jamais faire l'objet d'une évaluation, sous quelque forme que ce soit.",
+      "traitement_impose": "L'Éducation nationale impose un traitement en classe avec un adulte présent. Si le sujet apparaît dans l'application, ce doit être un écran informatif mentionnant le 3018, numéro national contre les violences numériques, et jamais une question.",
+      "numero_ressource": "3018"
+    },
+    "interdits": [
+      {
+        "regle": "Ne pas générer de question sur un repère marqué evaluable: false.",
+        "detail": "La très grande majorité des repères du CRCN décrivent un geste sur un outil numérique (utiliser, produire, paramétrer, sauvegarder). Ils s'évaluent en situation, pas par QCM."
+      },
+      {
+        "regle": "Ne jamais laisser entendre qu'il existe un test ou une certification d'informatique à l'entrée au collège.",
+        "detail": "Il n'existe aucun test d'informatique à l'entrée au collège. L'attestation de sensibilisation au numérique Pix se passe à la fin de la 6e, en classe, accompagnée par un adulte. La certification Pix a lieu en 3e. Au CM2, il n'y a qu'un bilan renseigné par le professeur dans le LSU."
+      }
+    ],
+    "recoupement_a_ne_pas_dupliquer": {
+      "competence": "num.3.4",
+      "recoupe": [
+        {
+          "referentiel": "maths-cm2.json",
+          "element": "mat.info",
+          "nom": "Initiation à la pensée informatique"
+        },
+        {
+          "referentiel": "sciences-cm2.json",
+          "element": "sci.t3.p4.b2",
+          "nom": "Algorithmes et programmation"
+        }
+      ],
+      "regle": "La compétence 3.4 « Programmer » couvre exactement la partie « Initiation à la pensée informatique » du programme de mathématiques du CM2. Lier les référentiels plutôt que générer deux fois les mêmes questions."
+    },
+    "niveaux_scolaires": {
+      "note": "Le CRCN définit 8 niveaux de maîtrise. Seuls les niveaux 1 et 2 concernent l'école élémentaire ; les niveaux 3 et suivants relèvent du collège et au-delà.",
+      "retenus_ici": [
+        1,
+        2
+      ]
+    }
+  },
+  "domaines": [
+    {
+      "id": "num.1",
+      "nom": "Information et données",
+      "competences": [
+        {
+          "id": "num.1.1",
+          "code": "1.1",
+          "nom": "Mener une recherche et une veille d'information",
+          "description": "Mener une recherche et une veille d'information pour répondre à un besoin d'information et se tenir au courant de l'actualité d'un sujet tout en étant en mesure de vérifier les sources et la fiabilité de l'information (avec un moteur de recherche, au sein d'un réseau social, par abonnement à des flux ou des lettres d'information, ou tout autre moyen).",
+          "reperes": [
+            {
+              "id": "num.1.1.n1.01",
+              "niveau": 1,
+              "repere": "Lire et repérer des informations sur un support numérique",
+              "evaluable": false,
+              "raison_non_evaluable": "Décrit un geste sur un outil numérique : s'évalue en situation, pas par question fermée."
+            },
+            {
+              "id": "num.1.1.n1.02",
+              "niveau": 1,
+              "repere": "Effectuer une recherche simple en ligne en utilisant un moteur de recherche",
+              "evaluable": false,
+              "raison_non_evaluable": "Décrit un geste sur un outil numérique : s'évalue en situation, pas par question fermée."
+            },
+            {
+              "id": "num.1.1.n2.03",
+              "niveau": 2,
+              "repere": "Reformuler sa requête en modifiant les mots-clés pour obtenir de meilleurs résultats",
+              "evaluable": false,
+              "raison_non_evaluable": "Décrit un geste sur un outil numérique : s'évalue en situation, pas par question fermée."
+            },
+            {
+              "id": "num.1.1.n2.04",
+              "niveau": 2,
+              "repere": "Questionner la fiabilité et la pertinence des sources",
+              "evaluable": true
+            }
+          ]
+        },
+        {
+          "id": "num.1.2",
+          "code": "1.2",
+          "nom": "Gérer des données",
+          "description": "Stocker et organiser des données pour les retrouver, les conserver et en faciliter l'accès et la gestion (avec un gestionnaire de fichiers, un espace de stockage en ligne, des classeurs, des bases de données, un système d'information…).",
+          "reperes": [
+            {
+              "id": "num.1.2.n1.01",
+              "niveau": 1,
+              "repere": "Sauvegarder des fichiers dans l'ordinateur utilisé et les retrouver",
+              "evaluable": false,
+              "raison_non_evaluable": "Décrit un geste sur un outil numérique : s'évalue en situation, pas par question fermée."
+            },
+            {
+              "id": "num.1.2.n2.02",
+              "niveau": 2,
+              "repere": "Sauvegarder des fichiers dans l'ordinateur utilisé, et dans un espace de stockage partagé et sécurisé, afin de pouvoir les réutiliser",
+              "evaluable": false,
+              "raison_non_evaluable": "Décrit un geste sur un outil numérique : s'évalue en situation, pas par question fermée."
+            },
+            {
+              "id": "num.1.2.n2.03",
+              "niveau": 2,
+              "repere": "Savoir distinguer les différents types d'espaces de stockage",
+              "evaluable": true
+            }
+          ]
+        },
+        {
+          "id": "num.1.3",
+          "code": "1.3",
+          "nom": "Traiter des données",
+          "description": "Appliquer des traitements à des données pour les analyser et les interpréter (avec un tableur, un programme, un logiciel de traitement d'enquête, une requête de calcul dans une base de données…).",
+          "reperes": [
+            {
+              "id": "num.1.3.n1.01",
+              "niveau": 1,
+              "repere": "Sélectionner et mettre en relation des informations issues de ressources numériques",
+              "evaluable": false,
+              "raison_non_evaluable": "Décrit un geste sur un outil numérique : s'évalue en situation, pas par question fermée."
+            },
+            {
+              "id": "num.1.3.n2.02",
+              "niveau": 2,
+              "repere": "Insérer, saisir, et trier des données dans un tableur pour les exploiter",
+              "evaluable": false,
+              "raison_non_evaluable": "Décrit un geste sur un outil numérique : s'évalue en situation, pas par question fermée."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "num.2",
+      "nom": "Communication et collaboration",
+      "competences": [
+        {
+          "id": "num.2.1",
+          "code": "2.1",
+          "nom": "Interagir",
+          "description": "Interagir avec des individus et des petits groupes pour échanger dans divers contextes liés à la vie privée ou à une activité professionnelle, de façon ponctuelle et récurrente (avec une messagerie électronique, une messagerie instantanée, un système de visioconférence…).",
+          "reperes": [
+            {
+              "id": "num.2.1.n1.01",
+              "niveau": 1,
+              "repere": "Comprendre que des contenus sur Internet peuvent être inappropriés et savoir réagir",
+              "evaluable": true
+            },
+            {
+              "id": "num.2.1.n1.02",
+              "niveau": 1,
+              "repere": "Utiliser un outil ou un service numérique pour communiquer",
+              "evaluable": false,
+              "raison_non_evaluable": "Décrit un geste sur un outil numérique : s'évalue en situation, pas par question fermée."
+            },
+            {
+              "id": "num.2.1.n2.03",
+              "niveau": 2,
+              "repere": "Connaître et utiliser les règles de civilité lors des interactions en ligne",
+              "evaluable": true
+            }
+          ]
+        },
+        {
+          "id": "num.2.2",
+          "code": "2.2",
+          "nom": "Partager et publier",
+          "description": "Partager et publier des informations et des contenus pour communiquer ses propres productions ou opinions, relayer celles des autres en contexte de communication publique en apportant un regard critique sur la nature du contenu (avec des plateformes de partage, des réseaux sociaux, des blogs, des espaces de forum et de commentaires, de système de gestion de contenu CMS…).",
+          "reperes": [
+            {
+              "id": "num.2.2.n1.01",
+              "niveau": 1,
+              "repere": "Publier des contenus en ligne",
+              "evaluable": false,
+              "raison_non_evaluable": "Décrit un geste sur un outil numérique : s'évalue en situation, pas par question fermée."
+            },
+            {
+              "id": "num.2.2.n1.02",
+              "niveau": 1,
+              "repere": "Partager des contenus numériques en ligne en diffusion publique ou privée",
+              "evaluable": false,
+              "raison_non_evaluable": "Décrit un geste sur un outil numérique : s'évalue en situation, pas par question fermée."
+            },
+            {
+              "id": "num.2.2.n2.03",
+              "niveau": 2,
+              "repere": "Modifier les informations attachées à son profil dans un environnement numérique en fonction du contexte d'usage",
+              "evaluable": false,
+              "raison_non_evaluable": "Décrit un geste sur un outil numérique : s'évalue en situation, pas par question fermée."
+            },
+            {
+              "id": "num.2.2.n2.04",
+              "niveau": 2,
+              "repere": "Savoir que certains contenus sont protégés par un droit d'auteur",
+              "evaluable": true
+            },
+            {
+              "id": "num.2.2.n2.05",
+              "niveau": 2,
+              "repere": "Identifier l'origine des informations et des contenus partagés",
+              "evaluable": true
+            }
+          ]
+        },
+        {
+          "id": "num.2.3",
+          "code": "2.3",
+          "nom": "Collaborer",
+          "description": "Collaborer dans un groupe pour réaliser un projet, co-produire des ressources, des connaissances, des données, et pour apprendre (avec des plateformes de travail collaboratif et de partage de document, des éditeurs en ligne, des fonctionnalités de suivi de modifications ou de gestion de versions…).",
+          "reperes": [
+            {
+              "id": "num.2.3.n1.01",
+              "niveau": 1,
+              "repere": "Utiliser un dispositif d'écriture collaborative",
+              "evaluable": false,
+              "raison_non_evaluable": "Décrit un geste sur un outil numérique : s'évalue en situation, pas par question fermée."
+            },
+            {
+              "id": "num.2.3.n2.02",
+              "niveau": 2,
+              "repere": "Utiliser un dispositif d'écriture collaborative adapté à un projet afin de partager des idées et de coproduire des contenus",
+              "evaluable": false,
+              "raison_non_evaluable": "Décrit un geste sur un outil numérique : s'évalue en situation, pas par question fermée."
+            }
+          ]
+        },
+        {
+          "id": "num.2.4",
+          "code": "2.4",
+          "nom": "S'insérer dans un monde numérique",
+          "description": "Maîtriser les enjeux de la présence en ligne, développer des stratégies et des pratiques autonomes en respectant les règles, les droits et les valeurs qui leur sont liés, pour se positionner en tant qu'acteur social, économique et citoyen dans le monde numérique, et répondre à des objectifs (avec les réseaux sociaux et les outils permettant de développer une présence publique sur Internet, et en lien avec la vie citoyenne, la vie professionnelle, la vie privée…).",
+          "reperes": [
+            {
+              "id": "num.2.4.n1.01",
+              "niveau": 1,
+              "repere": "Comprendre la nécessité de protéger la vie privée de chacun",
+              "evaluable": true
+            },
+            {
+              "id": "num.2.4.n2.02",
+              "niveau": 2,
+              "repere": "Utiliser des moyens simples pour protéger les données personnelles",
+              "evaluable": false,
+              "raison_non_evaluable": "Décrit un geste sur un outil numérique : s'évalue en situation, pas par question fermée."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "num.3",
+      "nom": "Création de contenus",
+      "competences": [
+        {
+          "id": "num.3.1",
+          "code": "3.1",
+          "nom": "Développer des documents textuels",
+          "description": "Produire des documents à contenu majoritairement textuel pour communiquer des idées, rendre compte et valoriser ses travaux (avec des logiciels de traitement de texte, de présentation, de création de page web, de carte conceptuelle…).",
+          "reperes": [
+            {
+              "id": "num.3.1.n1.01",
+              "niveau": 1,
+              "repere": "Utiliser les fonctions simples d'un traitement de texte",
+              "evaluable": false,
+              "raison_non_evaluable": "Décrit un geste sur un outil numérique : s'évalue en situation, pas par question fermée."
+            },
+            {
+              "id": "num.3.1.n2.02",
+              "niveau": 2,
+              "repere": "Utiliser les fonctions simples d'une application pour produire des contenus majoritairement textuels associés à une image, un son ou une vidéo",
+              "evaluable": false,
+              "raison_non_evaluable": "Décrit un geste sur un outil numérique : s'évalue en situation, pas par question fermée."
+            }
+          ]
+        },
+        {
+          "id": "num.3.2",
+          "code": "3.2",
+          "nom": "Développer des documents multimédia",
+          "description": "Développer des documents à contenu multimédia pour créer ses propres productions multimédia, enrichir ses créations textuelles (avec des logiciels de capture et d'édition d'image / son / vidéo / animation...).",
+          "reperes": [
+            {
+              "id": "num.3.2.n1.01",
+              "niveau": 1,
+              "repere": "Produire ou numériser une image ou un son",
+              "evaluable": false,
+              "raison_non_evaluable": "Décrit un geste sur un outil numérique : s'évalue en situation, pas par question fermée."
+            },
+            {
+              "id": "num.3.2.n2.02",
+              "niveau": 2,
+              "repere": "Produire et enregistrer un document multimédia",
+              "evaluable": false,
+              "raison_non_evaluable": "Décrit un geste sur un outil numérique : s'évalue en situation, pas par question fermée."
+            }
+          ]
+        },
+        {
+          "id": "num.3.3",
+          "code": "3.3",
+          "nom": "Adapter les documents à leur finalité",
+          "description": "Adapter des documents de tous types en fonction de l'usage envisagé et maîtriser l'usage des licences pour permettre, faciliter et encadrer l'utilisation dans divers contextes (mise à jour fréquente, diffusion multicanale, impression, mise en ligne, projection…) (avec les fonctionnalités des logiciels liées à la préparation d'impression, de projection, de mise en ligne, les outils de conversion de format…).",
+          "reperes": [
+            {
+              "id": "num.3.3.n1.01",
+              "niveau": 1,
+              "repere": "Utiliser des fonctions simples de mise en page d'un document pour répondre à un objectif de diffusion",
+              "evaluable": false,
+              "raison_non_evaluable": "Décrit un geste sur un outil numérique : s'évalue en situation, pas par question fermée."
+            },
+            {
+              "id": "num.3.3.n2.02",
+              "niveau": 2,
+              "repere": "Connaître et respecter les règles élémentaires du droit d'auteur, du droit à l'image et du droit à la protection des données personnelles",
+              "evaluable": true
+            },
+            {
+              "id": "num.3.3.n2.03",
+              "niveau": 2,
+              "repere": "Organiser et optimiser des contenus numériques pour les publier en ligne",
+              "evaluable": false,
+              "raison_non_evaluable": "Décrit un geste sur un outil numérique : s'évalue en situation, pas par question fermée."
+            }
+          ]
+        },
+        {
+          "id": "num.3.4",
+          "code": "3.4",
+          "nom": "Programmer",
+          "description": "Écrire des programmes et des algorithmes pour répondre à un besoin (automatiser une tâche répétitive, accomplir des tâches complexes ou chronophages, résoudre un problème logique…) et pour développer un contenu riche (jeu, site web…) (avec des environnements de développement informatique simples, des logiciels de planification de tâches…).",
+          "recoupement": "Couvre la partie « Initiation à la pensée informatique » du programme de mathématiques du CM2 et le bloc « Algorithmes et programmation » du programme de sciences. Ne pas dupliquer les questions.",
+          "reperes": [
+            {
+              "id": "num.3.4.n1.01",
+              "niveau": 1,
+              "repere": "Lire et construire un algorithme qui comprend des instructions simples",
+              "evaluable": true
+            },
+            {
+              "id": "num.3.4.n2.02",
+              "niveau": 2,
+              "repere": "Réaliser un programme simple",
+              "evaluable": false,
+              "raison_non_evaluable": "Décrit un geste sur un outil numérique : s'évalue en situation, pas par question fermée."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "num.4",
+      "nom": "Protection et sécurité",
+      "competences": [
+        {
+          "id": "num.4.1",
+          "code": "4.1",
+          "nom": "Sécuriser l'environnement numérique",
+          "description": "Sécuriser les équipements, les communications et les données pour se prémunir contre les attaques, pièges, désagréments et incidents susceptibles de nuire au bon fonctionnement des matériels, logiciels, sites internet, et de compromettre les transactions et les données (avec des logiciels de protection, la maîtrise de bonnes pratiques…).",
+          "reperes": [
+            {
+              "id": "num.4.1.n1.01",
+              "niveau": 1,
+              "repere": "Identifier les risques principaux qui menacent son environnement informatique",
+              "evaluable": true
+            },
+            {
+              "id": "num.4.1.n2.02",
+              "niveau": 2,
+              "repere": "Choisir et appliquer des mesures simples de protection de son environnement informatique",
+              "evaluable": false,
+              "raison_non_evaluable": "Décrit un geste sur un outil numérique : s'évalue en situation, pas par question fermée."
+            },
+            {
+              "id": "num.4.1.n2.03",
+              "niveau": 2,
+              "repere": "Identifier différents risques numériques et mettre en œuvre des stratégies de protection des ressources matérielles et logicielles",
+              "evaluable": true
+            }
+          ]
+        },
+        {
+          "id": "num.4.2",
+          "code": "4.2",
+          "nom": "Protéger les données personnelles et la vie privée",
+          "description": "Maîtriser ses traces et gérer les données personnelles pour protéger sa vie privée et celle des autres, et adopter une pratique éclairée (paramétrage des paramètres de confidentialité, la surveillance régulière de ses traces...).",
+          "reperes": [
+            {
+              "id": "num.4.2.n1.01",
+              "niveau": 1,
+              "repere": "Identifier les données à caractère personnel et celles à ne pas partager",
+              "evaluable": true
+            },
+            {
+              "id": "num.4.2.n2.02",
+              "niveau": 2,
+              "repere": "Connaître les règles attachées à la protection des données personnelles",
+              "evaluable": true
+            },
+            {
+              "id": "num.4.2.n2.03",
+              "niveau": 2,
+              "repere": "Connaître le concept de \"traces\" de navigation",
+              "evaluable": true
+            },
+            {
+              "id": "num.4.2.n2.04",
+              "niveau": 2,
+              "repere": "Savoir que les traces peuvent être vues, collectées ou analysées par d'autres personnes",
+              "evaluable": true
+            },
+            {
+              "id": "num.4.2.n2.05",
+              "niveau": 2,
+              "repere": "Appliquer des procédures pour protéger les données personnelles",
+              "evaluable": false,
+              "raison_non_evaluable": "Décrit un geste sur un outil numérique : s'évalue en situation, pas par question fermée."
+            }
+          ]
+        },
+        {
+          "id": "num.4.3",
+          "code": "4.3",
+          "nom": "Protéger la santé, le bien-être et l'environnement",
+          "description": "Prévenir et limiter les risques générés par le numérique sur la santé, le bien-être et l'environnement mais aussi tirer parti de ses potentialités pour favoriser le développement personnel, le soin, l'inclusion dans la société et la qualité des conditions de vie, pour soi et pour les autres (avec la connaissance des effets du numérique sur la santé physique et psychique et sur l'environnement, et des pratiques, services et outils numériques dédiés au bien-être, à la santé, à l'accessibilité…).",
+          "zone_sensible": true,
+          "reperes": [
+            {
+              "id": "num.4.3.n1.01",
+              "niveau": 1,
+              "repere": "Comprendre que l'utilisation non réfléchie des technologies numériques peut avoir des impacts négatifs sur sa santé et son équilibre social et psychologique",
+              "evaluable": true
+            },
+            {
+              "id": "num.4.3.n1.02",
+              "niveau": 1,
+              "repere": "Utiliser des moyens simples pour préserver sa santé en adaptant son espace de travail et en régulant ses pratiques",
+              "evaluable": false,
+              "raison_non_evaluable": "Décrit un geste sur un outil numérique : s'évalue en situation, pas par question fermée."
+            },
+            {
+              "id": "num.4.3.n2.03",
+              "niveau": 2,
+              "repere": "Reconnaître les comportements et contenus qui relèvent du cyberharcèlement",
+              "evaluable": false,
+              "zone_sensible": true,
+              "raison_non_evaluable": "ZONE SENSIBLE. Traitement imposé en classe avec un adulte présent. Dans l'application : écran informatif mentionnant le 3018, jamais une évaluation."
+            },
+            {
+              "id": "num.4.3.n2.04",
+              "niveau": 2,
+              "repere": "Être conscient que l'utilisation des technologies numériques peut avoir un impact sur l'environnement pour adopter des comportements simples pour économiser de l'énergie et des ressources",
+              "evaluable": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "num.5",
+      "nom": "Environnement numérique",
+      "competences": [
+        {
+          "id": "num.5.1",
+          "code": "5.1",
+          "nom": "Résoudre des problèmes techniques",
+          "description": "Résoudre des problèmes techniques pour garantir et rétablir le bon fonctionnement d'un environnement informatique (avec les outils de configuration et de maintenance des logiciels ou des systèmes d'exploitation, et en mobilisant les ressources techniques ou humaines nécessaires…).",
+          "reperes": [
+            {
+              "id": "num.5.1.n1.01",
+              "niveau": 1,
+              "repere": "Savoir décrire l'architecture simple d'un ordinateur et de ses périphériques",
+              "evaluable": true
+            },
+            {
+              "id": "num.5.1.n2.02",
+              "niveau": 2,
+              "repere": "Résoudre des problèmes simples empêchant l'accès à un service numérique usuel",
+              "evaluable": false,
+              "raison_non_evaluable": "Décrit un geste sur un outil numérique : s'évalue en situation, pas par question fermée."
+            }
+          ]
+        },
+        {
+          "id": "num.5.2",
+          "code": "5.2",
+          "nom": "Évoluer dans un environnement numérique",
+          "description": "Installer, configurer et enrichir un environnement numérique (matériels, outils, services) pour disposer d'un cadre adapté aux activités menées, à leur contexte d'exercice ou à des valeurs (avec les outils de configuration des logiciels et des systèmes d'exploitation, l'installation de nouveaux logiciels ou la souscription à des services…).",
+          "reperes": [
+            {
+              "id": "num.5.2.n1.01",
+              "niveau": 1,
+              "repere": "Se connecter à un environnement numérique",
+              "evaluable": false,
+              "raison_non_evaluable": "Décrit un geste sur un outil numérique : s'évalue en situation, pas par question fermée."
+            },
+            {
+              "id": "num.5.2.n1.02",
+              "niveau": 1,
+              "repere": "Utiliser les fonctionnalités élémentaires d'un environnement numérique",
+              "evaluable": false,
+              "raison_non_evaluable": "Décrit un geste sur un outil numérique : s'évalue en situation, pas par question fermée."
+            },
+            {
+              "id": "num.5.2.n2.03",
+              "niveau": 2,
+              "repere": "Retrouver des ressources et des contenus dans un environnement numérique",
+              "evaluable": false,
+              "raison_non_evaluable": "Décrit un geste sur un outil numérique : s'évalue en situation, pas par question fermée."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

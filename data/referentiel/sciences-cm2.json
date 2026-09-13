@@ -1,0 +1,415 @@
+{
+  "matiere": "sciences_et_technologie",
+  "niveau": "CM2",
+  "annee_scolaire": "2026-2027",
+  "source": {
+    "texte": "Annexe – Programme de sciences et technologie du cycle 3",
+    "bulletin_officiel": "BO n° 25 du 22 juin 2023",
+    "arrete": "Arrêté du 15 juin 2023 modifiant l'arrêté du 9 novembre 2015 fixant les programmes d'enseignement des cycles 2, 3 et 4",
+    "url_bo": "https://www.education.gouv.fr/bo/2023/Hebdo25/MENE2314101A",
+    "url_annexe": "https://www.education.gouv.fr/sites/default/files/document/Annexe%20%E2%80%93%20Programme%20de%20sciences%20et%20technologie%20du%20cycle%203-365166.pdf",
+    "version_applicable_cm2_2026_2027": "Ancien programme (BO 2023). Le nouveau programme de sciences et technologie, publié en 2026, ne s'applique au CM2 qu'à la rentrée 2027.",
+    "perimetre_extrait": "Colonne « Connaissances et compétences attendues en fin de cours moyen » uniquement. La colonne « fin de sixième » est hors périmètre.",
+    "licence": "Licence Ouverte / Open Licence 2.0 (Etalab)",
+    "date_extraction": "2026-09-11",
+    "note_decompte": "81 objectifs extraits pour la fin de cours moyen. Le CLAUDE.md du projet en annonçait 85 ; l'écart tient vraisemblablement à un découpage différent de quelques items listés sous une même puce."
+  },
+  "contraintes_generation": {
+    "pool_cm1_cm2": {
+      "regle": "Le programme ne distingue pas le CM1 du CM2. Il fixe un socle unique « fin de cours moyen ».",
+      "consequence": "Traiter l'ensemble comme un pool unique CM1+CM2. Ne jamais présenter un objectif comme « du CM2 » ou « du CM1 »."
+    },
+    "regle_evaluable": {
+      "definition": "evaluable vaut false quand l'objectif se réduit à un geste, une expérience, une réalisation ou un projet collectif, sans fait stable sous-jacent qu'une question fermée puisse vérifier. Il vaut true dès qu'un fait, un terme ou une relation stable fonde l'objectif, même si le programme l'exprime avec un verbe d'action.",
+      "exemple_false": "« Réaliser un circuit électrique à une boucle » : le montage est un geste, il n'y a pas de fait à restituer.",
+      "exemple_true": "« Différencier les états physiques solide, liquide et gazeux » : les définitions (forme propre, volume propre) sont des faits."
+    },
+    "interdits": [
+      {
+        "regle": "Ne jamais générer de fait ni de question sur un objectif marqué evaluable: false.",
+        "detail": "Ces objectifs supposent une manipulation, une expérience, une maquette ou un projet, intestables dans une application d'auto-révision."
+      },
+      {
+        "regle": "Ne pas produire de question sur la reproduction et la sexualité humaine au-delà du vocabulaire anatomique et des changements de la puberté tels qu'énoncés par le programme.",
+        "detail": "Le programme cadre strictement ces contenus ; toute extension relève de l'éducation à la sexualité, qui se traite en classe avec un adulte."
+      },
+      {
+        "regle": "Les unités de masse au programme se limitent aux unités usuelles : tonne, quintal, kilogramme, gramme et milligramme.",
+        "citation": "Effectuer des conversions d'unités de masse (en se limitant à des unités usuelles : tonne, quintal, kilogramme, gramme et milligramme)."
+      },
+      {
+        "regle": "Ne pas exiger la dépendance des énergies de pesanteur et cinétique vis-à-vis de la masse.",
+        "citation": "Si la dépendance des énergies de pesanteur et cinétique vis-à-vis de la masse peut être évoquée en cas de besoin à l'occasion des activités proposées, elle ne constitue pas pour autant une connaissance exigible des élèves en fin de cycle 3."
+      },
+      {
+        "regle": "Les formes d'énergie exigibles en fin de cours moyen sont l'énergie de pesanteur, l'énergie cinétique et l'énergie électrique.",
+        "detail": "Les autres formes (chimique, thermique, nucléaire, lumineuse) sont introduites mais ne sont pas exigibles à ce niveau."
+      }
+    ],
+    "liaison_crcn": {
+      "bloc_concerne": "sci.t3.p4",
+      "competence": "num.3.4",
+      "note": "Le bloc « Algorithmes et programmation » recoupe la compétence CRCN 3.4 « Programmer » et la partie « Initiation à la pensée informatique » du programme de mathématiques. Lier plutôt que dupliquer."
+    }
+  },
+  "thematiques": [
+    {
+      "id": "sci.t1",
+      "nom": "Matière, mouvement, énergie, information",
+      "parties": [
+        {
+          "id": "sci.t1.p1",
+          "nom": "États et constitution de la matière à l'échelle macroscopique",
+          "blocs": [
+            {
+              "id": "sci.t1.p1.b1",
+              "nom": "Propriétés de la matière",
+              "objectifs": [
+                { "id": "sci.t1.p1.b1.01", "intitule": "Distinguer les matériaux fabriqués ou transformés par l'être humain des matériaux directement disponibles dans la nature.", "evaluable": true },
+                { "id": "sci.t1.p1.b1.02", "intitule": "Différencier les états physiques solide (forme et volume propres), liquide (volume propre et absence de forme propre) et gazeux (ni forme propre ni volume propre).", "evaluable": true },
+                { "id": "sci.t1.p1.b1.03", "intitule": "Observer des changements d'état physique et leur réversibilité.", "evaluable": true },
+                { "id": "sci.t1.p1.b1.04", "intitule": "Identifier les différents états physiques de la matière dans la nature, en particulier ceux de l'eau.", "evaluable": true }
+              ]
+            },
+            {
+              "id": "sci.t1.p1.b2",
+              "nom": "Masse et volume",
+              "objectifs": [
+                { "id": "sci.t1.p1.b2.01", "intitule": "Comparer les masses de différents corps à l'aide d'un dispositif simple qui peut être conçu par les élèves (poulie et cordelette, balance romaine, à fléau, à plateaux).", "evaluable": false, "raison_non_evaluable": "Conception et manipulation d'un dispositif." },
+                { "id": "sci.t1.p1.b2.02", "intitule": "Mesurer la masse d'un solide ou d'un liquide à l'aide d'une balance, en tarant la balance le cas échéant.", "evaluable": false, "raison_non_evaluable": "Geste de mesure." },
+                { "id": "sci.t1.p1.b2.03", "intitule": "Effectuer des conversions d'unités de masse (en se limitant à des unités usuelles : tonne, quintal, kilogramme, gramme et milligramme).", "evaluable": true },
+                { "id": "sci.t1.p1.b2.04", "intitule": "Mesurer le volume d'un liquide et mesurer celui d'un solide par déplacement de liquide.", "evaluable": false, "raison_non_evaluable": "Geste de mesure." }
+              ]
+            },
+            {
+              "id": "sci.t1.p1.b3",
+              "nom": "Mélanges",
+              "objectifs": [
+                { "id": "sci.t1.p1.b3.01", "intitule": "Séparer les constituants d'un mélange de solides ou d'un mélange solide-liquide par tamisage, décantation, filtration.", "evaluable": true },
+                { "id": "sci.t1.p1.b3.02", "intitule": "Observer que certains solides peuvent se dissoudre dans l'eau et qu'il est possible de les récupérer par évaporation.", "evaluable": true },
+                { "id": "sci.t1.p1.b3.03", "intitule": "Mettre en évidence expérimentalement que la masse totale se conserve lors du mélange d'un solide dans un liquide.", "evaluable": true }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sci.t1.p2",
+          "nom": "Différents types de mouvement",
+          "blocs": [
+            {
+              "id": "sci.t1.p2.b1",
+              "nom": "Mouvements",
+              "objectifs": [
+                { "id": "sci.t1.p2.b1.01", "intitule": "Observer et identifier le mouvement rectiligne ou circulaire d'un objet, en précisant le point de vue.", "evaluable": true },
+                { "id": "sci.t1.p2.b1.02", "intitule": "Mesurer une distance lors du déplacement d'un objet.", "evaluable": false, "raison_non_evaluable": "Geste de mesure." },
+                { "id": "sci.t1.p2.b1.03", "intitule": "Mesurer une durée, comme intervalle entre deux instants, lors du déplacement d'un objet.", "evaluable": true },
+                { "id": "sci.t1.p2.b1.04", "intitule": "Effectuer des conversions d'unités de distance et de temps.", "evaluable": true }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sci.t1.p3",
+          "nom": "Ressources en énergie et conversions d'énergie",
+          "blocs": [
+            {
+              "id": "sci.t1.p3.b1",
+              "nom": "Conversions d'énergie",
+              "objectifs": [
+                { "id": "sci.t1.p3.b1.01", "intitule": "Réaliser expérimentalement un dispositif de conversion d'énergie.", "evaluable": false, "raison_non_evaluable": "Réalisation expérimentale." },
+                { "id": "sci.t1.p3.b1.02", "intitule": "Identifier différentes formes d'énergie : énergie de pesanteur (dépendant de l'altitude sur Terre), énergie cinétique (liée au mouvement) et énergie électrique, par exemple dans le contexte de la production d'électricité par une centrale hydro-électrique ou une éolienne.", "evaluable": true }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sci.t1.p4",
+          "nom": "Signal et information",
+          "blocs": [
+            {
+              "id": "sci.t1.p4.b1",
+              "nom": "Lumière",
+              "objectifs": [
+                { "id": "sci.t1.p4.b1.01", "intitule": "Observer et classer des objets selon qu'ils sont transparents, opaques à la lumière ou translucides.", "evaluable": true },
+                { "id": "sci.t1.p4.b1.02", "intitule": "Produire expérimentalement une ombre (déficit de lumière associé à une source) à l'aide d'un objet opaque et distinguer ombre propre et ombre portée.", "evaluable": true },
+                { "id": "sci.t1.p4.b1.03", "intitule": "Observer, schématiser et nommer les phases de la Lune.", "evaluable": true },
+                { "id": "sci.t1.p4.b1.04", "intitule": "Réaliser des ombres et associer leurs positions à celles de la source lumineuse et de l'objet opaque.", "evaluable": false, "raison_non_evaluable": "Réalisation expérimentale." }
+              ]
+            },
+            {
+              "id": "sci.t1.p4.b2",
+              "nom": "Électricité",
+              "objectifs": [
+                { "id": "sci.t1.p4.b2.01", "intitule": "Réaliser un circuit électrique à une boucle associant un générateur (pile), un interrupteur, un ou deux récepteurs (lampes à incandescence) pour mettre en évidence la circulation du courant électrique.", "evaluable": true },
+                { "id": "sci.t1.p4.b2.02", "intitule": "Rechercher des informations sur les règles de sécurité électrique et les prendre en compte dans son activité.", "evaluable": true }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sci.t2",
+      "nom": "Le vivant, sa diversité et les fonctions qui le caractérisent",
+      "parties": [
+        {
+          "id": "sci.t2.p1",
+          "nom": "Panorama du monde vivant",
+          "blocs": [
+            {
+              "id": "sci.t2.p1.b1",
+              "nom": "Organisation des êtres vivants",
+              "objectifs": [
+                { "id": "sci.t2.p1.b1.01", "intitule": "Distinguer (par l'observation) les différents niveaux d'organisation des êtres vivants (organisme, appareil, organe) à partir de deux exemples (plante à fleurs et animal).", "evaluable": true }
+              ]
+            },
+            {
+              "id": "sci.t2.p1.b2",
+              "nom": "Classification du vivant",
+              "objectifs": [
+                { "id": "sci.t2.p1.b2.01", "intitule": "Réaliser une classification en groupes emboîtés pour mettre en évidence des liens de parenté à partir d'un petit nombre d'espèces possédant des attributs identifiés.", "evaluable": true }
+              ]
+            },
+            {
+              "id": "sci.t2.p1.b3",
+              "nom": "Biodiversité actuelle et passée",
+              "objectifs": [
+                { "id": "sci.t2.p1.b3.01", "intitule": "Déterminer des espèces biologiques de l'environnement proche en utilisant une clé de détermination.", "evaluable": true },
+                { "id": "sci.t2.p1.b3.02", "intitule": "Caractériser le changement de la biodiversité au cours de l'histoire de la Terre par l'exploitation de fossiles.", "evaluable": true },
+                { "id": "sci.t2.p1.b3.03", "intitule": "Distinguer différentes échelles de temps : l'échelle des temps géologiques (notion de temps long) et celle de l'histoire de l'être humain.", "evaluable": true },
+                { "id": "sci.t2.p1.b3.04", "intitule": "Placer plusieurs espèces actuelles et fossiles sur une échelle des temps.", "evaluable": true }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sci.t2.p2",
+          "nom": "Alimentation humaine",
+          "blocs": [
+            {
+              "id": "sci.t2.p2.b1",
+              "nom": "Besoins alimentaires et nutrition humaine",
+              "objectifs": [
+                { "id": "sci.t2.p2.b1.01", "intitule": "Exploiter des données mettant en évidence le besoin de matière pour la croissance et le développement des êtres vivants.", "evaluable": true },
+                { "id": "sci.t2.p2.b1.02", "intitule": "Exploiter des données pour expliquer la variation des besoins alimentaires au cours de la croissance et selon l'activité physique.", "evaluable": true },
+                { "id": "sci.t2.p2.b1.03", "intitule": "Identifier et localiser la transformation des aliments dans l'appareil digestif (mastication par les dents, changements de texture lors du trajet).", "evaluable": true },
+                { "id": "sci.t2.p2.b1.04", "intitule": "Identifier le rôle de la circulation sanguine dans l'approvisionnement des organes.", "evaluable": true },
+                { "id": "sci.t2.p2.b1.05", "intitule": "Citer quelques comportements alimentaires et règles d'hygiène favorables à la santé (équilibre alimentaire, qualité sanitaire des aliments, brossage des dents, etc.).", "evaluable": true }
+              ]
+            },
+            {
+              "id": "sci.t2.p2.b2",
+              "nom": "Production et conservation des aliments",
+              "objectifs": [
+                { "id": "sci.t2.p2.b2.01", "intitule": "Réaliser une transformation alimentaire (pain ou yaourt, par exemple) et identifier son origine biologique (levure ou ferment lactique).", "evaluable": true },
+                { "id": "sci.t2.p2.b2.02", "intitule": "Identifier les processus à l'origine de la production d'aliments par une étude documentaire ou une rencontre avec des professionnels.", "evaluable": false, "raison_non_evaluable": "Étude documentaire ou rencontre, sans fait stable exigible." }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sci.t2.p3",
+          "nom": "Cycle de vie et reproduction des êtres vivants",
+          "blocs": [
+            {
+              "id": "sci.t2.p3.b1",
+              "nom": "Cycle de vie",
+              "objectifs": [
+                { "id": "sci.t2.p3.b1.01", "intitule": "Exploiter des observations issues de cultures ou d'élevages pour identifier les différentes étapes d'un cycle de vie (naissance, croissance, reproduction, vieillissement, mort) et les formes associées (graine-plantule-plante fleurie, œuf-embryon-larve ou jeune-adulte).", "evaluable": true }
+              ]
+            },
+            {
+              "id": "sci.t2.p3.b2",
+              "nom": "Reproduction et sexualité humaine",
+              "objectifs": [
+                { "id": "sci.t2.p3.b2.01", "intitule": "Nommer les organes reproducteurs étudiés avec le vocabulaire scientifique correspondant.", "evaluable": true },
+                { "id": "sci.t2.p3.b2.02", "intitule": "Décrire et identifier les changements du corps au moment de la puberté et les relier à la capacité à se reproduire.", "evaluable": true }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sci.t3",
+      "nom": "Les objets techniques au cœur de la société",
+      "parties": [
+        {
+          "id": "sci.t3.p1",
+          "nom": "Les objets techniques en réponse aux besoins des individus et de la société",
+          "blocs": [
+            {
+              "id": "sci.t3.p1.b1",
+              "nom": "Besoin exprimé par l'individu, la société",
+              "objectifs": [
+                { "id": "sci.t3.p1.b1.01", "intitule": "Identifier des besoins et leur évolution (se déplacer, se chauffer, s'alimenter, etc.).", "evaluable": true },
+                { "id": "sci.t3.p1.b1.02", "intitule": "Identifier le lien entre des besoins et des réponses apportées par les objets techniques.", "evaluable": true }
+              ]
+            },
+            {
+              "id": "sci.t3.p1.b2",
+              "nom": "Évolution technologique (innovation, invention, principe technique, approche environnementale)",
+              "objectifs": [
+                { "id": "sci.t3.p1.b2.01", "intitule": "Repérer les évolutions d'un objet dans différents contextes (historique, géographique, économique, culturel, technologique) ; par exemple, l'évolution du transport ferroviaire (matériel et usages) depuis son apparition jusqu'à aujourd'hui.", "evaluable": true }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sci.t3.p2",
+          "nom": "Besoins et fonctions techniques",
+          "blocs": [
+            {
+              "id": "sci.t3.p2.b1",
+              "nom": "Besoins et fonctions techniques",
+              "objectifs": [
+                { "id": "sci.t3.p2.b1.01", "intitule": "Distinguer un besoin et les fonctions techniques réalisées par un objet technique.", "evaluable": true },
+                { "id": "sci.t3.p2.b1.02", "intitule": "Identifier les fonctions assurées par un objet technique.", "evaluable": true }
+              ]
+            },
+            {
+              "id": "sci.t3.p2.b2",
+              "nom": "Solutions technologiques",
+              "objectifs": [
+                { "id": "sci.t3.p2.b2.01", "intitule": "Associer les solutions technologiques aux fonctions techniques.", "evaluable": true },
+                { "id": "sci.t3.p2.b2.02", "intitule": "Identifier les matériaux utilisés.", "evaluable": true }
+              ]
+            },
+            {
+              "id": "sci.t3.p2.b3",
+              "nom": "Représentation des objets techniques",
+              "objectifs": [
+                { "id": "sci.t3.p2.b3.01", "intitule": "Représenter graphiquement à l'aide de croquis à main levée les éléments d'un objet technique.", "evaluable": false, "raison_non_evaluable": "Production graphique." },
+                { "id": "sci.t3.p2.b3.02", "intitule": "Identifier les sous-ensembles constituant un objet technique.", "evaluable": true },
+                { "id": "sci.t3.p2.b3.03", "intitule": "Décrire à l'aide d'un schéma le fonctionnement d'un objet technique.", "evaluable": false, "raison_non_evaluable": "Production graphique." }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sci.t3.p3",
+          "nom": "Démarche de conception et de réalisation d'un objet technique",
+          "blocs": [
+            {
+              "id": "sci.t3.p3.b1",
+              "nom": "Problème technique",
+              "objectifs": [
+                { "id": "sci.t3.p3.b1.01", "intitule": "Rechercher des idées de solutions à l'aide de schémas ou de croquis pour résoudre un problème technique donné.", "evaluable": false, "raison_non_evaluable": "Démarche de conception." },
+                { "id": "sci.t3.p3.b1.02", "intitule": "Comparer des solutions par une analyse critique (notamment dans le cadre de la transition écologique et du développement durable).", "evaluable": false, "raison_non_evaluable": "Analyse critique, sans réponse unique." }
+              ]
+            },
+            {
+              "id": "sci.t3.p3.b2",
+              "nom": "Notion de contrainte (imperméabilité, poids, autonomie, etc.)",
+              "objectifs": [
+                { "id": "sci.t3.p3.b2.01", "intitule": "Prendre en compte une contrainte dans la recherche de solutions.", "evaluable": false, "raison_non_evaluable": "Démarche de conception." },
+                { "id": "sci.t3.p3.b2.02", "intitule": "Choisir un matériau en fonction de ses propriétés physiques.", "evaluable": true },
+                { "id": "sci.t3.p3.b2.03", "intitule": "Exploiter les formes d'énergie disponibles (par exemple, le système de chauffage d'un refuge de haute montagne ou d'un appartement en milieu urbain).", "evaluable": true }
+              ]
+            },
+            {
+              "id": "sci.t3.p3.b3",
+              "nom": "Cycle de vie de l'objet technique",
+              "objectifs": [
+                { "id": "sci.t3.p3.b3.01", "intitule": "Identifier les différentes étapes du cycle de vie d'un objet technique.", "evaluable": true },
+                { "id": "sci.t3.p3.b3.02", "intitule": "Effectuer des choix raisonnés en fonction des conséquences environnementales.", "evaluable": false, "raison_non_evaluable": "Choix argumenté, sans réponse unique." }
+              ]
+            },
+            {
+              "id": "sci.t3.p3.b4",
+              "nom": "Processus de réalisation de maquettes",
+              "objectifs": [
+                { "id": "sci.t3.p3.b4.01", "intitule": "Organiser le travail de réalisation d'une maquette (répartition des tâches, coopération, communication, préparation du travail, prise en compte des consignes de sécurité).", "evaluable": false, "raison_non_evaluable": "Projet collectif." },
+                { "id": "sci.t3.p3.b4.02", "intitule": "Planifier le travail au sein de l'équipe.", "evaluable": false, "raison_non_evaluable": "Projet collectif." },
+                { "id": "sci.t3.p3.b4.03", "intitule": "Participer au déroulement du projet.", "evaluable": false, "raison_non_evaluable": "Projet collectif." },
+                { "id": "sci.t3.p3.b4.04", "intitule": "Réaliser des maquettes simples pour matérialiser une solution.", "evaluable": false, "raison_non_evaluable": "Réalisation matérielle." },
+                { "id": "sci.t3.p3.b4.05", "intitule": "Vérifier que la solution répond au problème posé.", "evaluable": false, "raison_non_evaluable": "Démarche de projet." }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sci.t3.p4",
+          "nom": "Programmation d'objets techniques",
+          "blocs": [
+            {
+              "id": "sci.t3.p4.b1",
+              "nom": "Les objets programmables",
+              "objectifs": [
+                { "id": "sci.t3.p4.b1.01", "intitule": "Identifier la chaîne d'information et d'action (exemple d'un éclairage public intelligent : détecteur de présence, boîtier de contrôle, relais de commande d'éclairage, etc.).", "evaluable": true },
+                { "id": "sci.t3.p4.b1.02", "intitule": "Repérer les capteurs et les actionneurs (moteur électrique, etc.) présents dans un objet programmable (par exemple, un robot).", "evaluable": true }
+              ]
+            },
+            {
+              "id": "sci.t3.p4.b2",
+              "nom": "Algorithmes et programmation",
+              "liaison_crcn": "num.3.4",
+              "objectifs": [
+                { "id": "sci.t3.p4.b2.01", "intitule": "Coder un algorithme simple agissant sur le comportement d'un objet technique (déplacement d'un robot, fonctionnement d'un système d'éclairage, etc.).", "evaluable": false, "raison_non_evaluable": "Production de code." },
+                { "id": "sci.t3.p4.b2.02", "intitule": "Comprendre un programme simple et le traduire en langage naturel.", "evaluable": true },
+                { "id": "sci.t3.p4.b2.03", "intitule": "Critiquer un programme au regard du comportement de l'objet programmé (par exemple, la comparaison de différents programmes permettant à un robot de parcourir un trajet comportant des obstacles en un temps minimum).", "evaluable": false, "raison_non_evaluable": "Analyse critique, sans réponse unique." }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sci.t4",
+      "nom": "La Terre, une planète peuplée par des êtres vivants",
+      "parties": [
+        {
+          "id": "sci.t4.p1",
+          "nom": "La Terre, une planète singulière et active",
+          "blocs": [
+            {
+              "id": "sci.t4.p1.b1",
+              "nom": "La Terre, une planète active qui abrite la vie",
+              "objectifs": [
+                { "id": "sci.t4.p1.b1.01", "intitule": "Situer la Terre dans le système solaire.", "evaluable": true },
+                { "id": "sci.t4.p1.b1.02", "intitule": "Distinguer la météorologie du climat.", "evaluable": true },
+                { "id": "sci.t4.p1.b1.03", "intitule": "Réaliser et exploiter des mesures météorologiques en utilisant des capteurs (thermomètre, pluviomètre, anémomètre).", "evaluable": true },
+                { "id": "sci.t4.p1.b1.04", "intitule": "Identifier des indices de l'activité interne ou externe de la Terre (séismes, volcans, vents, courants océaniques, etc.).", "evaluable": true },
+                { "id": "sci.t4.p1.b1.05", "intitule": "Identifier des ressources naturelles exploitées par les sociétés humaines en lien avec l'activité de la planète Terre (matériaux de construction, géothermie, etc.).", "evaluable": true },
+                { "id": "sci.t4.p1.b1.06", "intitule": "Identifier un risque naturel à partir d'un exemple au choix (séisme, volcan, érosion littorale, cyclone, tempête, etc.) et les modalités de prévention associées.", "evaluable": true }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "sci.t4.p2",
+          "nom": "Écosystème : structure, fonctionnement et dynamique",
+          "blocs": [
+            {
+              "id": "sci.t4.p2.b1",
+              "nom": "Écosystème",
+              "objectifs": [
+                { "id": "sci.t4.p2.b1.01", "intitule": "Caractériser, à partir d'un exemple, un écosystème par son milieu de vie, l'ensemble des êtres vivants et les interactions en son sein.", "evaluable": true },
+                { "id": "sci.t4.p2.b1.02", "intitule": "Décrire plusieurs types de relations entre espèces au sein d'un écosystème (coopérations, prédation, etc.).", "evaluable": true },
+                { "id": "sci.t4.p2.b1.03", "intitule": "Comparer, à partir d'observations ou d'expériences, la répartition des êtres vivants dans des milieux proches pour relier les facteurs abiotiques (physico-chimiques) et étudier cette répartition (la température, l'ensoleillement ou l'humidité, etc.).", "evaluable": true }
+              ]
+            },
+            {
+              "id": "sci.t4.p2.b2",
+              "nom": "Place des êtres vivants dans les chaînes alimentaires",
+              "objectifs": [
+                { "id": "sci.t4.p2.b2.01", "intitule": "Relier la production de matière par les animaux à leur consommation de nourriture provenant d'autres êtres vivants.", "evaluable": true },
+                { "id": "sci.t4.p2.b2.02", "intitule": "Expérimenter pour identifier quelques besoins des végétaux.", "evaluable": true },
+                { "id": "sci.t4.p2.b2.03", "intitule": "Repérer la place singulière des végétaux positionnés à la base des réseaux alimentaires.", "evaluable": true },
+                { "id": "sci.t4.p2.b2.04", "intitule": "Représenter les liens alimentaires entre les êtres vivants par des chaînes formant un réseau.", "evaluable": true }
+              ]
+            },
+            {
+              "id": "sci.t4.p2.b3",
+              "nom": "Conséquences des actions humaines sur l'environnement",
+              "objectifs": [
+                { "id": "sci.t4.p2.b3.01", "intitule": "Mettre en évidence quelques répercussions positives et négatives des actions humaines sur l'environnement proche.", "evaluable": true },
+                { "id": "sci.t4.p2.b3.02", "intitule": "S'impliquer dans des actions et des projets relatifs à l'éducation au développement durable sur un thème au choix (alimentation responsable, santé, biodiversité, eau, énergie, gestion et recyclage des déchets, bio-inspiration).", "evaluable": false, "raison_non_evaluable": "Engagement dans un projet." }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
