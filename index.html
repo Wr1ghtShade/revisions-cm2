@@ -50,6 +50,26 @@
 /* display:flex sur un élément masqué l'emporterait sur l'attribut hidden. */
 [hidden] { display: none !important; }
 
+/* Décor : des affaires d'écolier posées sur le bureau, à droite de la feuille.
+   Purement décoratif — aria-hidden et pointer-events:none, pour qu'il ne se
+   mette jamais entre l'enfant et un bouton.
+
+   La feuille fait 56rem de large et reste centrée : le décor ne s'affiche donc
+   qu'à partir de 1280px, là où il reste vraiment du bureau libre sur le côté.
+   En dessous, il disparaît plutôt que de chevaucher le contenu. */
+.deco-ecole {
+  position: fixed;
+  right: max(1rem, calc((100vw - 56rem) / 2 - 8.5rem));
+  top: 50%;
+  transform: translateY(-50%);
+  width: 7.5rem;
+  z-index: 0;
+  pointer-events: none;
+  opacity: .9;
+}
+.deco-ecole svg { width: 100%; height: auto; display: block; }
+@media (max-width: 1279px) { .deco-ecole { display: none; } }
+
 body {
   margin: 0;
   padding: 0 0 4rem;
@@ -1141,15 +1161,23 @@ dialog.infos .journal .majeur { color: var(--juste); }
       <button type="button" class="bouton matiere" data-matiere="emc">
         <span class="emoji" aria-hidden="true">🏛️</span>Vivre en république</button>
       <button type="button" class="bouton matiere" data-matiere="revisions">
-        <span class="emoji" aria-hidden="true">🔁</span>Révisions</button>
+        <span class="emoji" aria-hidden="true">🧠</span>Révisions</button>
       <button type="button" class="bouton matiere" data-matiere="tout">
         <span class="emoji" aria-hidden="true">🎒</span>Tout</button>
     </div>
 
-    <p style="margin-top:1.1rem">
-      <button type="button" class="bouton" id="revoir-erreurs" hidden></button>
-    </p>
     <p class="attente" id="bloc-attente" hidden><span id="texte-attente"></span></p>
+
+    <!-- Rubrique à part : revoir ses erreurs n'est pas « choisir une matière »,
+         c'est reprendre ce qui a déjà été raté. Le bloc entier disparaît quand
+         il n'y a rien à revoir, pour ne pas laisser un titre sans contenu. -->
+    <div id="bloc-erreurs" hidden>
+      <div class="regle" aria-hidden="true"></div>
+      <h2><span class="emoji" aria-hidden="true">🔁</span>Revenir sur tes erreurs</h2>
+      <div class="groupe">
+        <button type="button" class="bouton" id="revoir-erreurs"></button>
+      </div>
+    </div>
 
     <div class="regle" aria-hidden="true"></div>
 
@@ -1377,12 +1405,15 @@ dialog.infos .journal .majeur { color: var(--juste); }
          une fiche ne compte donc pas dans le cahier, et ne change rien aux révisions.</p>
 
       <h2><span class="emoji" aria-hidden="true">🔢</span>Combien d'exercices ?</h2>
-      <!-- Même échelle que les séries à l'écran : 5, 10, 15 ou 20. -->
+      <!-- Même échelle que les séries à l'écran, plus un 30 réservé au papier :
+           une planche de tables se fait d'une traite, ce qui serait trop long
+           sur un écran. -->
       <div class="groupe" role="group" aria-label="Nombre d'exercices">
         <button type="button" class="bouton" data-fiche-nombre="5" aria-pressed="false">5</button>
         <button type="button" class="bouton" data-fiche-nombre="10" aria-pressed="false">10</button>
         <button type="button" class="bouton" data-fiche-nombre="15" aria-pressed="false">15</button>
         <button type="button" class="bouton choisi" data-fiche-nombre="20" aria-pressed="true">20</button>
+        <button type="button" class="bouton" data-fiche-nombre="30" aria-pressed="false">30</button>
       </div>
 
       <h2><span class="emoji" aria-hidden="true">✏️</span>Sur quoi ?</h2>
@@ -1399,6 +1430,8 @@ dialog.infos .journal .majeur { color: var(--juste); }
                 aria-pressed="false"><span class="emoji" aria-hidden="true">💻</span>Numérique</button>
         <button type="button" class="bouton matiere" data-fiche-matiere="emc"
                 aria-pressed="false"><span class="emoji" aria-hidden="true">🏛️</span>Vivre en république</button>
+        <button type="button" class="bouton matiere" data-fiche-matiere="revisions"
+                aria-pressed="false"><span class="emoji" aria-hidden="true">🧠</span>Révisions</button>
         <button type="button" class="bouton matiere" data-fiche-matiere="tout"
                 aria-pressed="false"><span class="emoji" aria-hidden="true">🎒</span>Tout</button>
       </div>
@@ -1600,6 +1633,52 @@ dialog.infos .journal .majeur { color: var(--juste); }
     </footer>
   </div>
 
+</div>
+
+<!-- Décor des affaires d'écolier. SVG écrit ici même : aucun fichier image à
+     charger, donc rien à télécharger et rien qui manque en mode hors ligne. -->
+<div class="deco-ecole non-imprimable" aria-hidden="true">
+  <svg viewBox="0 0 120 400" xmlns="http://www.w3.org/2000/svg" role="presentation" focusable="false">
+    <!-- le crayon -->
+    <g transform="translate(14 6) rotate(6 24 100)">
+      <rect x="10" y="26" width="28" height="122" rx="3" fill="#f4dc86"/>
+      <rect x="10" y="26" width="9" height="122" fill="#e6c95f"/>
+      <rect x="10" y="12" width="28" height="15" rx="3" fill="#f0a8ae"/>
+      <rect x="10" y="26" width="28" height="5" fill="#b9bcc2"/>
+      <path d="M10 148 h28 l-14 20 z" fill="#e3c39a"/>
+      <path d="M17 160 h14 l-7 8 z" fill="#24303a"/>
+    </g>
+
+    <!-- la règle graduée -->
+    <g transform="translate(66 34) rotate(-8 18 90)">
+      <rect x="0" y="0" width="30" height="180" rx="4" fill="#a6cde9" opacity=".92"/>
+      <rect x="0" y="0" width="30" height="180" rx="4" fill="none" stroke="#7fa8cd" stroke-width="1.5"/>
+      <g stroke="#3d5c50" stroke-width="1.4" opacity=".55">
+        <line x1="0" y1="18" x2="13" y2="18"/><line x1="0" y1="36" x2="8" y2="36"/>
+        <line x1="0" y1="54" x2="13" y2="54"/><line x1="0" y1="72" x2="8" y2="72"/>
+        <line x1="0" y1="90" x2="13" y2="90"/><line x1="0" y1="108" x2="8" y2="108"/>
+        <line x1="0" y1="126" x2="13" y2="126"/><line x1="0" y1="144" x2="8" y2="144"/>
+        <line x1="0" y1="162" x2="13" y2="162"/>
+      </g>
+    </g>
+
+    <!-- la pile de cahiers -->
+    <g transform="translate(10 246)">
+      <rect x="4" y="60" width="96" height="20" rx="3" fill="#cfe0ee"/>
+      <rect x="4" y="60" width="9" height="20" fill="#7fa8cd"/>
+      <rect x="0" y="38" width="100" height="22" rx="3" fill="#f6f2e5"/>
+      <rect x="0" y="38" width="9" height="22" fill="#b33f3f"/>
+      <rect x="8" y="16" width="94" height="22" rx="3" fill="#d6f0d8"/>
+      <rect x="8" y="16" width="9" height="22" fill="#6aa97c"/>
+      <!-- la gomme, posée dessus -->
+      <rect x="58" y="2" width="34" height="14" rx="3" fill="#f3a9b6"/>
+      <rect x="58" y="2" width="11" height="14" rx="3" fill="#7fa8cd"/>
+    </g>
+
+    <!-- une étoile, pour le plaisir -->
+    <path d="M22 330 l4 9 10 1 -7 7 2 10 -9 -5 -9 5 2 -10 -7 -7 10 -1 z"
+          fill="#f4dc86" stroke="#e6c95f" stroke-width="1"/>
+  </svg>
 </div>
 
 <!-- Scripts classiques et espace de noms global : le protocole file:// bloque

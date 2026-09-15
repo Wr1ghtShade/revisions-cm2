@@ -211,9 +211,12 @@
     // Les autres sont en train d'être mémorisés : les ressortir trop tôt
     // n'apprendrait rien, et la révision espacée n'aurait plus de sens.
     var echus = Prog.aReviser();
+    // C'est la rubrique entière qui s'efface, pas seulement le bouton : sinon
+    // le titre « Revenir sur tes erreurs » resterait seul, sans rien dessous.
     var bouton = $('revoir-erreurs');
+    $('bloc-erreurs').hidden = !echus.length;
     bouton.hidden = !echus.length;
-    bouton.textContent = '🔁 Revoir mes erreurs (' + echus.length + ')';
+    bouton.textContent = 'Revoir mes erreurs (' + echus.length + ')';
 
     var attente = Prog.enAttente();
     var jours = Prog.prochaineEcheance();

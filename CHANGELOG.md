@@ -22,9 +22,17 @@ La numérotation est `1.MAJEUR.MINEUR`.
 
 🌟 marque une version majeure, 🔧 une version mineure.
 
-**Version actuelle : `1.12.00` — 15 septembre 2026.**
+**Version actuelle : `1.12.02` — 15 septembre 2026.**
 
 ---
+
+## 🔧 1.12.02 — 15 septembre 2026
+
+« Revoir mes erreurs » quittait mal sa place : rangé sous « On révise quoi ? », il passait pour une matière de plus. Il a maintenant sa propre rubrique, qui s'efface entièrement quand il n'y a rien à revoir. Des affaires d'écolier apparaissent aussi à droite de la feuille sur les grands écrans — dessinées dans la page, sans image à charger.
+
+## 🔧 1.12.01 — 15 septembre 2026
+
+Les fiches à imprimer ignoraient les révisions : la matière manquait dans la liste, et le nombre d'exercices s'arrêtait à 20. « Révisions » est proposée, et un choix « 30 » s'ajoute pour le papier — une planche de tables se fait d'une traite. Corrigé au passage : la référence d'une fiche de révisions ne se relisait pas, la lettre « R » ayant été ajoutée à la table des codes mais pas au motif qui les relit. La fiche s'imprimait, sa référence ne ramenait rien.
 
 ## 🌟 1.12.00 — 15 septembre 2026
 
@@ -152,4 +160,4 @@ Socle de production — tirage déterministe, contrôle des contraintes du progr
 
 ---
 
-*31 versions depuis le 11 septembre 2026.*
+*33 versions depuis le 11 septembre 2026.*

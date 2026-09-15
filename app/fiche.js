@@ -56,7 +56,10 @@
   Fi.depuisReference = function (texte) {
     var s = String(texte === null || texte === undefined ? '' : texte)
       .toUpperCase().replace(/\s/g, '');
-    var m = /^([0-9A-Z]+)(?:-([MFSHNCT])(\d+)?)?$/.exec(s);
+    // Les lettres acceptées ici doivent suivre CODE_MATIERE à la lettre près :
+    // une matière ajoutée à la table mais oubliée dans cette classe produirait
+    // des fiches dont la référence ne se relit plus (constaté avec « R »).
+    var m = /^([0-9A-Z]+)(?:-([MFSHNCRT])(\d+)?)?$/.exec(s);
     if (!m) return null;
     var graine = parseInt(m[1], 36);
     if (isNaN(graine)) return null;

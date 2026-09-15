@@ -192,7 +192,23 @@
             'Les deux sont recalculés par l\'oracle. Le facteur connu n\'est jamais 0, ' +
             'car « 0 × ? = 0 » accepterait n\'importe quelle réponse. Rien de nouveau ' +
             'au programme : ces exercices rejouent l\'objectif de CM2 ' +
-            'mat.nc.calcul_mental.faits.01, servi à part.' }
+            'mat.nc.calcul_mental.faits.01, servi à part.' },
+
+    { numero: '1.12.01', date: '2026-09-15',
+      quoi: 'Les fiches à imprimer ignoraient les révisions : la matière manquait ' +
+            'dans la liste, et le nombre d\'exercices s\'arrêtait à 20. « Révisions » ' +
+            'est proposée, et un choix « 30 » s\'ajoute pour le papier — une planche ' +
+            'de tables se fait d\'une traite. Corrigé au passage : la référence d\'une ' +
+            'fiche de révisions ne se relisait pas, la lettre « R » ayant été ajoutée ' +
+            'à la table des codes mais pas au motif qui les relit. La fiche ' +
+            's\'imprimait, sa référence ne ramenait rien.' },
+
+    { numero: '1.12.02', date: '2026-09-15',
+      quoi: '« Revoir mes erreurs » quittait mal sa place : rangé sous « On révise ' +
+            'quoi ? », il passait pour une matière de plus. Il a maintenant sa propre ' +
+            'rubrique, qui s\'efface entièrement quand il n\'y a rien à revoir. Des ' +
+            'affaires d\'écolier apparaissent aussi à droite de la feuille sur les ' +
+            'grands écrans — dessinées dans la page, sans image à charger.' }
   ];
 
   var actuelle = HISTORIQUE[HISTORIQUE.length - 1];
