@@ -170,6 +170,7 @@ var ORDRE = [
   'app/generateurs/francais-grammaire.js', 'app/generateurs/francais-vocabulaire.js',
   'app/banques/emc.js', 'app/banques/sciences.js',
   'app/banques/histoire-geo.js', 'app/banques/numerique.js',
+  'app/generateurs/revisions-tables.js',
   'app/profil.js', 'app/progression.js', 'app/bilan.js', 'app/classe.js',
   'app/fiche.js', 'app/ui.js'
 ];

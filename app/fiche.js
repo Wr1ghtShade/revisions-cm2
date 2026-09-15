@@ -38,9 +38,11 @@
      donc tout ce qu'il faut pour refaire la fiche — sans elle, il faudrait se
      souvenir aussi de la matière choisie. */
   var CODE_MATIERE = { mathematiques: 'M', francais: 'F', sciences: 'S',
-                       histoire_geo: 'H', numerique: 'N', emc: 'C', tout: 'T' };
+                       histoire_geo: 'H', numerique: 'N', emc: 'C',
+                       revisions: 'R', tout: 'T' };
   var MATIERE_DEPUIS_CODE = { M: 'mathematiques', F: 'francais', S: 'sciences',
-                              H: 'histoire_geo', N: 'numerique', C: 'emc', T: 'tout' };
+                              H: 'histoire_geo', N: 'numerique', C: 'emc',
+                              R: 'revisions', T: 'tout' };
 
   Fi.reference = function (graine, matiere, nombre) {
     var base = (graine >>> 0).toString(36).toUpperCase();
@@ -149,6 +151,7 @@
     histoire_geo: 'Histoire et géographie',
     numerique: 'Le numérique',
     emc: 'Vivre en république',
+    revisions: 'Révisions',
     tout: 'Toutes les matières'
   };
 

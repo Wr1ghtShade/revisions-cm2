@@ -22,9 +22,13 @@ La numérotation est `1.MAJEUR.MINEUR`.
 
 🌟 marque une version majeure, 🔧 une version mineure.
 
-**Version actuelle : `1.11.04` — 13 septembre 2026.**
+**Version actuelle : `1.12.00` — 15 septembre 2026.**
 
 ---
+
+## 🌟 1.12.00 — 15 septembre 2026
+
+Nouvelle matière « Révisions », pour travailler dès la rentrée ce qui n'attend pas que la notion soit vue en classe. Elle s'ouvre sur les tables de multiplication de 0 à 10, sous deux formes : le produit (« Calcule 7 × 8 ») et le facteur manquant (« Complète : 7 × ? = 56 »). Les deux sont recalculés par l'oracle. Le facteur connu n'est jamais 0, car « 0 × ? = 0 » accepterait n'importe quelle réponse. Rien de nouveau au programme : ces exercices rejouent l'objectif de CM2 mat.nc.calcul_mental.faits.01, servi à part.
 
 ## 🔧 1.11.04 — 13 septembre 2026
 
@@ -148,4 +152,4 @@ Socle de production — tirage déterministe, contrôle des contraintes du progr
 
 ---
 
-*30 versions depuis le 11 septembre 2026.*
+*31 versions depuis le 11 septembre 2026.*

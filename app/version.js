@@ -182,7 +182,17 @@
       quoi: 'Les sujets d\'histoire à cocher s\'affichaient dans la police du texte ' +
             'courant, alors que les boutons de matières juste au-dessus utilisent ' +
             'l\'écriture manuscrite. Même police pour les deux ; les sujets gardent ' +
-            'leur taille plus discrète, ce sont des réglages.' }
+            'leur taille plus discrète, ce sont des réglages.' },
+
+    { numero: '1.12.00', date: '2026-09-15', majeur: true,
+      quoi: 'Nouvelle matière « Révisions », pour travailler dès la rentrée ce qui ' +
+            'n\'attend pas que la notion soit vue en classe. Elle s\'ouvre sur les ' +
+            'tables de multiplication de 0 à 10, sous deux formes : le produit ' +
+            '(« Calcule 7 × 8 ») et le facteur manquant (« Complète : 7 × ? = 56 »). ' +
+            'Les deux sont recalculés par l\'oracle. Le facteur connu n\'est jamais 0, ' +
+            'car « 0 × ? = 0 » accepterait n\'importe quelle réponse. Rien de nouveau ' +
+            'au programme : ces exercices rejouent l\'objectif de CM2 ' +
+            'mat.nc.calcul_mental.faits.01, servi à part.' }
   ];
 
   var actuelle = HISTORIQUE[HISTORIQUE.length - 1];

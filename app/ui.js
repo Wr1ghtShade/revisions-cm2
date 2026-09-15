@@ -26,6 +26,7 @@
     histoire_geo: 'Histoire et géographie',
     numerique: 'Le numérique',
     emc: 'Enseignement moral et civique',
+    revisions: 'Révisions',
     tout: 'Toutes les matières',
     erreurs: 'Tes erreurs à revoir'
   };
@@ -1072,7 +1073,8 @@
       reg.parMatiere('sciences').length + ' en sciences et technologie, ' +
       reg.parMatiere('histoire_geo').length + ' en histoire-géographie, ' +
       reg.parMatiere('numerique').length + ' en numérique, ' +
-      reg.parMatiere('emc').length + ' en enseignement moral et civique. ' +
+      reg.parMatiere('emc').length + ' en enseignement moral et civique, ' +
+      reg.parMatiere('revisions').length + ' en révisions. ' +
       'Chacune peut produire un nombre illimité de questions différentes.';
 
     var liste = $('infos-versions');
@@ -1242,6 +1244,7 @@
     $('compte-histoire-geo').textContent = reg.parMatiere('histoire_geo').length;
     $('compte-numerique').textContent = reg.parMatiere('numerique').length;
     $('compte-emc').textContent = reg.parMatiere('emc').length;
+    $('compte-revisions').textContent = reg.parMatiere('revisions').length;
     $('version').textContent = 'v' + CM2.version.numero;
 
     preparerInfos();

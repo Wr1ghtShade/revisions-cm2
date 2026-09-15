@@ -44,6 +44,7 @@ contexte.window = contexte;
   'app/generateurs/francais-grammaire.js', 'app/generateurs/francais-vocabulaire.js',
   'app/banques/emc.js', 'app/banques/sciences.js',
   'app/banques/histoire-geo.js', 'app/banques/numerique.js',
+  'app/generateurs/revisions-tables.js',
   'app/profil.js', 'app/progression.js', 'app/bilan.js', 'app/classe.js'
 ].forEach(function (f) {
   vm.runInContext(fs.readFileSync(path.join(racine, f), 'utf8'), contexte, { filename: f });

@@ -589,7 +589,16 @@
    'cm.distributivite', 'cm.diviser_par_4_ou_8', 'cm.multiplier_par_5_ou_50',
    'ope.parentheses', 'ope.multiplication_decimale', 'ope.division_dividende_entier',
    'ope.division_dividende_decimal', 'fra.additionner', 'fra.soustraire',
-   'fra.produit_entier'].forEach(function (id) { regle(id, calcul); });
+   'fra.produit_entier',
+   'rev.tables_multiplication'].forEach(function (id) { regle(id, calcul); });
+
+  /* « Complète : 7 × ? = 56. » — le facteur cherché se recalcule par division.
+     Le générateur garantit un facteur connu non nul, donc le quotient existe
+     et il est unique. */
+  regle('rev.tables_facteur_manquant', function (c) {
+    var m = motif(c.e, /^Complète\s*:\s*(\d+)\s*×\s*\?\s*=\s*(\d+)\s*\.$/);
+    return { valeur: divise(n(m[2]), n(m[1])) };
+  });
 
   regle('cm.faits_usuels', function (c) {
     if (/^Calcule/.test(c.e)) return calcul(c);

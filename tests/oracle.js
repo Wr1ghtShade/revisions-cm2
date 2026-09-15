@@ -31,7 +31,8 @@ var FICHIERS = [
   'app/generateurs/francais-conjugaison.js', 'app/generateurs/francais-accords.js',
   'app/generateurs/francais-grammaire.js', 'app/generateurs/francais-vocabulaire.js',
   'app/banques/emc.js', 'app/banques/sciences.js',
-  'app/banques/histoire-geo.js', 'app/banques/numerique.js'
+  'app/banques/histoire-geo.js', 'app/banques/numerique.js',
+  'app/generateurs/revisions-tables.js'
 ];
 
 var contexte = vm.createContext({ console: console, Math: Math, Date: Date });

@@ -1083,6 +1083,7 @@ dialog.infos .journal .majeur { color: var(--juste); }
       <div class="jeton"><b id="compte-histoire-geo">0</b><span>en histoire-géo</span></div>
       <div class="jeton"><b id="compte-numerique">0</b><span>en numérique</span></div>
       <div class="jeton"><b id="compte-emc">0</b><span>en EMC</span></div>
+      <div class="jeton"><b id="compte-revisions">0</b><span>en révisions</span></div>
     </div>
     <p class="hors-ligne"><span aria-hidden="true">✈️</span> Tout fonctionne sans connexion</p>
   </section>
@@ -1139,6 +1140,8 @@ dialog.infos .journal .majeur { color: var(--juste); }
         <span class="emoji" aria-hidden="true">💻</span>Numérique</button>
       <button type="button" class="bouton matiere" data-matiere="emc">
         <span class="emoji" aria-hidden="true">🏛️</span>Vivre en république</button>
+      <button type="button" class="bouton matiere" data-matiere="revisions">
+        <span class="emoji" aria-hidden="true">🔁</span>Révisions</button>
       <button type="button" class="bouton matiere" data-matiere="tout">
         <span class="emoji" aria-hidden="true">🎒</span>Tout</button>
     </div>
@@ -1632,6 +1635,7 @@ dialog.infos .journal .majeur { color: var(--juste); }
 <script src="app/banques/sciences.js"></script>
 <script src="app/banques/histoire-geo.js"></script>
 <script src="app/banques/numerique.js"></script>
+<script src="app/generateurs/revisions-tables.js"></script>
 <script src="app/profil.js"></script>
 <script src="app/progression.js"></script>
 <script src="app/bilan.js"></script>
