@@ -22,9 +22,13 @@ La numérotation est `1.MAJEUR.MINEUR`.
 
 🌟 marque une version majeure, 🔧 une version mineure.
 
-**Version actuelle : `1.12.05` — 15 septembre 2026.**
+**Version actuelle : `1.12.06` — 15 septembre 2026.**
 
 ---
+
+## 🔧 1.12.06 — 15 septembre 2026
+
+La maison encadrait le titre du tableau au lieu de tenir compagnie au « i ». Elle se range à côté de lui, dans le même coin : les deux boutons se lisent désormais comme une paire.
 
 ## 🔧 1.12.05 — 15 septembre 2026
 
@@ -172,4 +176,4 @@ Socle de production — tirage déterministe, contrôle des contraintes du progr
 
 ---
 
-*36 versions depuis le 11 septembre 2026.*
+*37 versions depuis le 11 septembre 2026.*

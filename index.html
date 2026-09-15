@@ -665,7 +665,11 @@ button { font: inherit; cursor: pointer; }
    l'on atteint la vue enseignant, la restauration et la création d'un cahier.
    Le tableau restant affiché sur tous les écrans, ce retour est toujours là. */
 .bouton-maison {
-  right: auto; left: .6rem;
+  /* Juste à gauche du « i », dans le même coin : sa position (.6rem), sa
+     largeur (1.9rem), puis un écart. Les deux boutons se lisent comme une
+     paire au lieu d'encadrer le titre. */
+  right: calc(.6rem + 1.9rem + .45rem);
+  left: auto;
   display: flex; align-items: center; justify-content: center;
 }
 .bouton-maison svg { width: 1.05rem; height: 1.05rem; }

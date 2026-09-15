@@ -235,7 +235,12 @@
             'cahier. Une maison répond maintenant au « i » sur le tableau, qui reste ' +
             'affiché partout. Elle s\'efface sur l\'accueil, où elle n\'aurait rien à ' +
             'faire, et pendant une question, pour ne pas offrir une sortie de série ' +
-            'par mégarde — « Arrêter » y ramène au bureau, où elle reparaît.' }
+            'par mégarde — « Arrêter » y ramène au bureau, où elle reparaît.' },
+
+    { numero: '1.12.06', date: '2026-09-15',
+      quoi: 'La maison encadrait le titre du tableau au lieu de tenir compagnie au ' +
+            '« i ». Elle se range à côté de lui, dans le même coin : les deux ' +
+            'boutons se lisent désormais comme une paire.' }
   ];
 
   var actuelle = HISTORIQUE[HISTORIQUE.length - 1];
