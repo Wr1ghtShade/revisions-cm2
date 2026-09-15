@@ -226,7 +226,16 @@
             'confondait avec la ligne de base du texte, ce qui se rend mal, surtout ' +
             'sur deux colonnes. Il a maintenant une hauteur explicite et passe sous la ' +
             'ligne d\'écriture, comme sur un cahier. L\'application gagne par ailleurs ' +
-            'une icône d\'onglet : le cahier à reliure rouge, sur le vert du tableau.' }
+            'une icône d\'onglet : le cahier à reliure rouge, sur le vert du tableau.' },
+
+    { numero: '1.12.05', date: '2026-09-15',
+      quoi: 'Une fois dans le cahier d\'un enfant, plus rien ne ramenait à l\'accueil : ' +
+            'il fallait recharger la page. Les cahiers restaient accessibles par la ' +
+            'bascule, mais pas la vue enseignant, la restauration ni la création d\'un ' +
+            'cahier. Une maison répond maintenant au « i » sur le tableau, qui reste ' +
+            'affiché partout. Elle s\'efface sur l\'accueil, où elle n\'aurait rien à ' +
+            'faire, et pendant une question, pour ne pas offrir une sortie de série ' +
+            'par mégarde — « Arrêter » y ramène au bureau, où elle reparaît.' }
   ];
 
   var actuelle = HISTORIQUE[HISTORIQUE.length - 1];

@@ -22,9 +22,13 @@ La numérotation est `1.MAJEUR.MINEUR`.
 
 🌟 marque une version majeure, 🔧 une version mineure.
 
-**Version actuelle : `1.12.04` — 15 septembre 2026.**
+**Version actuelle : `1.12.05` — 15 septembre 2026.**
 
 ---
+
+## 🔧 1.12.05 — 15 septembre 2026
+
+Une fois dans le cahier d'un enfant, plus rien ne ramenait à l'accueil : il fallait recharger la page. Les cahiers restaient accessibles par la bascule, mais pas la vue enseignant, la restauration ni la création d'un cahier. Une maison répond maintenant au « i » sur le tableau, qui reste affiché partout. Elle s'efface sur l'accueil, où elle n'aurait rien à faire, et pendant une question, pour ne pas offrir une sortie de série par mégarde — « Arrêter » y ramène au bureau, où elle reparaît.
 
 ## 🔧 1.12.04 — 15 septembre 2026
 
@@ -168,4 +172,4 @@ Socle de production — tirage déterministe, contrôle des contraintes du progr
 
 ---
 
-*35 versions depuis le 11 septembre 2026.*
+*36 versions depuis le 11 septembre 2026.*

@@ -661,6 +661,15 @@ button { font: inherit; cursor: pointer; }
 }
 .bouton-info:hover { color: var(--craie); border-color: var(--craie); transform: scale(1.08); }
 
+/* Le pendant du « i », de l'autre côté du tableau : revenir à l'accueil, d'où
+   l'on atteint la vue enseignant, la restauration et la création d'un cahier.
+   Le tableau restant affiché sur tous les écrans, ce retour est toujours là. */
+.bouton-maison {
+  right: auto; left: .6rem;
+  display: flex; align-items: center; justify-content: center;
+}
+.bouton-maison svg { width: 1.05rem; height: 1.05rem; }
+
 dialog.infos {
   max-width: 38rem; width: calc(100% - 2rem);
   border: none; border-radius: .6rem;
@@ -1049,6 +1058,14 @@ li.fiche-court .fiche-reglure {
 
   <!-- ================================================== le tableau du maître -->
   <div class="tableau">
+    <button type="button" class="bouton-info bouton-maison" id="retour-cahiers"
+            aria-label="Revenir à l'accueil : les cahiers, la vue enseignant, la restauration">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+        <path d="M3 11 12 3l9 8"/>
+        <path d="M5.5 10.5V20h13v-9.5"/>
+      </svg>
+    </button>
     <button type="button" class="bouton-info" id="ouvrir-infos"
             aria-label="À propos de ce cahier de révisions">i</button>
     <h1 id="tableau-titre">Le cahier de révisions</h1>

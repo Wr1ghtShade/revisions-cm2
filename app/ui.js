@@ -61,6 +61,12 @@
     $('bascule').hidden = !avecBascule;
     if (avecBascule) dessinerBascule();
 
+    // Le retour à l'accueil disparaît là où il n'a pas de sens — on y est déjà
+    // — et pendant une question : au même titre que les cahiers de la bascule,
+    // ce serait une occasion de quitter une série par mégarde. Depuis une
+    // séance, « Arrêter » ramène au bureau, où le bouton réapparaît.
+    $('retour-cahiers').hidden = (ecran === 'cahiers' || ecran === 'seance');
+
     window.scrollTo(0, 0);
   }
 
@@ -1251,6 +1257,10 @@
     $('version').textContent = 'v' + CM2.version.numero;
 
     preparerInfos();
+    // dessinerCahiers() redessine la liste avant d'afficher l'écran : les
+    // statistiques d'un cahier travaillé entre-temps sont donc à jour.
+    $('retour-cahiers').addEventListener('click', dessinerCahiers);
+
     $('ouvrir-infos').addEventListener('click', ouvrirInfos);
     $('fermer-infos').addEventListener('click', fermerInfos);
     $('fermer-infos-bas').addEventListener('click', fermerInfos);
