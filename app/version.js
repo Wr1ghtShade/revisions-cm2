@@ -208,7 +208,17 @@
             'quoi ? », il passait pour une matière de plus. Il a maintenant sa propre ' +
             'rubrique, qui s\'efface entièrement quand il n\'y a rien à revoir. Des ' +
             'affaires d\'écolier apparaissent aussi à droite de la feuille sur les ' +
-            'grands écrans — dessinées dans la page, sans image à charger.' }
+            'grands écrans — dessinées dans la page, sans image à charger.' },
+
+    { numero: '1.12.03', date: '2026-09-15',
+      quoi: 'Une planche de tables partait sur trois pages : chaque « Calcule 5 × 5 » ' +
+            'occupait un titre de notion, une ligne d\'énoncé et une réglure pleine ' +
+            'largeur. Les exercices courts tiennent désormais sur une seule ligne, ' +
+            'énoncé et trait de réponse côte à côte ; et quand toute la fiche est ' +
+            'faite de questions courtes, elle passe sur deux colonnes sans le libellé ' +
+            'de notion, identique partout. Les fiches comportant des figures, des QCM ' +
+            'ou des énoncés longs gardent la pleine largeur : une question à l\'étroit ' +
+            'se lit mal. Le bouton « Une autre fiche » prend le rose de la gomme.' }
   ];
 
   var actuelle = HISTORIQUE[HISTORIQUE.length - 1];

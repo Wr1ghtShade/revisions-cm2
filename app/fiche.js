@@ -72,6 +72,20 @@
 
   /** Range les générateurs par sous-domaine du programme, pour pouvoir ensuite
       les prendre à tour de rôle. */
+  /* Un exercice « court » tient sur une seule ligne, énoncé et trait pour la
+     réponse compris : pas de figure à regarder, pas de propositions à cocher,
+     et un énoncé bref tenant sur une ligne. Le seuil est volontairement bas —
+     en cas de doute on garde la pleine largeur, une question à l'étroit se lit
+     mal, et c'est l'enfant qui en pâtirait. */
+  var LONGUEUR_COURTE = 46;
+
+  function estCourt(ex) {
+    return !ex.figure &&
+           ex.type !== 'qcm' &&
+           String(ex.enonce).indexOf('\n') === -1 &&
+           String(ex.enonce).length <= LONGUEUR_COURTE;
+  }
+
   function parSousDomaine(specs) {
     var paquets = {};
     var ordre = [];
@@ -192,9 +206,16 @@
       CM2.format.date(aujourdhui)));
     conteneur.appendChild(tete);
 
-    var ol = el('ol', 'fiche-exercices');
+    var ol = el('ol', 'fiche-exercices' +
+      // Planche homogène — que des questions courtes, comme une série de
+      // tables : elle passe sur deux colonnes. Vingt multiplications servies
+      // en pleine largeur, avec un titre et une réglure chacune, mangeaient
+      // trois pages pour une poignée de chiffres.
+      (fiche.exercices.length && fiche.exercices.every(estCourt) ? ' fiche-compacte' : ''));
+
     fiche.exercices.forEach(function (ex) {
       var li = document.createElement('li');
+      if (estCourt(ex)) li.className = 'fiche-court';
       li.appendChild(el('p', 'fiche-notion', ex.titre));
       li.appendChild(el('p', 'fiche-enonce', ex.enonce));
 

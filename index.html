@@ -231,6 +231,9 @@ button { font: inherit; cursor: pointer; }
 .bouton:disabled { cursor: default; opacity: .6; box-shadow: .18rem .18rem 0 var(--encre); }
 .bouton.choisi { background: var(--craie-jaune); }
 .bouton.vedette { background: var(--juste); color: #fff; border-color: #1e5c39; box-shadow: .18rem .18rem 0 #1e5c39; }
+/* Le rose de la gomme (cf. .objet-gomme) : tirer une autre fiche, c'est effacer
+   celle qu'on avait sous les yeux. */
+.bouton.gomme { background: #f3a9b6; color: #4a2f37; }
 
 .groupe { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; }
 .matiere { font-size: 1.05rem; padding: .85rem 1.3rem; font-family: var(--craie-police); }
@@ -844,6 +847,25 @@ dialog.infos .journal .majeur { color: var(--juste); }
   margin: .3rem 0 0; height: 1.3rem;
   border-bottom: 1px dotted var(--encre-pale);
 }
+
+/* ---- Économie de papier ----
+   Un exercice court (cf. estCourt dans app/fiche.js) tient sur une ligne :
+   l'énoncé et le trait de réponse côte à côte, au lieu de trois blocs
+   empilés suivis d'une réglure pleine largeur. */
+.fiche-exercices > li.fiche-court { margin-bottom: .45rem; break-inside: avoid; }
+li.fiche-court .fiche-enonce { display: inline; margin: 0; }
+li.fiche-court .fiche-reglure {
+  display: inline-block;
+  width: 4.5rem; height: 0;
+  margin: 0 0 0 .7rem;
+  vertical-align: baseline;
+}
+
+/* Planche entièrement composée de questions courtes : deux colonnes. Le
+   libellé de notion, identique d'un bout à l'autre, n'apprend plus rien et
+   coûte une ligne par exercice — on le retire ici seulement. */
+.fiche-compacte { column-count: 2; column-gap: 2.2rem; }
+.fiche-compacte > li .fiche-notion { display: none; }
 .fiche-corrige { margin-top: 2rem; }
 .fiche-corrige h3 { font-family: var(--craie-police); font-size: 1.25rem; margin: 0 0 .2rem; }
 .fiche-reponses > li { margin-bottom: .45rem; font-size: .92rem; }
@@ -1439,7 +1461,8 @@ dialog.infos .journal .majeur { color: var(--juste); }
       <p style="margin-top:1.2rem" class="groupe">
         <button type="button" class="bouton vedette" id="fiche-imprimer">
           <span aria-hidden="true">🖨️</span> Imprimer cette fiche</button>
-        <button type="button" class="bouton" id="fiche-autre">Une autre fiche</button>
+        <button type="button" class="bouton gomme" id="fiche-autre">
+          <span aria-hidden="true">🎲</span> Une autre fiche</button>
       </p>
 
       <h2><span class="emoji" aria-hidden="true">🔎</span>Retrouver une fiche déjà imprimée</h2>
