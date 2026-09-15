@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light">
 <meta name="theme-color" content="#2f4a40">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
 <title>Le cahier de révisions — CM2</title>
 <style>
 /* =========================================================================
@@ -854,11 +855,16 @@ dialog.infos .journal .majeur { color: var(--juste); }
    empilés suivis d'une réglure pleine largeur. */
 .fiche-exercices > li.fiche-court { margin-bottom: .45rem; break-inside: avoid; }
 li.fiche-court .fiche-enonce { display: inline; margin: 0; }
+/* Une vraie boîte, et non un élément de hauteur nulle : un bord posé
+   exactement sur la ligne de base du texte se rend de façon instable — il
+   apparaissait sur certains exercices et pas sur d'autres. Ici la hauteur est
+   explicite et le trait descend sous la ligne d'écriture, comme sur un cahier. */
 li.fiche-court .fiche-reglure {
   display: inline-block;
-  width: 4.5rem; height: 0;
+  width: 5rem;
+  height: .9rem;
   margin: 0 0 0 .7rem;
-  vertical-align: baseline;
+  vertical-align: -.3rem;
 }
 
 /* Planche entièrement composée de questions courtes : deux colonnes. Le

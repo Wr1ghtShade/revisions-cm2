@@ -218,7 +218,15 @@
             'faite de questions courtes, elle passe sur deux colonnes sans le libellé ' +
             'de notion, identique partout. Les fiches comportant des figures, des QCM ' +
             'ou des énoncés longs gardent la pleine largeur : une question à l\'étroit ' +
-            'se lit mal. Le bouton « Une autre fiche » prend le rose de la gomme.' }
+            'se lit mal. Le bouton « Une autre fiche » prend le rose de la gomme.' },
+
+    { numero: '1.12.04', date: '2026-09-15',
+      quoi: 'Sur les fiches compactes, le trait où écrire la réponse n\'apparaissait ' +
+            'que sur certains exercices : il avait une hauteur nulle et son bord se ' +
+            'confondait avec la ligne de base du texte, ce qui se rend mal, surtout ' +
+            'sur deux colonnes. Il a maintenant une hauteur explicite et passe sous la ' +
+            'ligne d\'écriture, comme sur un cahier. L\'application gagne par ailleurs ' +
+            'une icône d\'onglet : le cahier à reliure rouge, sur le vert du tableau.' }
   ];
 
   var actuelle = HISTORIQUE[HISTORIQUE.length - 1];

@@ -22,9 +22,13 @@ La numérotation est `1.MAJEUR.MINEUR`.
 
 🌟 marque une version majeure, 🔧 une version mineure.
 
-**Version actuelle : `1.12.03` — 15 septembre 2026.**
+**Version actuelle : `1.12.04` — 15 septembre 2026.**
 
 ---
+
+## 🔧 1.12.04 — 15 septembre 2026
+
+Sur les fiches compactes, le trait où écrire la réponse n'apparaissait que sur certains exercices : il avait une hauteur nulle et son bord se confondait avec la ligne de base du texte, ce qui se rend mal, surtout sur deux colonnes. Il a maintenant une hauteur explicite et passe sous la ligne d'écriture, comme sur un cahier. L'application gagne par ailleurs une icône d'onglet : le cahier à reliure rouge, sur le vert du tableau.
 
 ## 🔧 1.12.03 — 15 septembre 2026
 
@@ -164,4 +168,4 @@ Socle de production — tirage déterministe, contrôle des contraintes du progr
 
 ---
 
-*34 versions depuis le 11 septembre 2026.*
+*35 versions depuis le 11 septembre 2026.*
