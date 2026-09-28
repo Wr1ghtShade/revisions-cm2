@@ -240,7 +240,17 @@
     { numero: '1.12.06', date: '2026-09-15',
       quoi: 'La maison encadrait le titre du tableau au lieu de tenir compagnie au ' +
             '« i ». Elle se range à côté de lui, dans le même coin : les deux ' +
-            'boutons se lisent désormais comme une paire.' }
+            'boutons se lisent désormais comme une paire.' },
+
+    { numero: '1.12.07', date: '2026-09-28',
+      quoi: 'Un 10 sur 10 s\'entendait dire « Sans faute ou presque » : le sans-faute ' +
+            'partageait sa mention avec les séries à une erreur près. Il a désormais la ' +
+            'sienne. En coulisse, les matières ne sont plus décrites qu\'à un seul ' +
+            'endroit (app/matieres.js), dont découlent libellés, codes des fiches et ' +
+            'compteurs ; et les tests lisent la liste des scripts dans index.html au ' +
+            'lieu d\'en tenir six copies. Deux défauts silencieux venaient de ces ' +
+            'doublons ; ce qui reste écrit en dur est désormais confronté à la table, et ' +
+            'une dérive fait échouer les contrôles.' }
   ];
 
   var actuelle = HISTORIQUE[HISTORIQUE.length - 1];

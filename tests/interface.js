@@ -102,13 +102,24 @@ function groupe(attribut, valeurs) {
   });
 }
 
+/* Les boutons de groupe sont lus dans index.html lui-même. Recopiés à la main,
+   ils avaient dérivé : ce DOM ne connaissait ni la matière « revisions » ni les
+   fiches de 30, et le parcours ne les exerçait donc jamais — sans que rien ne
+   le signale. */
+var PAGE = fs.readFileSync(path.join(racine, 'index.html'), 'utf8');
+
+function valeursDans(attribut) {
+  var out = [], re = new RegExp(attribut + '="([^"]+)"', 'g'), m;
+  while ((m = re.exec(PAGE))) out.push(m[1]);
+  if (!out.length) throw new Error('index.html ne contient aucun ' + attribut);
+  return out;
+}
+
 var SELECTEURS = {
-  '[data-nombre]': groupe('data-nombre', ['5', '10', '15', '20']),
-  '[data-matiere]': groupe('data-matiere',
-                           ['mathematiques', 'francais', 'sciences', 'histoire_geo', 'numerique', 'emc', 'tout']),
-  '[data-fiche-nombre]': groupe('data-fiche-nombre', ['5', '10', '15', '20']),
-  '[data-fiche-matiere]': groupe('data-fiche-matiere',
-                                 ['mathematiques', 'francais', 'sciences', 'histoire_geo', 'numerique', 'emc', 'tout']),
+  '[data-nombre]': groupe('data-nombre', valeursDans('data-nombre')),
+  '[data-matiere]': groupe('data-matiere', valeursDans('data-matiere')),
+  '[data-fiche-nombre]': groupe('data-fiche-nombre', valeursDans('data-fiche-nombre')),
+  '[data-fiche-matiere]': groupe('data-fiche-matiere', valeursDans('data-fiche-matiere')),
   '.message-cahier': [new Element('p'), new Element('p')]
 };
 
@@ -156,24 +167,7 @@ contexte.window.print = function () { impressions++; };
 contexte.window.confirm = function () { return true; };
 
 /* Les mêmes fichiers, dans le même ordre que index.html. */
-var ORDRE = [
-  'app/version.js', 'app/rng.js', 'app/format.js', 'app/lettres.js', 'app/contraintes.js',
-  'app/qcm.js', 'app/figures.js', 'app/registre.js', 'app/domaines.js',
-  'app/lexique/lexique.js', 'app/conjugaison.js', 'app/lexique/phrases.js',
-  'app/generateurs/maths-entiers.js', 'app/generateurs/maths-decimaux.js',
-  'app/generateurs/maths-fractions.js', 'app/generateurs/maths-calcul-mental.js',
-  'app/generateurs/maths-operations.js', 'app/generateurs/maths-mesures.js',
-  'app/generateurs/maths-algebre.js', 'app/generateurs/maths-problemes.js',
-  'app/generateurs/maths-probabilites.js', 'app/generateurs/maths-figures.js',
-  'app/generateurs/maths-geometrie.js',
-  'app/generateurs/francais-conjugaison.js', 'app/generateurs/francais-accords.js',
-  'app/generateurs/francais-grammaire.js', 'app/generateurs/francais-vocabulaire.js',
-  'app/banques/emc.js', 'app/banques/sciences.js',
-  'app/banques/histoire-geo.js', 'app/banques/numerique.js',
-  'app/generateurs/revisions-tables.js',
-  'app/profil.js', 'app/progression.js', 'app/bilan.js', 'app/classe.js',
-  'app/fiche.js', 'app/ui.js'
-];
+var ORDRE = require('./charger').tranche('application');
 ORDRE.forEach(function (f) {
   vm.runInContext(fs.readFileSync(path.join(racine, f), 'utf8'), contexte, { filename: f });
 });

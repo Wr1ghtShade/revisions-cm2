@@ -18,22 +18,7 @@ var GRAINES = parseInt(process.argv[2], 10) || 300;
 var FILTRE = process.argv[3] || '';
 var racine = path.join(__dirname, '..');
 
-var FICHIERS = [
-  'app/version.js', 'app/rng.js', 'app/format.js', 'app/lettres.js', 'app/contraintes.js',
-  'app/qcm.js', 'app/figures.js', 'app/registre.js',
-  'app/lexique/lexique.js', 'app/conjugaison.js', 'app/lexique/phrases.js',
-  'app/generateurs/maths-entiers.js', 'app/generateurs/maths-decimaux.js',
-  'app/generateurs/maths-fractions.js', 'app/generateurs/maths-calcul-mental.js',
-  'app/generateurs/maths-operations.js', 'app/generateurs/maths-mesures.js',
-  'app/generateurs/maths-algebre.js', 'app/generateurs/maths-problemes.js',
-  'app/generateurs/maths-probabilites.js', 'app/generateurs/maths-figures.js',
-  'app/generateurs/maths-geometrie.js',
-  'app/generateurs/francais-conjugaison.js', 'app/generateurs/francais-accords.js',
-  'app/generateurs/francais-grammaire.js', 'app/generateurs/francais-vocabulaire.js',
-  'app/banques/emc.js', 'app/banques/sciences.js',
-  'app/banques/histoire-geo.js', 'app/banques/numerique.js',
-  'app/generateurs/revisions-tables.js'
-];
+var FICHIERS = require('./charger').tranche('exercices');
 
 var contexte = vm.createContext({ console: console, Math: Math, Date: Date });
 contexte.window = contexte;

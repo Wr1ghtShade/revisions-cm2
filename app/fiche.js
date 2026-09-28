@@ -36,19 +36,21 @@
   /* La référence imprimée sur la feuille, par exemple « 7K3QP2-M20 » : la
      graine en base 36, puis la matière et le nombre d'exercices. Elle contient
      donc tout ce qu'il faut pour refaire la fiche — sans elle, il faudrait se
-     souvenir aussi de la matière choisie. */
-  var CODE_MATIERE = { mathematiques: 'M', francais: 'F', sciences: 'S',
-                       histoire_geo: 'H', numerique: 'N', emc: 'C',
-                       revisions: 'R', tout: 'T' };
-  var MATIERE_DEPUIS_CODE = { M: 'mathematiques', F: 'francais', S: 'sciences',
-                              H: 'histoire_geo', N: 'numerique', C: 'emc',
-                              R: 'revisions', T: 'tout' };
+     souvenir aussi de la matière choisie.
+
+     Les codes lettre viennent de app/matieres.js : l'écriture et la relecture
+     puisent à la même table, elles ne peuvent plus diverger. */
+  var M = CM2.matieres;
 
   Fi.reference = function (graine, matiere, nombre) {
     var base = (graine >>> 0).toString(36).toUpperCase();
     if (!matiere && !nombre) return base;
-    return base + '-' + (CODE_MATIERE[matiere] || 'T') + (nombre || '');
+    return base + '-' + (M.get(matiere) || M.tout).code + (nombre || '');
   };
+
+  // Construit une fois, depuis la table des matières : toute lettre qu'on sait
+  // écrire, on sait la relire.
+  var MOTIF_REFERENCE = new RegExp('^([0-9A-Z]+)(?:-([' + M.codes() + '])(\\d+)?)?$');
 
   /** Relit une référence. Renvoie { graine, matiere, nombre }, ou null si le
       texte ne ressemble à rien. La casse et les espaces sont pardonnés : la
@@ -56,16 +58,13 @@
   Fi.depuisReference = function (texte) {
     var s = String(texte === null || texte === undefined ? '' : texte)
       .toUpperCase().replace(/\s/g, '');
-    // Les lettres acceptées ici doivent suivre CODE_MATIERE à la lettre près :
-    // une matière ajoutée à la table mais oubliée dans cette classe produirait
-    // des fiches dont la référence ne se relit plus (constaté avec « R »).
-    var m = /^([0-9A-Z]+)(?:-([MFSHNCRT])(\d+)?)?$/.exec(s);
+    var m = MOTIF_REFERENCE.exec(s);
     if (!m) return null;
     var graine = parseInt(m[1], 36);
     if (isNaN(graine)) return null;
     return {
       graine: graine >>> 0,
-      matiere: m[2] ? MATIERE_DEPUIS_CODE[m[2]] : null,
+      matiere: m[2] ? M.depuisCode(m[2]).id : null,
       nombre: m[3] ? parseInt(m[3], 10) : null
     };
   };
@@ -100,8 +99,7 @@
 
   /** Compose une fiche.
 
-      matiere : 'mathematiques' | 'francais' | 'sciences' | 'histoire_geo'
-                | 'numerique' | 'emc' | 'tout'
+      matiere : un identifiant de app/matieres.js, ou 'tout'
       nombre  : nombre d'exercices
       graine  : graine maîtresse, ou rien pour en tirer une
 
@@ -161,17 +159,6 @@
 
   /* --- Mise en page (DOM) ---------------------------------------------- */
 
-  var NOM_MATIERE = {
-    mathematiques: 'Mathématiques',
-    francais: 'Français',
-    sciences: 'Sciences et technologie',
-    histoire_geo: 'Histoire et géographie',
-    numerique: 'Le numérique',
-    emc: 'Vivre en république',
-    revisions: 'Révisions',
-    tout: 'Toutes les matières'
-  };
-
   function el(balise, classe, texte) {
     var n = document.createElement(balise);
     if (classe) n.className = classe;
@@ -198,7 +185,7 @@
     /* --- la feuille d'exercices --- */
     var tete = el('header', 'fiche-tete');
     tete.appendChild(el('h3', null, 'Fiche d\'entraînement — ' +
-      (NOM_MATIERE[fiche.matiere] || fiche.matiere)));
+      (M.get(fiche.matiere) ? M.get(fiche.matiere).nomFiche : fiche.matiere)));
     tete.appendChild(el('p', 'fiche-lignes-a-remplir',
       'Nom : .............................        Date : ...................'));
     tete.appendChild(el('p', 'fiche-reference',

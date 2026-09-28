@@ -22,9 +22,13 @@ La numérotation est `1.MAJEUR.MINEUR`.
 
 🌟 marque une version majeure, 🔧 une version mineure.
 
-**Version actuelle : `1.12.06` — 15 septembre 2026.**
+**Version actuelle : `1.12.07` — 28 septembre 2026.**
 
 ---
+
+## 🔧 1.12.07 — 28 septembre 2026
+
+Un 10 sur 10 s'entendait dire « Sans faute ou presque » : le sans-faute partageait sa mention avec les séries à une erreur près. Il a désormais la sienne. En coulisse, les matières ne sont plus décrites qu'à un seul endroit (app/matieres.js), dont découlent libellés, codes des fiches et compteurs ; et les tests lisent la liste des scripts dans index.html au lieu d'en tenir six copies. Deux défauts silencieux venaient de ces doublons ; ce qui reste écrit en dur est désormais confronté à la table, et une dérive fait échouer les contrôles.
 
 ## 🔧 1.12.06 — 15 septembre 2026
 
@@ -176,4 +180,4 @@ Socle de production — tirage déterministe, contrôle des contraintes du progr
 
 ---
 
-*37 versions depuis le 11 septembre 2026.*
+*38 versions depuis le 11 septembre 2026.*

@@ -18,37 +18,7 @@ var vm = require('vm');
 var GRAINES = parseInt(process.argv[2], 10) || 500;
 var racine = path.join(__dirname, '..');
 
-var FICHIERS = [
-  'app/version.js',
-  'app/rng.js',
-  'app/format.js',
-  'app/lettres.js',
-  'app/contraintes.js',
-  'app/qcm.js',
-  'app/figures.js',
-  'app/registre.js',
-  'app/lexique/lexique.js',
-  'app/conjugaison.js',
-  'app/lexique/phrases.js',
-  'app/generateurs/maths-entiers.js',
-  'app/generateurs/maths-decimaux.js',
-  'app/generateurs/maths-fractions.js',
-  'app/generateurs/maths-calcul-mental.js',
-  'app/generateurs/maths-operations.js',
-  'app/generateurs/maths-mesures.js',
-  'app/generateurs/maths-algebre.js',
-  'app/generateurs/maths-problemes.js',
-  'app/generateurs/maths-probabilites.js',
-  'app/generateurs/maths-figures.js',
-  'app/generateurs/maths-geometrie.js',
-  'app/generateurs/francais-conjugaison.js',
-  'app/generateurs/francais-accords.js',
-  'app/generateurs/francais-grammaire.js',
-  'app/generateurs/francais-vocabulaire.js',
-  'app/banques/emc.js', 'app/banques/sciences.js',
-  'app/banques/histoire-geo.js', 'app/banques/numerique.js',
-  'app/generateurs/revisions-tables.js'
-];
+var FICHIERS = require('./charger').tranche('exercices');
 
 var contexte = vm.createContext({ console: console, Math: Math, Date: Date });
 contexte.window = contexte;
@@ -128,49 +98,110 @@ generateurs.forEach(function (spec) {
   });
 });
 
-/* --- Aucun fichier d'exercices oublié quelque part --------------------
+/* --- Aucun fichier oublié quelque part ---------------------------------
 
-   Les générateurs et les banques sont déclarés dans quatre listes qui doivent
-   rester identiques : index.html (l'application), tests.html (la page de
-   vérification), et la liste FICHIERS de ce fichier. Une banque ajoutée à
-   l'application mais oubliée dans tests.html s'y trouverait simplement
-   absente : la page annoncerait « tout est vérifié » en ayant contrôlé moins
-   d'exercices qu'elle ne le croit. C'est exactement ce qui était arrivé aux
-   trois banques de sciences, d'histoire-géographie et de numérique.
+   index.html est la seule liste des scripts de l'application : les tests en
+   ligne de commande la lisent (tests/charger.js). Restent deux listes qui ne
+   peuvent pas la lire, et qu'on confronte donc à elle :
 
-   La source de vérité est le disque : tout fichier présent dans
-   app/generateurs/ ou app/banques/ doit être chargé partout. */
+   - le disque : tout fichier .js de app/ doit être chargé par index.html, et
+     tout script chargé doit exister ;
+   - tests.html : la page de vérification ne peut pas lire index.html depuis le
+     navigateur. Elle doit en reprendre, à l'identique et dans le même ordre,
+     toute la tranche qui produit des exercices. Une banque absente de
+     tests.html y serait simplement ignorée : la page annoncerait « tout est
+     vérifié » en ayant contrôlé moins d'exercices qu'elle ne le croit — c'est
+     arrivé aux banques de sciences, d'histoire-géographie et de numérique. */
 (function controlerChargements() {
-  var attendus = [];
-  ['app/generateurs', 'app/banques'].forEach(function (dossier) {
-    fs.readdirSync(path.join(racine, dossier)).forEach(function (f) {
-      if (/\.js$/.test(f)) attendus.push(dossier + '/' + f);
-    });
-  });
+  var charger = require('./charger');
+  var application = charger.scriptsDe('index.html');
 
-  function chargesPar(fichier) {
-    var texte = fs.readFileSync(path.join(racine, fichier), 'utf8');
-    var out = {}, re = /src="(app\/[^"]+)"/g, m;
-    while ((m = re.exec(texte))) out[m[1]] = true;
+  function tousLesJs(dossier) {
+    var out = [];
+    fs.readdirSync(path.join(racine, dossier)).forEach(function (f) {
+      var rel = dossier + '/' + f;
+      if (fs.statSync(path.join(racine, rel)).isDirectory()) out = out.concat(tousLesJs(rel));
+      else if (/\.js$/.test(f)) out.push(rel);
+    });
     return out;
   }
 
-  [{ nom: 'index.html', charges: chargesPar('index.html') },
-   { nom: 'tests.html', charges: chargesPar('tests.html') },
-   { nom: 'la liste FICHIERS de tests/verifier.js',
-     charges: FICHIERS.reduce(function (o, f) { o[f] = true; return o; }, {}) }
-  ].forEach(function (cible) {
-    attendus.forEach(function (f) {
-      if (!cible.charges[f]) {
-        echecs.push('chargement : « ' + f + ' » est sur le disque mais absent de ' + cible.nom);
-      }
-    });
+  tousLesJs('app').forEach(function (f) {
+    if (application.indexOf(f) === -1) {
+      echecs.push('chargement : « ' + f + ' » est sur le disque mais index.html ne le charge pas');
+    }
   });
-
-  // Et l'inverse : un fichier déclaré mais disparu du disque.
-  Object.keys(chargesPar('index.html')).forEach(function (f) {
+  application.forEach(function (f) {
     if (!fs.existsSync(path.join(racine, f))) {
       echecs.push('chargement : index.html charge « ' + f + ' », qui n\'existe pas');
+    }
+  });
+
+  var attendu = charger.tranche('exercices');
+  var page = charger.scriptsDe('tests.html').filter(function (f) { return /^app\//.test(f); });
+  if (attendu.join('\n') !== page.join('\n')) {
+    var avant = echecs.length;
+    attendu.forEach(function (f) {
+      if (page.indexOf(f) === -1) echecs.push('chargement : tests.html ne charge pas « ' + f + ' »');
+    });
+    page.forEach(function (f) {
+      if (attendu.indexOf(f) === -1) echecs.push('chargement : tests.html charge « ' + f + ' », hors de la tranche des exercices');
+    });
+    // Mêmes fichiers de part et d'autre : c'est donc l'ordre qui diffère.
+    if (echecs.length === avant) {
+      echecs.push('chargement : tests.html charge les bons fichiers, mais pas dans l\'ordre d\'index.html');
+    }
+  }
+})();
+
+/* --- Les matières : une table, et ce qui en reste écrit en dur ----------
+
+   app/matieres.js est la seule liste des matières. Ce qui ne peut pas en
+   découler — les boutons et les jetons de compteurs, écrits dans index.html —
+   doit la suivre exactement. Une matière ajoutée sans son bouton ne serait
+   jamais proposée ; un jeton manquant ferait planter l'accueil au démarrage. */
+(function controlerMatieres() {
+  var M = CM2.matieres;
+  var page = fs.readFileSync(path.join(racine, 'index.html'), 'utf8');
+
+  function valeurs(attribut) {
+    var out = [], re = new RegExp(attribut + '="([^"]+)"', 'g'), m;
+    while ((m = re.exec(page))) out.push(m[1]);
+    return out;
+  }
+
+  var attendus = M.liste.map(function (m) { return m.id; }).concat([M.tout.id]);
+  [['data-matiere', 'les boutons « On révise quoi ? »'],
+   ['data-fiche-matiere', 'les boutons des fiches']].forEach(function (a) {
+    var vus = valeurs(a[0]);
+    if (vus.join(' ') !== attendus.join(' ')) {
+      echecs.push('matières : ' + a[1] + ' (' + vus.join(', ') + ') ne suivent pas app/matieres.js (' +
+                  attendus.join(', ') + ')');
+    }
+  });
+
+  M.liste.forEach(function (m) {
+    if (page.indexOf('id="' + m.compteur + '"') === -1) {
+      echecs.push('matières : aucun jeton id="' + m.compteur + '" dans index.html pour « ' + m.id + ' »');
+    }
+  });
+
+  // Un générateur rangé sous une matière inconnue ne serait servi nulle part.
+  CM2.registre.liste().forEach(function (spec) {
+    if (!M.get(spec.matiere) || spec.matiere === M.tout.id) {
+      echecs.push('matières : ' + spec.id + ' est rangé sous « ' + spec.matiere +
+                  ' », qui n\'est pas dans app/matieres.js');
+    }
+  });
+
+  // Toute référence de fiche doit se relire, pour chaque matière et « tout ».
+  vm.runInContext(fs.readFileSync(path.join(racine, 'app/fiche.js'), 'utf8'), contexte,
+                  { filename: 'app/fiche.js' });
+  attendus.forEach(function (id) {
+    var ref = CM2.fiche.reference(123456789, id, 30);
+    var lu = CM2.fiche.depuisReference(ref);
+    if (!lu || lu.matiere !== id || lu.nombre !== 30 || lu.graine !== 123456789) {
+      echecs.push('matières : la référence « ' + ref + ' » (' + id + ') ne se relit pas');
     }
   });
 })();

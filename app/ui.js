@@ -19,17 +19,14 @@
   var CONSOLATIONS = ['Pas tout à fait.', 'Presque !', 'Ce n\'était pas ça.',
                       'Raté pour cette fois.', 'On va la retenir, celle-là.'];
 
-  var NOM_MATIERE = {
-    mathematiques: 'Mathématiques',
-    francais: 'Français',
-    sciences: 'Sciences et technologie',
-    histoire_geo: 'Histoire et géographie',
-    numerique: 'Le numérique',
-    emc: 'Enseignement moral et civique',
-    revisions: 'Révisions',
-    tout: 'Toutes les matières',
-    erreurs: 'Tes erreurs à revoir'
-  };
+  /* Le titre du tableau pendant une série. Les matières viennent de
+     app/matieres.js ; « erreurs » n'en est pas une — c'est la série de reprise
+     — et reste donc ici. */
+  function nomMatiere(id) {
+    if (id === 'erreurs') return 'Tes erreurs à revoir';
+    var m = CM2.matieres.get(id);
+    return m ? m.nom : id;
+  }
 
   var etat = {
     serie: [],          // [{ id, graine }]
@@ -386,7 +383,7 @@
 
     if (etat.index >= etat.serie.length) { afficherBilan(); return true; }
 
-    ecrireTableau(NOM_MATIERE[etat.matiere], P.actuel().nom + ' ' + P.actuel().avatar);
+    ecrireTableau(nomMatiere(etat.matiere), P.actuel().nom + ' ' + P.actuel().avatar);
     montrer('seance');
     afficherExercice();
     return true;
@@ -556,7 +553,11 @@
     P.oublierSeance();
 
     var mention, etoiles;
-    if (part >= 0.95)      { mention = 'Sans faute ou presque !'; etoiles = 5; }
+    // Le sans-faute a sa propre mention : un 10 sur 10 ne doit pas s'entendre
+    // dire « ou presque ». On compare les nombres de réussites, pas la
+    // fraction, qui peut s'arrondir. Le seuil de 95 % reste pour 19 sur 20.
+    if (total && etat.reussites === total) { mention = 'Sans faute ! Bravo !'; etoiles = 5; }
+    else if (part >= 0.95) { mention = 'Presque sans faute !'; etoiles = 5; }
     else if (part >= 0.8)  { mention = 'Très bien'; etoiles = 4; }
     else if (part >= 0.6)  { mention = 'Bien, ça avance'; etoiles = 3; }
     else if (part >= 0.4)  { mention = 'En progrès'; etoiles = 2; }
@@ -999,7 +1000,7 @@
     etat.reussites = 0;
     etat.rates = [];
 
-    ecrireTableau(NOM_MATIERE[matiere], P.actuel().nom + ' ' + P.actuel().avatar);
+    ecrireTableau(nomMatiere(matiere), P.actuel().nom + ' ' + P.actuel().avatar);
     montrer('seance');
     afficherExercice();
   }
@@ -1076,14 +1077,12 @@
   /** Remplit la fenêtre d'information avec ce que l'application sait d'elle-même :
       son contenu réel et son journal de versions. Rien n'est recopié à la main. */
   function preparerInfos() {
+    // Une ligne par matière de la table : la somme retombe toujours sur le
+    // total, une matière ajoutée ne peut plus manquer à l'appel.
     $('infos-compte').textContent = reg.liste().length + ' sortes d\'exercices — ' +
-      reg.parMatiere('mathematiques').length + ' en mathématiques, ' +
-      reg.parMatiere('francais').length + ' en français, ' +
-      reg.parMatiere('sciences').length + ' en sciences et technologie, ' +
-      reg.parMatiere('histoire_geo').length + ' en histoire-géographie, ' +
-      reg.parMatiere('numerique').length + ' en numérique, ' +
-      reg.parMatiere('emc').length + ' en enseignement moral et civique, ' +
-      reg.parMatiere('revisions').length + ' en révisions. ' +
+      CM2.matieres.liste.map(function (m) {
+        return reg.parMatiere(m.id).length + ' ' + m.phrase;
+      }).join(', ') + '. ' +
       'Chacune peut produire un nombre illimité de questions différentes.';
 
     var liste = $('infos-versions');
@@ -1247,13 +1246,9 @@
     });
 
     $('compte-total').textContent = reg.liste().length;
-    $('compte-maths').textContent = reg.parMatiere('mathematiques').length;
-    $('compte-francais').textContent = reg.parMatiere('francais').length;
-    $('compte-sciences').textContent = reg.parMatiere('sciences').length;
-    $('compte-histoire-geo').textContent = reg.parMatiere('histoire_geo').length;
-    $('compte-numerique').textContent = reg.parMatiere('numerique').length;
-    $('compte-emc').textContent = reg.parMatiere('emc').length;
-    $('compte-revisions').textContent = reg.parMatiere('revisions').length;
+    CM2.matieres.liste.forEach(function (m) {
+      $(m.compteur).textContent = reg.parMatiere(m.id).length;
+    });
     $('version').textContent = 'v' + CM2.version.numero;
 
     preparerInfos();

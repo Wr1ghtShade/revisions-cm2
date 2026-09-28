@@ -30,23 +30,7 @@ var contexte = vm.createContext({
 });
 contexte.window = contexte;
 
-[
-  'app/version.js', 'app/rng.js', 'app/format.js', 'app/lettres.js', 'app/contraintes.js',
-  'app/qcm.js', 'app/figures.js', 'app/registre.js', 'app/domaines.js',
-  'app/lexique/lexique.js', 'app/conjugaison.js', 'app/lexique/phrases.js',
-  'app/generateurs/maths-entiers.js', 'app/generateurs/maths-decimaux.js',
-  'app/generateurs/maths-fractions.js', 'app/generateurs/maths-calcul-mental.js',
-  'app/generateurs/maths-operations.js', 'app/generateurs/maths-mesures.js',
-  'app/generateurs/maths-algebre.js', 'app/generateurs/maths-problemes.js',
-  'app/generateurs/maths-probabilites.js', 'app/generateurs/maths-figures.js',
-  'app/generateurs/maths-geometrie.js',
-  'app/generateurs/francais-conjugaison.js', 'app/generateurs/francais-accords.js',
-  'app/generateurs/francais-grammaire.js', 'app/generateurs/francais-vocabulaire.js',
-  'app/banques/emc.js', 'app/banques/sciences.js',
-  'app/banques/histoire-geo.js', 'app/banques/numerique.js',
-  'app/generateurs/revisions-tables.js',
-  'app/profil.js', 'app/progression.js', 'app/bilan.js', 'app/classe.js'
-].forEach(function (f) {
+require('./charger').tranche('cahier').forEach(function (f) {
   vm.runInContext(fs.readFileSync(path.join(racine, f), 'utf8'), contexte, { filename: f });
 });
 

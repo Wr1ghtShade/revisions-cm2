@@ -26,9 +26,7 @@ var racine = path.join(__dirname, '..');
 
 var contexte = vm.createContext({ console: console, Math: Math, Date: Date });
 contexte.window = contexte;
-['app/version.js', 'app/rng.js', 'app/format.js', 'app/contraintes.js', 'app/qcm.js', 'app/registre.js',
- 'app/banques/emc.js', 'app/banques/sciences.js',
- 'app/banques/histoire-geo.js', 'app/banques/numerique.js'].forEach(function (f) {
+require('./charger').tranche('banques').forEach(function (f) {
   vm.runInContext(fs.readFileSync(path.join(racine, f), 'utf8'), contexte, { filename: f });
 });
 var CM2 = contexte.CM2;
