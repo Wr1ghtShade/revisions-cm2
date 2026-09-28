@@ -61,7 +61,8 @@ node tests/interface.js           # les écrans s'exécutent-ils
 ```
 
 `tests.html`, ouvert dans le navigateur, fait tourner les deux principaux
-contrôles sans terminal.
+contrôles sans terminal. Aucun lien n'y mène depuis l'application : on
+l'ouvre par son adresse.
 
 ---
 

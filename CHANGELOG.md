@@ -22,9 +22,13 @@ La numérotation est `1.MAJEUR.MINEUR`.
 
 🌟 marque une version majeure, 🔧 une version mineure.
 
-**Version actuelle : `1.12.07` — 28 septembre 2026.**
+**Version actuelle : `1.12.08` — 28 septembre 2026.**
 
 ---
+
+## 🔧 1.12.08 — 28 septembre 2026
+
+La page de vérification sert aux adultes : le lien du bas de page et celui de la fenêtre d'informations disparaissent, pour qu'un enfant n'y tombe pas par hasard. Elle reste ouverte à qui tape son adresse.
 
 ## 🔧 1.12.07 — 28 septembre 2026
 
@@ -180,4 +184,4 @@ Socle de production — tirage déterministe, contrôle des contraintes du progr
 
 ---
 
-*38 versions depuis le 11 septembre 2026.*
+*39 versions depuis le 11 septembre 2026.*

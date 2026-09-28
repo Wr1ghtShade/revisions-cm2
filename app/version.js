@@ -250,7 +250,12 @@
             'compteurs ; et les tests lisent la liste des scripts dans index.html au ' +
             'lieu d\'en tenir six copies. Deux défauts silencieux venaient de ces ' +
             'doublons ; ce qui reste écrit en dur est désormais confronté à la table, et ' +
-            'une dérive fait échouer les contrôles.' }
+            'une dérive fait échouer les contrôles.' },
+
+    { numero: '1.12.08', date: '2026-09-28',
+      quoi: 'La page de vérification sert aux adultes : le lien du bas de page et ' +
+            'celui de la fenêtre d\'informations disparaissent, pour qu\'un enfant ' +
+            'n\'y tombe pas par hasard. Elle reste ouverte à qui tape son adresse.' }
   ];
 
   var actuelle = HISTORIQUE[HISTORIQUE.length - 1];
