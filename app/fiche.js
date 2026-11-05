@@ -27,6 +27,12 @@
 
   var LETTRES = ['a', 'b', 'c', 'd', 'e', 'f'];
 
+  /* Le plus grand nombre d'exercices qu'une fiche puisse porter : celui du
+     plus grand bouton de l'écran. Une référence recopiée à la main peut
+     contenir n'importe quel nombre ; sans borne, « A-M9999999999 » faisait
+     composer des millions d'exercices et figeait la page. */
+  var NOMBRE_MAX = 30;
+
   /* --- Composition (aucun DOM : testable hors navigateur) -------------- */
 
   function graineAuHasard() {
@@ -62,12 +68,18 @@
     if (!m) return null;
     var graine = parseInt(m[1], 36);
     if (isNaN(graine)) return null;
+    var nombre = m[3] ? parseInt(m[3], 10) : null;
+    // Aucune fiche imprimée par l'application ne porte 0 ou 500 exercices :
+    // une telle référence est une erreur de recopie, pas une fiche à refaire.
+    if (nombre !== null && (nombre < 1 || nombre > NOMBRE_MAX)) return null;
     return {
       graine: graine >>> 0,
       matiere: m[2] ? M.depuisCode(m[2]).id : null,
-      nombre: m[3] ? parseInt(m[3], 10) : null
+      nombre: nombre
     };
   };
+
+  Fi.NOMBRE_MAX = NOMBRE_MAX;
 
   /** Range les générateurs par sous-domaine du programme, pour pouvoir ensuite
       les prendre à tour de rôle. */
@@ -108,6 +120,9 @@
   Fi.composer = function (matiere, nombre, graine) {
     var maitresse = (graine === undefined || graine === null) ? graineAuHasard() : (graine >>> 0);
     var r = new CM2.Rng(maitresse);
+    // Même garde-fou que la relecture des références : la composition est en
+    // temps linéaire, mais le dessin de millions d'exercices ne l'est pas.
+    nombre = Math.max(1, Math.min(parseInt(nombre, 10) || 0, NOMBRE_MAX));
 
     var specs = ((matiere === 'tout' || !matiere)
       ? CM2.registre.liste()

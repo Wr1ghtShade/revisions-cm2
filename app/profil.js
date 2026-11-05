@@ -18,6 +18,13 @@
   var CLE = 'cm2.cahiers.v1';
   var MAX_SEANCES = 40;
 
+  /* Taille au-delà de laquelle un fichier de restauration n'est pas un cahier.
+     Un cahier réel pèse quelques dizaines de kilo-octets au plus : ses listes
+     sont toutes bornées. Au-delà, c'est un autre fichier, ou un fichier
+     abîmé — et un cahier trop gros pour localStorage se dirait « restauré »
+     sans l'être, puis ferait perdre en silence tout ce qui suit. */
+  var TAILLE_MAX_FICHIER = 2 * 1024 * 1024;
+
   /* Au bout de combien de séances non sauvegardées on le rappelle. Cinq, c'est
      à peu près une semaine de travail : assez pour que la perte fasse mal,
      assez rare pour que le rappel ne devienne pas du décor. */
@@ -70,14 +77,28 @@
 
   /* --- Lecture et écriture --------------------------------------------- */
 
-  function vide() { return { version: 1, dernier: null, cahiers: {} }; }
+  /* Les cahiers sont rangés par nom dans un dictionnaire sans prototype. Avec
+     un objet ordinaire, un enfant qui se serait appelé « __proto__ » ou
+     « constructor » tombait sur Object.prototype : son cahier existait sans
+     avoir été créé, polluait tous les objets de la page et n'était jamais
+     enregistré. Ici, n'importe quel nom est une clé comme une autre. */
+  function sansPrototype(objet) {
+    var d = Object.create(null);
+    if (objet && typeof objet === 'object') {
+      Object.keys(objet).forEach(function (k) { d[k] = objet[k]; });
+    }
+    return d;
+  }
+
+  function vide() { return { version: 1, dernier: null, cahiers: sansPrototype(null) }; }
 
   function charger() {
     if (cache) return cache;
     try {
       var brut = window.localStorage.getItem(CLE);
       cache = brut ? JSON.parse(brut) : vide();
-      if (!cache || !cache.cahiers) cache = vide();
+      if (!cache || typeof cache !== 'object' || !cache.cahiers) cache = vide();
+      cache.cahiers = sansPrototype(cache.cahiers);
     } catch (e) {
       disponible = false;
       cache = vide();
@@ -85,12 +106,24 @@
     return cache;
   }
 
+  /** Écrit la mémoire dans localStorage. Renvoie vrai si c'est fait. */
   function sauver() {
-    if (!cache) return;
+    if (!cache) return false;
     try {
       window.localStorage.setItem(CLE, JSON.stringify(cache));
+      return true;
     } catch (e) {
-      disponible = false;      // la session continue, en mémoire seulement
+      // Refus de principe (navigation privée, stockage interdit) ou simple
+      // manque de place ? Dans le premier cas, la session continue en mémoire
+      // et l'accueil le dit ; dans le second, la mémoire fonctionne encore et
+      // c'est à l'appelant de prévenir que cette écriture-là n'a pas eu lieu.
+      try {
+        window.localStorage.setItem(CLE + '.essai', '1');
+        window.localStorage.removeItem(CLE + '.essai');
+      } catch (e2) {
+        disponible = false;
+      }
+      return false;
     }
   }
 
@@ -115,29 +148,37 @@
     };
   }
 
-  /** Complète un cahier écrit par une version antérieure de l'application. */
+  function estObjet(v) { return !!v && typeof v === 'object' && !Array.isArray(v); }
+
+  /** Complète un cahier écrit par une version antérieure de l'application.
+      Un champ qui n'a pas la forme attendue est remis à neuf plutôt que de
+      faire planter la page : ce qui est ici vient de la mémoire du navigateur,
+      écrite par l'application elle-même. Un fichier venu d'ailleurs est, lui,
+      passé au crible de `defauts()` avant d'arriver ici. */
   function normaliser(c) {
-    if (!c.total) c.total = { questions: 0, reussites: 0 };
-    if (!c.notions) c.notions = {};
-    if (!c.aRevoir) c.aRevoir = [];
-    if (!c.seances) c.seances = [];
-    if (!c.jours || !c.jours.length) c.jours = [c.derniereVisite || aujourdhui()];
+    if (!estObjet(c.total)) c.total = { questions: 0, reussites: 0 };
+    if (!estObjet(c.notions)) c.notions = {};
+    if (!Array.isArray(c.aRevoir)) c.aRevoir = [];
+    if (!Array.isArray(c.seances)) c.seances = [];
+    if (!Array.isArray(c.jours) || !c.jours.length) c.jours = [c.derniereVisite || aujourdhui()];
     if (c.sauvegarde === undefined) c.sauvegarde = null;
     // Un cahier d'avant le rappel n'a jamais été compté : on repart de ses
     // séances connues, ce qui le fait rappeler tout de suite s'il en a.
     if (typeof c.seancesDepuisSauvegarde !== 'number') {
       c.seancesDepuisSauvegarde = c.seances.length;
     }
-    if (!c.confort) c.confort = confortNeuf();
-    if (!c.sujetsEtudies) c.sujetsEtudies = {};
+    if (!estObjet(c.confort)) c.confort = confortNeuf();
+    if (!estObjet(c.sujetsEtudies)) c.sujetsEtudies = {};
 
     // Les boîtes de révision n'existaient pas avant : tout ce qui est déjà là
     // est considéré comme à revoir aujourd'hui, ce qui est le choix prudent.
     Object.keys(c.notions).forEach(function (id) {
       var n = c.notions[id];
+      if (!estObjet(n)) { n = c.notions[id] = { vus: 0, reussites: 0, dernier: null }; }
       if (typeof n.boite !== 'number') n.boite = 0;
       if (!n.prochaine) n.prochaine = aujourdhui();
     });
+    c.aRevoir = c.aRevoir.filter(estObjet);
     c.aRevoir.forEach(function (e) {
       if (typeof e.boite !== 'number') e.boite = 0;
       if (!e.prochaine) e.prochaine = aujourdhui();
@@ -145,10 +186,43 @@
     return c;
   }
 
+  /** Ce qui, dans un cahier lu depuis un fichier, n'a pas la forme d'un cahier.
+      Renvoie la liste des champs fautifs — vide si tout va bien.
+
+      On ne répare pas un fichier : on le refuse. Remettre à neuf la liste des
+      exercices à revoir d'un cahier qu'on croit restaurer, c'est perdre des
+      mois de travail en annonçant le contraire. */
+  function defauts(c) {
+    var f = [];
+    if (!estObjet(c)) return ['cahier'];
+    if (typeof c.nom !== 'string' || !c.nom.trim()) f.push('nom');
+    if (c.avatar !== undefined && typeof c.avatar !== 'string') f.push('avatar');
+    if (c.total !== undefined && !estObjet(c.total)) f.push('total');
+    if (c.notions !== undefined && !estObjet(c.notions)) f.push('notions');
+    if (c.aRevoir !== undefined && !Array.isArray(c.aRevoir)) f.push('aRevoir');
+    if (c.seances !== undefined && !Array.isArray(c.seances)) f.push('seances');
+    if (c.jours !== undefined && !Array.isArray(c.jours)) f.push('jours');
+    if (c.confort !== undefined && !estObjet(c.confort)) f.push('confort');
+    if (c.sujetsEtudies !== undefined && !estObjet(c.sujetsEtudies)) f.push('sujetsEtudies');
+    if (c.seanceEnCours !== undefined && c.seanceEnCours !== null) {
+      var s = c.seanceEnCours;
+      // Une série se rejoue à partir de ses graines : chaque entrée doit en
+      // porter une, et nommer un générateur par une chaîne.
+      var serieOk = estObjet(s) && Array.isArray(s.serie) && s.serie.every(function (e) {
+        return estObjet(e) && typeof e.id === 'string' &&
+               (e.graine === undefined || typeof e.graine === 'number');
+      });
+      if (!serieOk) f.push('seanceEnCours');
+    }
+    return f;
+  }
+
   var P = {};
 
   P.avatars = AVATARS;
-  P.nomAvatar = function (emoji) { return NOMS_AVATARS[emoji] || 'mascotte'; };
+  P.nomAvatar = function (emoji) {
+    return Object.prototype.hasOwnProperty.call(NOMS_AVATARS, emoji) ? NOMS_AVATARS[emoji] : 'mascotte';
+  };
   P.aujourdhui = aujourdhui;
   P.dans = dans;
   P.joursDecart = joursDecart;
@@ -383,31 +457,56 @@
   };
 
   /** Relit un fichier exporté. Renvoie { ok, nom, existe, message }.
-      `remplacer` autorise l'écrasement d'un cahier portant le même nom. */
+      `remplacer` autorise l'écrasement d'un cahier portant le même nom.
+
+      Le fichier est la seule chose que l'application lise sans l'avoir écrite
+      elle-même : il est contrôlé avant d'entrer, et le résultat n'est annoncé
+      qu'une fois réellement en mémoire du navigateur. */
   P.importer = function (texte, remplacer) {
+    texte = String(texte);
+    if (texte.length > TAILLE_MAX_FICHIER) {
+      return { ok: false, message: 'Ce fichier est bien trop gros pour être un cahier.' };
+    }
+
     var paquet;
     try {
       paquet = JSON.parse(texte);
     } catch (e) {
       return { ok: false, message: 'Ce fichier est illisible : ce n\'est pas un cahier.' };
     }
-    if (!paquet || paquet.format !== 'cahier-revisions-cm2' ||
-        !paquet.cahier || !paquet.cahier.nom) {
+    if (!estObjet(paquet) || paquet.format !== 'cahier-revisions-cm2' ||
+        !estObjet(paquet.cahier) || !paquet.cahier.nom) {
       return { ok: false, message: 'Ce fichier n\'est pas un cahier de révisions CM2.' };
     }
 
+    var fautes = defauts(paquet.cahier);
+    if (fautes.length) {
+      return { ok: false, message: 'Ce fichier est abîmé : la partie « ' + fautes[0] +
+                                   ' » du cahier n\'a pas la forme attendue.' };
+    }
+
     var d = charger();
-    var nom = String(paquet.cahier.nom);
-    if (d.cahiers[nom] && !remplacer) {
+    var nom = paquet.cahier.nom.trim();
+    var ancien = d.cahiers[nom];
+    if (ancien && !remplacer) {
       return { ok: false, existe: true, nom: nom,
                message: 'Il y a déjà un cahier au nom de ' + nom + '.' };
     }
 
     d.cahiers[nom] = normaliser(paquet.cahier);
     d.cahiers[nom].nom = nom;
-    sauver();
+    if (!sauver()) {
+      // Rien n'a été écrit : on rend la mémoire telle qu'elle était, pour que
+      // l'écran et le navigateur disent la même chose.
+      if (ancien) d.cahiers[nom] = ancien; else delete d.cahiers[nom];
+      return { ok: false, message: disponible
+        ? 'Le navigateur n\'a pas pu enregistrer ce cahier : il manque de place.'
+        : 'Le navigateur refuse d\'enregistrer : ce cahier ne survivrait pas à la fermeture de la page.' };
+    }
     return { ok: true, nom: nom };
   };
+
+  P.TAILLE_MAX_FICHIER = TAILLE_MAX_FICHIER;
 
   CM2.profil = P;
 })(window.CM2 = window.CM2 || {});

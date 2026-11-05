@@ -207,6 +207,14 @@ verifier('elle est pardonnante sur la casse et les espaces',
          Fi.depuisReference(' ' + fiche.reference.toLowerCase() + ' ').graine, fiche.graine);
 verifier('un texte qui n\'est pas une référence est refusé',
          Fi.depuisReference('bonjour !'), null);
+verifier('une référence à zéro exercice est refusée', Fi.depuisReference('7K3QP2-M0'), null);
+verifier('une référence à des millions d\'exercices est refusée',
+         Fi.depuisReference('7K3QP2-M9999999999'), null);
+verifier('la plus grande fiche possible se relit',
+         Fi.depuisReference('7K3QP2-M' + Fi.NOMBRE_MAX).nombre, Fi.NOMBRE_MAX);
+verifier('composer ne dépasse jamais la plus grande fiche',
+         Fi.composer('mathematiques', 100000, 1).exercices.length, Fi.NOMBRE_MAX);
+verifier('une matière nommée « constructor » n\'existe pas', CM2.matieres.get('constructor'), null);
 
 var memeFiche = Fi.composer('mathematiques', 20, fiche.graine);
 verifier('la même référence redonne exactement la même fiche',

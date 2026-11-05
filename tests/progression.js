@@ -153,5 +153,53 @@ verifier('réimporter en remplaçant fonctionne', P.importer(fichier, true).ok, 
 verifier('un fichier étranger est refusé', P.importer('{"format":"autre"}', true).ok, false);
 verifier('un fichier illisible est refusé', P.importer('pas du json', true).ok, false);
 
+console.log('\nUn fichier de restauration est contrôlé avant d\'entrer');
+function paquet(cahier) {
+  return JSON.stringify({ format: 'cahier-revisions-cm2', version: 1, cahier: cahier });
+}
+var abime = P.importer(paquet({ nom: 'Casse', aRevoir: { pas: 'un tableau' } }), true);
+verifier('une liste à revoir qui n\'est pas une liste est refusée', abime.ok, false);
+verifier('… et le message nomme la partie fautive', /aRevoir/.test(abime.message), true);
+verifier('le cahier refusé n\'est pas entré', P.existe('Casse'), false);
+verifier('une série en cours sans identifiants de texte est refusée',
+         P.importer(paquet({ nom: 'Piege', seanceEnCours: { serie: [{ id: 42, graine: 1 }] } }), true).ok,
+         false);
+verifier('un nom qui n\'est pas un texte est refusé',
+         P.importer(paquet({ nom: { x: 1 } }), true).ok, false);
+var gros = paquet({ nom: 'Gros', bourrage: new Array(P.TAILLE_MAX_FICHIER + 2).join('x') });
+verifier('un fichier plus gros qu\'un cahier ne peut l\'être est refusé',
+         P.importer(gros, true).ok, false);
+verifier('un cahier normal, lui, passe', P.importer(paquet({ nom: 'Normal' }), true).ok, true);
+
+console.log('\nUn échec d\'écriture est annoncé, pas tu');
+var vraiSetItem = contexte.localStorage.setItem;
+contexte.localStorage.setItem = function (k, v) {
+  if (k === 'cm2.cahiers.v1') throw new Error('QuotaExceededError');
+  vraiSetItem(k, v);
+};
+var refuse = P.importer(paquet({ nom: 'SansPlace' }), true);
+verifier('l\'import rapporte l\'échec', refuse.ok, false);
+verifier('… en parlant de place', /place/.test(refuse.message), true);
+verifier('le cahier n\'est pas resté en mémoire', P.existe('SansPlace'), false);
+verifier('la mémoire est toujours déclarée disponible', P.memoireDisponible(), true);
+contexte.localStorage.setItem = vraiSetItem;
+verifier('l\'écriture rétablie, le même cahier passe', P.importer(paquet({ nom: 'SansPlace' }), true).ok, true);
+
+console.log('\nLes noms réservés de JavaScript sont des noms comme les autres');
+['__proto__', 'constructor', 'toString'].forEach(function (nom) {
+  var avant = P.liste().length;
+  P.ouvrir(nom);
+  verifier('« ' + nom + ' » : le cahier existe', P.existe(nom), true);
+  verifier('« ' + nom + ' » : il porte son nom', P.actuel().nom, nom);
+  verifier('« ' + nom + ' » : il figure dans la liste', P.liste().length, avant + 1);
+  verifier('« ' + nom + ' » : les autres objets ne sont pas touchés', ({}).notions, undefined);
+  verifier('« ' + nom + ' » : il est bien enregistré',
+           Object.keys(JSON.parse(stock['cm2.cahiers.v1']).cahiers).indexOf(nom) !== -1, true);
+  P.supprimer(nom);
+  verifier('« ' + nom + ' » : il se supprime', P.existe(nom), false);
+});
+verifier('un générateur nommé « constructor » n\'existe pas', CM2.registre.get('constructor'), undefined);
+verifier('une mascotte nommée « constructor » n\'a pas de nom', P.nomAvatar('constructor'), 'mascotte');
+
 console.log('\n' + (total - echecs) + ' vérifications réussies sur ' + total + '.');
 process.exit(echecs ? 1 : 0);

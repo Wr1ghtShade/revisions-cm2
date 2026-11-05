@@ -255,7 +255,21 @@
     { numero: '1.12.08', date: '2026-09-28',
       quoi: 'La page de vérification sert aux adultes : le lien du bas de page et ' +
             'celui de la fenêtre d\'informations disparaissent, pour qu\'un enfant ' +
-            'n\'y tombe pas par hasard. Elle reste ouverte à qui tape son adresse.' }
+            'n\'y tombe pas par hasard. Elle reste ouverte à qui tape son adresse.' },
+
+    { numero: '1.12.09', date: '2026-11-05',
+      quoi: 'Revue de sécurité. Le fichier de sauvegarde est la seule chose que ' +
+            'l\'application lise sans l\'avoir écrite : il est désormais contrôlé ' +
+            'avant d\'entrer — forme de chaque partie, taille — et « cahier ' +
+            'restauré » n\'est annoncé qu\'une fois le cahier réellement en mémoire ' +
+            'du navigateur. Avant, un fichier trop gros se disait restauré puis ' +
+            'faisait perdre en silence tout ce qui suivait, et un fichier abîmé ' +
+            'pouvait figer le démarrage. Un enfant qui s\'appelle « constructor » ' +
+            'ou « __proto__ » a maintenant un vrai cahier, enregistré comme les ' +
+            'autres. Une référence de fiche recopiée avec un nombre délirant ' +
+            'd\'exercices est refusée au lieu de figer la page. La page déclare ' +
+            'enfin une règle de sécurité du contenu : rien d\'autre que ses propres ' +
+            'fichiers.' }
   ];
 
   var actuelle = HISTORIQUE[HISTORIQUE.length - 1];

@@ -11,7 +11,11 @@
 (function (CM2) {
   'use strict';
 
-  var specs = {};
+  /* Dictionnaire sans prototype : un identifiant lu dans un cahier — donc
+     dans un fichier qu'on n'a pas écrit — ne doit jamais tomber sur
+     « constructor » ou « toString » d'Object.prototype et passer pour un
+     générateur. Avec un objet ordinaire, specs['constructor'] existait. */
+  var specs = Object.create(null);
   var ordre = [];
 
   var R = {};
@@ -27,7 +31,7 @@
         generer(rng) -> { enonce, type, propositions?, bonne_reponse, explication }
       } */
   R.ajouter = function (spec) {
-    if (!spec || !spec.id) throw new Error('registre : générateur sans id');
+    if (!spec || !spec.id || typeof spec.id !== 'string') throw new Error('registre : générateur sans id');
     if (specs[spec.id]) throw new Error('registre : id en double « ' + spec.id + ' »');
     if (typeof spec.generer !== 'function') throw new Error('registre : ' + spec.id + ' n\'a pas de fonction generer');
     if (!spec.matiere) throw new Error('registre : ' + spec.id + ' sans matière');

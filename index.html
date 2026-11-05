@@ -2,6 +2,14 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
+<!-- Ceinture et bretelles : la page n'a besoin de rien d'autre que ses propres
+     fichiers. Si un jour une saisie devait tout de même atteindre le HTML, le
+     navigateur refuserait d'en exécuter le script. L'empreinte est celle de
+     l'unique script en ligne, CM2.ui.initialiser(); en bas de page : la
+     changer sans changer l'empreinte casse le démarrage, tests/interface.js
+     le contrôle. Les styles en attribut (figures SVG) restent permis. -->
+<meta http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' 'sha256-eQrcX66zGLVaneZRJa0RKconrxcM8GrObWlY/L+RcG4='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light">
 <meta name="theme-color" content="#2f4a40">

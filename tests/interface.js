@@ -569,5 +569,24 @@ verifier('les domaines annoncent leur vide',
 clic('classe-retour');
 verifier('sans cahier ouvert, le retour ramène à l\'accueil', ecranVisible(), 'cahiers');
 
+/* La règle de sécurité du contenu (CSP) de index.html n'autorise un script en
+   ligne que par son empreinte. Changer ce script sans refaire l'empreinte
+   ferait une page qui ne démarre plus — et rien ne le dirait avant d'ouvrir le
+   navigateur. L'empreinte de chaque script en ligne est donc recalculée ici. */
+console.log('\nLa règle de sécurité du contenu');
+var csp = /<meta http-equiv="Content-Security-Policy"\s+content="([^"]+)"/.exec(PAGE);
+verifier('index.html déclare une règle', !!csp, true);
+var enLigne = [], reScript = /<script>([\s\S]*?)<\/script>/g, ms;
+while ((ms = reScript.exec(PAGE))) enLigne.push(ms[1]);
+verifier('il y a un seul script en ligne', enLigne.length, 1);
+enLigne.forEach(function (source) {
+  var empreinte = require('crypto').createHash('sha256').update(source, 'utf8').digest('base64');
+  verifier('l\'empreinte du script en ligne figure dans la règle',
+           csp ? csp[1].indexOf("'sha256-" + empreinte + "'") !== -1 : false, true);
+});
+verifier('aucun script n\'est chargé depuis le réseau',
+         require('./charger').scriptsDe('index.html').every(function (s) { return !/^[a-z]+:|^\/\//.test(s); }),
+         true);
+
 console.log('\n' + (total - echecs) + ' vérifications réussies sur ' + total + '.');
 process.exit(echecs ? 1 : 0);

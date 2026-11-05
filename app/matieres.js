@@ -51,7 +51,9 @@
   var TOUT = { id: 'tout', code: 'T', nom: 'Toutes les matières',
                nomFiche: 'Toutes les matières' };
 
-  var parId = {}, parCode = {};
+  // Sans prototype : un identifiant venu d'un cahier importé (« constructor »)
+  // ne doit pas remonter jusqu'à Object.prototype et passer pour une matière.
+  var parId = Object.create(null), parCode = Object.create(null);
   LISTE.concat([TOUT]).forEach(function (m) {
     if (parId[m.id]) throw new Error('matières : identifiant en double « ' + m.id + ' »');
     if (parCode[m.code]) throw new Error('matières : code en double « ' + m.code + ' »');

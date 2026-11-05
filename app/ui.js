@@ -367,7 +367,8 @@
     // Un générateur a pu disparaître entre deux versions : dans ce cas on
     // abandonne la reprise plutôt que de servir une question qui n'existe plus.
     for (var i = 0; i < s.serie.length; i++) {
-      if (!reg.get(s.serie[i].id)) { P.oublierSeance(); return false; }
+      var e = s.serie[i];
+      if (!e || !reg.get(e.id)) { P.oublierSeance(); return false; }
     }
 
     etat.matiere = s.matiere;

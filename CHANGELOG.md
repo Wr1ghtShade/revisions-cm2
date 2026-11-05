@@ -22,9 +22,13 @@ La numérotation est `1.MAJEUR.MINEUR`.
 
 🌟 marque une version majeure, 🔧 une version mineure.
 
-**Version actuelle : `1.12.08` — 28 septembre 2026.**
+**Version actuelle : `1.12.09` — 5 novembre 2026.**
 
 ---
+
+## 🔧 1.12.09 — 5 novembre 2026
+
+Revue de sécurité. Le fichier de sauvegarde est la seule chose que l'application lise sans l'avoir écrite : il est désormais contrôlé avant d'entrer — forme de chaque partie, taille — et « cahier restauré » n'est annoncé qu'une fois le cahier réellement en mémoire du navigateur. Avant, un fichier trop gros se disait restauré puis faisait perdre en silence tout ce qui suivait, et un fichier abîmé pouvait figer le démarrage. Un enfant qui s'appelle « constructor » ou « __proto__ » a maintenant un vrai cahier, enregistré comme les autres. Une référence de fiche recopiée avec un nombre délirant d'exercices est refusée au lieu de figer la page. La page déclare enfin une règle de sécurité du contenu : rien d'autre que ses propres fichiers.
 
 ## 🔧 1.12.08 — 28 septembre 2026
 
@@ -184,4 +188,4 @@ Socle de production — tirage déterministe, contrôle des contraintes du progr
 
 ---
 
-*39 versions depuis le 11 septembre 2026.*
+*40 versions depuis le 11 septembre 2026.*
