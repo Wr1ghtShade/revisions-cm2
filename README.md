@@ -207,6 +207,18 @@ node tests/generer-changelog.js --verifier
 `app/ui.js`** : un identifiant manquant, un écran oublié, un bouton sans
 écouteur font échouer la suite.
 
+### 📦 Fabriquer une release
+
+```bash
+node tests/fabriquer-release.js     # → dist/revisions-cm2-<version>.zip et son .sha256
+```
+
+Le zip est tiré du commit courant et contient l'application, la page de
+vérification, les contrôles ci-dessus et `data/referentiel/` : il suffit à
+utiliser l'application comme à relancer tous les contrôles. Les PDF officiels
+de `data/sources/` n'y sont pas ; chaque fichier de `data/referentiel/` donne
+l'adresse de son texte d'origine.
+
 ---
 
 ## 📂 Où est quoi

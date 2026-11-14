@@ -6,6 +6,7 @@ desktop.ini
 # Éditeurs
 *.swp
 *~
+/dist/
 .vscode/
 .idea/
 
