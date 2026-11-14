@@ -269,7 +269,20 @@
             'autres. Une référence de fiche recopiée avec un nombre délirant ' +
             'd\'exercices est refusée au lieu de figer la page. La page déclare ' +
             'enfin une règle de sécurité du contenu : rien d\'autre que ses propres ' +
-            'fichiers.' }
+            'fichiers.' },
+
+    { numero: '1.12.10', date: '2026-11-14',
+      quoi: 'Suite de la revue de sécurité. Le contrôle du fichier de sauvegarde ' +
+            'descend d\'un cran : chaque séance doit être lisible, la position ' +
+            'dans une série en cours doit désigner une question qui existe, et un ' +
+            'nom de plus de quarante caractères n\'est pas un prénom. Avant, un ' +
+            'fichier abîmé à ces endroits-là entrait, puis faisait planter « Ma ' +
+            'progression » et la vue enseignant, ou figeait la reprise d\'une ' +
+            'série. Un fichier manifestement trop gros est refusé avant d\'être ' +
+            'lu. Un exercice raté dont la sorte a depuis été retirée n\'est plus ' +
+            'compté ni servi dans « Revoir mes erreurs », qu\'il interrompait. La ' +
+            'page de vérification déclare à son tour une règle de sécurité du ' +
+            'contenu, et son script quitte la page pour un fichier à part.' }
   ];
 
   var actuelle = HISTORIQUE[HISTORIQUE.length - 1];

@@ -171,6 +171,74 @@ verifier('un fichier plus gros qu\'un cahier ne peut l\'être est refusé',
          P.importer(gros, true).ok, false);
 verifier('un cahier normal, lui, passe', P.importer(paquet({ nom: 'Normal' }), true).ok, true);
 
+console.log('\nLe contrôle descend dans les listes');
+var seanceCassee = P.importer(paquet({ nom: 'Seances', seances: [null, 'hier'] }), true);
+verifier('une séance qui n\'est pas un objet est refusée', seanceCassee.ok, false);
+verifier('… et le message nomme la partie fautive', /seances/.test(seanceCassee.message), true);
+verifier('des séances bien formées passent',
+         P.importer(paquet({ nom: 'Seances', seances: [{ date: '2026-11-02', matiere: 'tout',
+                                                         questions: 10, reussites: 7 }] }), true).ok, true);
+
+function enCours(extra) {
+  var s = { matiere: 'mathematiques', index: 0, repondu: false, reussites: 0, rates: [],
+            serie: [{ id: 'faux.a', graine: 1 }, { id: 'faux.b', graine: 2 }], enPause: true };
+  Object.keys(extra || {}).forEach(function (k) { s[k] = extra[k]; });
+  return paquet({ nom: 'Serie', seanceEnCours: s });
+}
+verifier('une série en cours bien formée passe', P.importer(enCours(), true).ok, true);
+verifier('… y compris arrêtée sur sa dernière question', P.importer(enCours({ index: 1 }), true).ok, true);
+[['négatif', -1], ['au-delà de la fin', 2], ['décimal', 0.5], ['qui est un texte', '0'],
+ ['qui n\'est pas un nombre', NaN], ['absent', undefined]].forEach(function (cas) {
+  verifier('un indice ' + cas[0] + ' est refusé', P.importer(enCours({ index: cas[1] }), true).ok, false);
+});
+verifier('une liste de ratés qui n\'est pas une liste est refusée',
+         P.importer(enCours({ rates: 5 }), true).ok, false);
+verifier('un compte de réussites qui n\'est pas un nombre est refusé',
+         P.importer(enCours({ reussites: 'trois' }), true).ok, false);
+verifier('une série vide est refusée', P.importer(enCours({ serie: [] }), true).ok, false);
+
+var long = new Array(P.LONGUEUR_MAX_NOM + 2).join('a');
+verifier('un nom plus long qu\'un prénom est refusé', P.importer(paquet({ nom: long }), true).ok, false);
+verifier('… et n\'est pas entré', P.existe(long), false);
+verifier('un nom à la limite passe',
+         P.importer(paquet({ nom: long.slice(0, P.LONGUEUR_MAX_NOM) }), true).ok, true);
+P.supprimer(long.slice(0, P.LONGUEUR_MAX_NOM));
+verifier('un nom n\'est mesuré qu\'une fois ses espaces retirés',
+         P.importer(paquet({ nom: '  ' + long.slice(0, P.LONGUEUR_MAX_NOM) + '  ' }), true).ok, true);
+P.supprimer(long.slice(0, P.LONGUEUR_MAX_NOM));
+['Seances', 'Serie'].forEach(function (n) { P.supprimer(n); });
+
+console.log('\nUn exercice dont la sorte a disparu n\'est ni compté ni servi');
+P.ouvrir('Orphelin');
+var orphelin = P.actuel();
+orphelin.aRevoir.push({ id: 'faux.disparu', graine: 7, titre: 'Sorte retirée',
+                        matiere: 'mathematiques', boite: 0, prochaine: P.aujourdhui() });
+orphelin.aRevoir.push({ id: 'faux.disparu', graine: 8, titre: 'Sorte retirée',
+                        matiere: 'mathematiques', boite: 2, prochaine: P.dans(5) });
+orphelin.aRevoir.push({ id: 'faux.a', graine: 9, titre: 'Exercice a',
+                        matiere: 'mathematiques', boite: 0, prochaine: P.aujourdhui() });
+verifier('il ne compte pas dans ce qui est à revoir', Prog.aReviser().length, 1);
+verifier('… ni par matière', Prog.aReviser('mathematiques').length, 1);
+verifier('… ni dans ce qui attend', Prog.enAttente().length, 0);
+verifier('aucune échéance n\'est annoncée pour lui', Prog.prochaineEcheance(), null);
+var reprise = Prog.serieDesErreurs(10);
+verifier('la série des erreurs ne sert que ce qui se rejoue',
+         reprise.map(function (e) { return e.id; }).join(','), 'faux.a');
+var jouee = true;
+try { reprise.forEach(function (e) { CM2.registre.produire(e.id, e.graine); }); }
+catch (e) { jouee = false; }
+verifier('… et chaque question de cette série se produit', jouee, true);
+verifier('il reste inscrit dans le cahier : on n\'efface pas le passé', orphelin.aRevoir.length, 3);
+verifier('une série ordinaire ne le sert pas non plus',
+         Prog.choisirSerie('mathematiques', 9).every(function (e) { return e.id !== 'faux.disparu'; }), true);
+P.supprimer('Orphelin');
+
+console.log('\nUn cahier abîmé dans la mémoire du navigateur ne fait rien planter');
+P.ouvrir('Ancien');
+P.actuel().seances = [null, { date: P.aujourdhui(), matiere: 'tout', questions: 4, reussites: 3 }, 12];
+verifier('relu, il ne garde que les séances lisibles', P.cahierDe('Ancien').seances.length, 1);
+P.supprimer('Ancien');
+
 console.log('\nUn échec d\'écriture est annoncé, pas tu');
 var vraiSetItem = contexte.localStorage.setItem;
 contexte.localStorage.setItem = function (k, v) {

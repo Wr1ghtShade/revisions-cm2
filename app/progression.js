@@ -117,9 +117,19 @@
 
   /* --- Ce qui est à revoir --------------------------------------------- */
 
+  /* Un exercice raté dont la sorte a été retirée entre deux versions reste
+     inscrit dans le cahier — on n'efface pas le passé — mais il ne peut plus
+     être rejoué. On ne le compte donc ni dans ce qui est à revoir ni dans ce
+     qui attend : annoncé, il gonflait le compteur du bureau, et servi dans
+     « Revoir mes erreurs », il arrêtait la série sur une question introuvable. */
+  function rejouables(liste) {
+    return liste.filter(function (e) { return !!e && !!CM2.registre.get(e.id); });
+  }
+
   function filtrerMatiere(liste, matiere) {
-    if (!matiere || matiere === 'tout') return liste;
-    return liste.filter(function (e) { return e.matiere === matiere; });
+    var connus = rejouables(liste);
+    if (!matiere || matiere === 'tout') return connus;
+    return connus.filter(function (e) { return e.matiere === matiere; });
   }
 
   /** Exercices ratés dont la date de révision est arrivée.

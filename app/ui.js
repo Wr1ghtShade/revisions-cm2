@@ -239,6 +239,8 @@
 
     // Une série mise en pause attend sagement son tour, dans ce cahier-ci.
     var enCours = P.seanceEnCours();
+    // Une série sans questions n'a rien à reprendre : on ne la propose pas.
+    if (enCours && !(Array.isArray(enCours.serie) && enCours.serie.length)) enCours = null;
     $('bloc-reprendre').hidden = !enCours;
     if (enCours) {
       var question = Math.min(enCours.index + (enCours.repondu ? 2 : 1), enCours.serie.length);
@@ -362,7 +364,8 @@
   /** Reprend la série laissée en plan, s'il y en a une. */
   function reprendreSeance() {
     var s = P.seanceEnCours();
-    if (!s || !s.serie || !s.serie.length) return false;
+    if (!s) return false;
+    if (!Array.isArray(s.serie) || !s.serie.length) { P.oublierSeance(); return false; }
 
     // Un générateur a pu disparaître entre deux versions : dans ce cas on
     // abandonne la reprise plutôt que de servir une question qui n'existe plus.
@@ -371,10 +374,18 @@
       if (!e || !reg.get(e.id)) { P.oublierSeance(); return false; }
     }
 
+    // Même prudence pour la position : un indice qui ne désigne aucune
+    // question de la série ne se reprend pas, il s'abandonne.
+    if (typeof s.index !== 'number' || Math.floor(s.index) !== s.index ||
+        s.index < 0 || s.index >= s.serie.length) {
+      P.oublierSeance();
+      return false;
+    }
+
     etat.matiere = s.matiere;
     etat.serie = s.serie;
-    etat.reussites = s.reussites || 0;
-    etat.rates = s.rates || [];
+    etat.reussites = (typeof s.reussites === 'number') ? s.reussites : 0;
+    etat.rates = Array.isArray(s.rates) ? s.rates : [];
     etat.nombre = s.serie.length;
     // La réponse déjà donnée a été comptée avant le rafraîchissement :
     // on reprend à la question suivante, pas sur celle-là.
@@ -1042,6 +1053,13 @@
   }
 
   function restaurerCahier(fichier) {
+    // Le poids est connu avant la lecture : inutile de charger en mémoire un
+    // fichier qui sera refusé. Un caractère pèse au plus quatre octets, d'où
+    // la marge — le contrôle exact, en caractères, reste celui de l'import.
+    if (fichier && fichier.size > 4 * P.TAILLE_MAX_FICHIER) {
+      message('Ce fichier est bien trop gros pour être un cahier.', 'rate');
+      return;
+    }
     var lecteur = new FileReader();
     lecteur.onload = function () {
       var bilan = P.importer(String(lecteur.result), false);
@@ -1148,7 +1166,11 @@
 
     // Arrêter met la série en pause, sans l'effacer : on la retrouve au bureau.
     $('abandonner').addEventListener('click', mettreEnPause);
-    $('reprendre-serie').addEventListener('click', reprendreSeance);
+    $('reprendre-serie').addEventListener('click', function () {
+      // Une série qui ne peut plus être reprise est oubliée : le bureau se
+      // redessine, pour que le bouton ne reste pas là à ne rien faire.
+      if (!reprendreSeance()) dessinerBureau();
+    });
     $('retour-bureau').addEventListener('click', dessinerBureau);
     $('encore').addEventListener('click', function () {
       demarrer(etat.matiere === 'erreurs' ? 'tout' : etat.matiere, etat.nombre);
@@ -1277,7 +1299,9 @@
     if (dernier && P.existe(dernier)) {
       ouvrirCahier(dernier);
       var enCours = P.seanceEnCours();
-      if (enCours && !enCours.enPause) reprendreSeance();
+      // Une série qui ne peut pas être reprise vient d'être oubliée : le
+      // bureau, dessiné juste avant, la proposait encore.
+      if (enCours && !enCours.enPause && !reprendreSeance()) dessinerBureau();
     }
   }
 

@@ -22,9 +22,13 @@ La numérotation est `1.MAJEUR.MINEUR`.
 
 🌟 marque une version majeure, 🔧 une version mineure.
 
-**Version actuelle : `1.12.09` — 5 novembre 2026.**
+**Version actuelle : `1.12.10` — 14 novembre 2026.**
 
 ---
+
+## 🔧 1.12.10 — 14 novembre 2026
+
+Suite de la revue de sécurité. Le contrôle du fichier de sauvegarde descend d'un cran : chaque séance doit être lisible, la position dans une série en cours doit désigner une question qui existe, et un nom de plus de quarante caractères n'est pas un prénom. Avant, un fichier abîmé à ces endroits-là entrait, puis faisait planter « Ma progression » et la vue enseignant, ou figeait la reprise d'une série. Un fichier manifestement trop gros est refusé avant d'être lu. Un exercice raté dont la sorte a depuis été retirée n'est plus compté ni servi dans « Revoir mes erreurs », qu'il interrompait. La page de vérification déclare à son tour une règle de sécurité du contenu, et son script quitte la page pour un fichier à part.
 
 ## 🔧 1.12.09 — 5 novembre 2026
 
@@ -188,4 +192,4 @@ Socle de production — tirage déterministe, contrôle des contraintes du progr
 
 ---
 
-*40 versions depuis le 11 septembre 2026.*
+*41 versions depuis le 11 septembre 2026.*

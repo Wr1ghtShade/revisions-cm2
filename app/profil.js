@@ -25,6 +25,13 @@
      sans l'être, puis ferait perdre en silence tout ce qui suit. */
   var TAILLE_MAX_FICHIER = 2 * 1024 * 1024;
 
+  /* Longueur au-delà de laquelle un nom lu dans un fichier n'est pas un prénom.
+     L'écran d'accueil n'en laisse saisir que dix-huit caractères ; la marge
+     couvre les cahiers d'anciennes versions. Sans borne, un fichier pouvait
+     faire entrer un « nom » de plusieurs centaines de milliers de caractères,
+     recopié ensuite sur chaque écran et dans chaque fenêtre de confirmation. */
+  var LONGUEUR_MAX_NOM = 40;
+
   /* Au bout de combien de séances non sauvegardées on le rappelle. Cinq, c'est
      à peu près une semaine de travail : assez pour que la perte fasse mal,
      assez rare pour que le rappel ne devienne pas du décor. */
@@ -160,6 +167,9 @@
     if (!estObjet(c.notions)) c.notions = {};
     if (!Array.isArray(c.aRevoir)) c.aRevoir = [];
     if (!Array.isArray(c.seances)) c.seances = [];
+    // Une séance qui n'est pas un objet ne se lit pas : la progression et la
+    // vue enseignant planteraient dessus, pour tous les cahiers à la fois.
+    c.seances = c.seances.filter(estObjet);
     if (!Array.isArray(c.jours) || !c.jours.length) c.jours = [c.derniereVisite || aujourdhui()];
     if (c.sauvegarde === undefined) c.sauvegarde = null;
     // Un cahier d'avant le rappel n'a jamais été compté : on repart de ses
@@ -195,12 +205,14 @@
   function defauts(c) {
     var f = [];
     if (!estObjet(c)) return ['cahier'];
-    if (typeof c.nom !== 'string' || !c.nom.trim()) f.push('nom');
+    if (typeof c.nom !== 'string' || !c.nom.trim() ||
+        c.nom.trim().length > LONGUEUR_MAX_NOM) f.push('nom');
     if (c.avatar !== undefined && typeof c.avatar !== 'string') f.push('avatar');
     if (c.total !== undefined && !estObjet(c.total)) f.push('total');
     if (c.notions !== undefined && !estObjet(c.notions)) f.push('notions');
     if (c.aRevoir !== undefined && !Array.isArray(c.aRevoir)) f.push('aRevoir');
-    if (c.seances !== undefined && !Array.isArray(c.seances)) f.push('seances');
+    if (c.seances !== undefined &&
+        !(Array.isArray(c.seances) && c.seances.every(estObjet))) f.push('seances');
     if (c.jours !== undefined && !Array.isArray(c.jours)) f.push('jours');
     if (c.confort !== undefined && !estObjet(c.confort)) f.push('confort');
     if (c.sujetsEtudies !== undefined && !estObjet(c.sujetsEtudies)) f.push('sujetsEtudies');
@@ -212,7 +224,14 @@
         return estObjet(e) && typeof e.id === 'string' &&
                (e.graine === undefined || typeof e.graine === 'number');
       });
-      if (!serieOk) f.push('seanceEnCours');
+      // La position dans la série désigne une question qui existe : un indice
+      // négatif, décimal ou au-delà de la fin ferait reprendre sur du vide.
+      var indexOk = serieOk && typeof s.index === 'number' &&
+                    Math.floor(s.index) === s.index &&
+                    s.index >= 0 && s.index < s.serie.length;
+      var compteOk = (s.rates === undefined || Array.isArray(s.rates)) &&
+                     (s.reussites === undefined || typeof s.reussites === 'number');
+      if (!serieOk || !indexOk || !compteOk) f.push('seanceEnCours');
     }
     return f;
   }
@@ -507,6 +526,7 @@
   };
 
   P.TAILLE_MAX_FICHIER = TAILLE_MAX_FICHIER;
+  P.LONGUEUR_MAX_NOM = LONGUEUR_MAX_NOM;
 
   CM2.profil = P;
 })(window.CM2 = window.CM2 || {});

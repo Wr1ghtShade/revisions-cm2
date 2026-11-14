@@ -588,5 +588,25 @@ verifier('aucun script n\'est chargé depuis le réseau',
          require('./charger').scriptsDe('index.html').every(function (s) { return !/^[a-z]+:|^\/\//.test(s); }),
          true);
 
+
+/* tests.html suit la même règle, sans empreinte : son script est dans un
+   fichier à part. Un script en ligne qu'on y remettrait ne s'exécuterait plus,
+   et la page resterait blanche sans rien dire. */
+var PAGE_TESTS = fs.readFileSync(path.join(racine, 'tests.html'), 'utf8');
+var cspTests = /<meta http-equiv="Content-Security-Policy"\s+content="([^"]+)"/.exec(PAGE_TESTS);
+verifier('tests.html déclare une règle', !!cspTests, true);
+verifier('… qui n\'autorise que les scripts du projet',
+         cspTests ? /script-src 'self';/.test(cspTests[1]) : false, true);
+verifier('tests.html n\'a aucun script en ligne', /<script>/.test(PAGE_TESTS), false);
+verifier('tests.html n\'a aucun gestionnaire en attribut', /\son[a-z]+\s*=/i.test(PAGE_TESTS), false);
+verifier('tests.html charge son script',
+         require('./charger').scriptsDe('tests.html').indexOf('tests/page.js') !== -1, true);
+verifier('… et aucun depuis le réseau',
+         require('./charger').scriptsDe('tests.html').every(function (s) { return !/^[a-z]+:|^\/\//.test(s); }),
+         true);
+verifier('le script de la page n\'écrit pas de HTML',
+         /innerHTML|insertAdjacentHTML|document\.write/.test(
+           fs.readFileSync(path.join(racine, 'tests/page.js'), 'utf8')), false);
+
 console.log('\n' + (total - echecs) + ' vérifications réussies sur ' + total + '.');
 process.exit(echecs ? 1 : 0);
