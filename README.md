@@ -273,4 +273,9 @@ Les textes des programmes sont sous **Licence Ouverte / Open Licence 2.0**
 (Etalab). Chaque fichier de `data/referentiel/` porte sa source, son URL
 d'origine et sa date d'extraction.
 
+Le code de l'application (`index.html`, `tests.html`, `app/`, `tests/`, `img/`)
+est sous **licence MIT** : voir [LICENSE](LICENSE). Elle ne s'applique pas aux
+textes officiels de `data/sources/` ni aux extraits de `data/referentiel/`, qui
+restent sous Licence Ouverte 2.0.
+
 Le journal complet des versions est dans [CHANGELOG.md](CHANGELOG.md).
