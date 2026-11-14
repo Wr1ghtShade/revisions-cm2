@@ -282,7 +282,12 @@
             'lu. Un exercice raté dont la sorte a depuis été retirée n\'est plus ' +
             'compté ni servi dans « Revoir mes erreurs », qu\'il interrompait. La ' +
             'page de vérification déclare à son tour une règle de sécurité du ' +
-            'contenu, et son script quitte la page pour un fichier à part.' }
+            'contenu, et son script quitte la page pour un fichier à part.' },
+
+    { numero: '1.12.11', date: '2026-11-14',
+      quoi: 'Lien de téléchargement du code source, en bas de page et dans la ' +
+            'fenêtre « à propos ». Le lien est relatif : il ne fonctionne que ' +
+            'sur un site qui sert le fichier sources-cm2.zip à côté de la page.' }
   ];
 
   var actuelle = HISTORIQUE[HISTORIQUE.length - 1];

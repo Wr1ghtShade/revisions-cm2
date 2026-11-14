@@ -22,9 +22,13 @@ La numérotation est `1.MAJEUR.MINEUR`.
 
 🌟 marque une version majeure, 🔧 une version mineure.
 
-**Version actuelle : `1.12.10` — 14 novembre 2026.**
+**Version actuelle : `1.12.11` — 14 novembre 2026.**
 
 ---
+
+## 🔧 1.12.11 — 14 novembre 2026
+
+Lien de téléchargement du code source, en bas de page et dans la fenêtre « à propos ». Le lien est relatif : il ne fonctionne que sur un site qui sert le fichier sources-cm2.zip à côté de la page.
 
 ## 🔧 1.12.10 — 14 novembre 2026
 
@@ -192,4 +196,4 @@ Socle de production — tirage déterministe, contrôle des contraintes du progr
 
 ---
 
-*41 versions depuis le 11 septembre 2026.*
+*42 versions depuis le 11 septembre 2026.*
